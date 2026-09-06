@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1080, initial-scale=1" />
+<title>Zen Nail Spa — Honey Orange Zest Spa Pedicure</title>
+
+<!-- fonts vendored locally -->
+
+<link href="../../vendor/fonts/fonts.css" rel="stylesheet">
+
+<link href="../../vendor/mini-tw.css" rel="stylesheet">
+<script src="../../vendor/react.production.min.js"></script>
+<script src="../../vendor/react-dom.production.min.js"></script>
+<script src="../../vendor/framer-motion.js"></script>
+<script src="../../vendor/babel.min.js"></script>
+
+<style>
+  :root{
+    --cream-100:#F5E6D8;
+    --cream-200:#E8D5C4;
+    --cream-300:#D4B8A0;
+    --blush:#E8C4B4;
+    --sage:#B5C4A8;
+    --gold:#B8965A;
+    --gold-hi:#D4B886;
+    --charcoal:#1F1B16;
+    --charcoal-soft:rgba(31,27,22,0.78);
+    --charcoal-muted:rgba(31,27,22,0.55);
+    --glass-fill:rgba(255, 251, 246, 0.42);
+    --glass-stroke:rgba(255, 255, 255, 0.55);
+    --glass-shadow: 0 24px 60px -20px rgba(60, 40, 20, 0.22), 0 6px 16px -8px rgba(60, 40, 20, 0.16);
+
+    /* Slide 3 — Honey Orange citrus additions */
+    --orange:#E8821C;
+    --orange-deep:#D2691E;
+    --orange-soft:rgba(232,130,28,0.86);
+    --orange-muted:rgba(232,130,28,0.55);
+    --honey-amber:#E5A641;
+    --leaf-green:#7C9C5A;
+  }
+  html, body{
+    width:1080px; height:1920px; margin:0; padding:0;
+    background:#E8D5C4;
+    overflow:hidden;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--charcoal);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  #root{ width:1080px; height:1920px; position:relative; }
+  .display{ font-family:'Inter Tight', 'Inter', sans-serif; letter-spacing:-0.035em; }
+  .tabular{ font-variant-numeric: tabular-nums; }
+  .eyebrow{ font-family:'Inter', sans-serif; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; }
+
+  .stage{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 900px 700px at 18% 18%, rgba(232, 196, 180, 0.85), transparent 60%),
+      radial-gradient(ellipse 800px 600px at 88% 35%, rgba(245, 230, 216, 0.75), transparent 65%),
+      radial-gradient(ellipse 700px 700px at 30% 90%, rgba(181, 196, 168, 0.45), transparent 65%),
+      radial-gradient(ellipse 1100px 900px at 110% 110%, rgba(212, 184, 160, 0.7), transparent 70%),
+      linear-gradient(168deg, #F5E6D8 0%, #EBD3C0 45%, #E0BFA8 100%);
+  }
+
+  /* atmospheric drifting orbs */
+  .orb{
+    position:absolute; border-radius:50%;
+    filter: blur(60px);
+    mix-blend-mode: multiply;
+    opacity: 0.55;
+    pointer-events:none;
+  }
+  .orb-1{ width:520px; height:520px; left:-80px; top:120px; background: radial-gradient(circle, #E8C4B4 0%, transparent 65%); }
+  .orb-2{ width:600px; height:600px; right:-120px; top:480px; background: radial-gradient(circle, #F5E6D8 0%, transparent 65%); }
+  .orb-3{ width:480px; height:480px; left:60px; bottom:-40px; background: radial-gradient(circle, #B5C4A8 0%, transparent 60%); opacity:0.32; }
+  .orb-4{ width:420px; height:420px; right:80px; bottom:240px; background: radial-gradient(circle, #D4B8A0 0%, transparent 65%); }
+  /* New: citrus / honey motif orbs */
+  .orb-orange{ width:400px; height:400px; left:-60px; top:780px; background: radial-gradient(circle, #E8821C 0%, transparent 60%); opacity:0.24; }
+  .orb-honey{ width:360px; height:360px; right:-40px; top:840px; background: radial-gradient(circle, #E5A641 0%, transparent 62%); opacity:0.28; }
+
+  /* grain overlay */
+  .grain{
+    position:absolute; inset:0; pointer-events:none; opacity:0.07; mix-blend-mode:overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .glass{
+    position:relative;
+    background: var(--glass-fill);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    backdrop-filter: blur(24px) saturate(140%);
+    border: 1px solid var(--glass-stroke);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.45);
+    border-radius: 28px;
+    overflow:hidden;
+  }
+  .glass-strong{
+    background: rgba(255, 251, 246, 0.58);
+  }
+  .glass::after{
+    content:""; position:absolute; left:0; right:0; top:0; height:50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0));
+    pointer-events:none;
+  }
+  .gold-frame{
+    position:absolute; inset:0; pointer-events:none;
+    border-radius:inherit;
+  }
+
+  /* Warm-orange "deal" pill — pulls citrus accent through */
+  .price-pill-orange{
+    background:
+      radial-gradient(ellipse 80% 60% at 30% 25%, rgba(255,220,170,0.22), transparent 55%),
+      linear-gradient(155deg, #F09333 0%, #E8821C 55%, #D2691E 100%);
+    border: 1.5px solid rgba(212, 184, 134, 0.6);
+    box-shadow:
+      0 28px 60px -16px rgba(180, 90, 20, 0.50),
+      0 10px 22px -8px rgba(180, 90, 20, 0.30),
+      inset 0 1px 0 rgba(255,230,200,0.45),
+      inset 0 -1px 0 rgba(120,60,10,0.25);
+  }
+  .price-pill-orange::before{
+    content:""; position:absolute; inset:6px;
+    border-radius:22px;
+    border: 1px solid rgba(255, 230, 190, 0.35);
+    pointer-events:none;
+  }
+
+  .hero-img{
+    width:100%; height:100%; object-fit:cover; object-position: center 35%;
+  }
+  .hero-vignette{
+    position:absolute; inset:0; pointer-events:none;
+    background:
+      linear-gradient(90deg, rgba(31,27,22,0.62) 0%, rgba(31,27,22,0.20) 38%, rgba(31,27,22,0) 60%);
+  }
+  .hero-eyebrow-pill{
+    background: rgba(245, 230, 216, 0.88);
+    border: 1px solid rgba(232, 130, 28, 0.45);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  .step-num{
+    width:34px; height:34px; flex-shrink:0;
+    display:inline-flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    background: linear-gradient(135deg, #D4B886, #B8965A);
+    box-shadow: 0 5px 12px -3px rgba(184,150,90,0.45), inset 0 1px 0 rgba(255,255,255,0.5);
+    color:#FBF3E8;
+    font-family:'Inter Tight', sans-serif;
+    font-weight:700; font-size:16px;
+    letter-spacing:-0.02em;
+  }
+
+  .pin-dot-orange{
+    width:8px; height:8px; border-radius:50%; background:var(--orange);
+    box-shadow: 0 0 0 4px rgba(232,130,28,0.18);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" data-presets="react">
+const { useEffect, useState, useRef, useMemo } = React;
+const m = window.Motion.motion;
+
+function App(){
+
+  const springIn = (delay=0)=>({
+    initial:{ opacity:0, y:40, scale:0.95 },
+    animate:{ opacity:1, y:0, scale:1 },
+    transition:{ type:'spring', stiffness:100, damping:15, delay }
+  });
+
+  const breathe = (phase=0)=>({
+    animate:{ y: [0, -2, 0, 2, 0] },
+    transition:{ duration:4, repeat:Infinity, ease:'easeInOut', delay: phase }
+  });
+
+  const GoldFrame = ({ r=28, delay=0.4, color="rgba(184,150,90,0.55)" })=> (
+    <svg className="gold-frame" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <m.rect
+        x="0.5" y="0.5" width="99" height="99" rx={r/2.4} ry={r/2.4}
+        fill="none" stroke={color} strokeWidth="0.18"
+        pathLength="1"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 1 }}
+        transition={{ duration: 1.4, delay, ease: 'easeOut' }}
+      />
+    </svg>
+  );
+
+  const benefits = [
+    { icon: <SunIcon/>,    title:'Vitamin C Glow',         body:'Brightens dull skin and reveals a fresh, radiant look.' },
+    { icon: <HoneyIcon/>,  title:'Honey Hydration',        body:'Locks in moisture for soft, smooth, healthy-looking skin.' },
+    { icon: <OrangeIcon/>, title:'Orange Revitalization',  body:'Antioxidant-rich citrus refreshes and evens skin tone.' },
+  ];
+
+  const included = [
+    { n:1, title:'Sea Salt Soak',     icon:<SaltBowlIcon/> },
+    { n:2, title:'Honey Sugar Scrub', icon:<ScrubJarIcon/> },
+    { n:3, title:'Mud Masque',        icon:<MudJarIcon/> },
+    { n:4, title:'Massage Lotion',    icon:<LotionIcon/> },
+    { n:5, title:'Real Orange Slices', icon:<OrangeSliceIcon/> },
+  ];
+
+  return (
+    <>
+      {/* atmospheric stage */}
+      <div className="stage" aria-hidden="true">
+        <m.div className="orb orb-1"
+          animate={{ x:[0,30,-10,0], y:[0,-20,10,0] }}
+          transition={{ duration:18, repeat:Infinity, ease:'easeInOut' }} />
+        <m.div className="orb orb-2"
+          animate={{ x:[0,-25,15,0], y:[0,15,-12,0] }}
+          transition={{ duration:22, repeat:Infinity, ease:'easeInOut', delay:1.5 }} />
+        <m.div className="orb orb-3"
+          animate={{ x:[0,18,-22,0], y:[0,-14,8,0] }}
+          transition={{ duration:20, repeat:Infinity, ease:'easeInOut', delay:0.8 }} />
+        <m.div className="orb orb-4"
+          animate={{ x:[0,-18,22,0], y:[0,12,-18,0] }}
+          transition={{ duration:24, repeat:Infinity, ease:'easeInOut', delay:2.2 }} />
+        <m.div className="orb orb-orange"
+          animate={{ x:[0,24,-16,0], y:[0,-14,18,0] }}
+          transition={{ duration:21, repeat:Infinity, ease:'easeInOut', delay:1.1 }} />
+        <m.div className="orb orb-honey"
+          animate={{ x:[0,-22,14,0], y:[0,16,-12,0] }}
+          transition={{ duration:23, repeat:Infinity, ease:'easeInOut', delay:1.8 }} />
+        <div className="grain"/>
+      </div>
+
+      {/* content frame */}
+      <div className="relative w-full h-full" style={{ padding:'56px 60px', display:'grid',
+        gridTemplateColumns:'repeat(6, 1fr)',
+        gridTemplateRows:'76px 660px 184px 320px 268px 88px',
+        gap:'22px'
+      }}>
+
+        {/* ─── Row A — brand strip ─── */}
+        <m.div {...springIn(0.05)} style={{ gridColumn:'1 / -1', gridRow:'1' }}
+          className="glass glass-strong flex items-center justify-between px-9">
+          <GoldFrame delay={0.5}/>
+          <div className="flex items-baseline gap-4">
+            <span className="display tabular" style={{ fontSize:'30px', fontWeight:800, letterSpacing:'-0.04em' }}>
+              ZEN
+            </span>
+            <span className="eyebrow" style={{ fontSize:'14px', color:'var(--charcoal-soft)' }}>
+              Nail Spa
+            </span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="pin-dot-orange"/>
+            <span className="eyebrow" style={{ fontSize:'13px', color:'var(--orange-soft)' }}>
+              Signature Pedicure · Year Round
+            </span>
+          </div>
+        </m.div>
+
+        {/* ─── Row B — Hero with title overlay ─── */}
+        <m.div {...springIn(0.15)} style={{ gridColumn:'1 / -1', gridRow:'2' }}
+          className="glass relative overflow-hidden">
+          <m.div style={{ width:'100%', height:'100%' }}
+            initial={{ scale:0.92 }}
+            animate={{ scale:[1, 1.015, 1] }}
+            transition={{ scale:{ duration:5, repeat:Infinity, ease:'easeInOut' } }}>
+            <img src="assets/honey-orange-hero.png" alt="Fresh oranges and honey flat-lay" className="hero-img"/>
+          </m.div>
+          <div className="hero-vignette"/>
+
+          {/* eyebrow pill top-left */}
+          <m.div className="hero-eyebrow-pill absolute"
+            style={{ top:'28px', left:'28px', padding:'10px 18px', borderRadius:'999px',
+              display:'inline-flex', alignItems:'center', gap:'10px' }}
+            initial={{ opacity:0, y:-10 }} animate={{ opacity:1, y:0 }}
+            transition={{ delay:0.9, duration:0.6 }}>
+            <span style={{ width:'8px', height:'8px', background:'var(--orange)', borderRadius:'50%' }}/>
+            <span className="eyebrow" style={{ fontSize:'12px', color:'var(--charcoal)' }}>
+              Zen Pedicure · 50 Min
+            </span>
+          </m.div>
+
+          {/* title block left-center */}
+          <div className="absolute" style={{ left:'44px', right:'44px', top:'160px' }}>
+            <m.div initial={{ opacity:0, y:24 }} animate={{ opacity:1, y:0 }}
+              transition={{ delay:1.0, duration:0.7, ease:'easeOut' }}>
+              <div className="eyebrow" style={{ fontSize:'13px', color:'#FBF3E8', marginBottom:'14px', letterSpacing:'0.22em' }}>
+                Vitamin C Brightening · Warm Oil Therapy
+              </div>
+              <h1 className="display" style={{
+                fontSize:'94px', fontWeight:800, lineHeight:0.92, letterSpacing:'-0.05em',
+                color:'#FBF3E8', margin:0,
+                textShadow:'0 2px 14px rgba(80,40,10,0.30)'
+              }}>
+                Honey<br/>Orange<br/>Zest
+              </h1>
+              <div className="display" style={{
+                fontStyle:'italic', fontWeight:600, fontSize:'40px',
+                color:'#FFD9A6', marginTop:'12px', letterSpacing:'-0.025em',
+                textShadow:'0 2px 10px rgba(80,40,10,0.30)'
+              }}>
+                Spa Pedicure
+              </div>
+            </m.div>
+          </div>
+
+          {/* standfirst bottom-left */}
+          <m.div className="absolute"
+            style={{ left:'44px', right:'44px', bottom:'34px' }}
+            initial={{ opacity:0, y:14 }} animate={{ opacity:1, y:0 }}
+            transition={{ delay:1.25, duration:0.6 }}>
+            <div style={{
+              fontFamily:'Inter Tight', fontWeight:500, fontStyle:'italic',
+              fontSize:'22px', letterSpacing:'-0.015em',
+              color:'#FBF3E8', lineHeight:1.25, maxWidth:'620px',
+              textShadow:'0 2px 10px rgba(80,40,10,0.30)'
+            }}>
+              Vitamin C brightening + warm oil therapy.
+            </div>
+          </m.div>
+
+          <GoldFrame delay={0.7}/>
+        </m.div>
+
+        {/* ─── Row C — Tagline (cols 1–4) + Price pill (cols 5–6) ─── */}
+        <m.div {...springIn(0.30)} style={{ gridColumn:'1 / span 4', gridRow:'3' }}
+          className="glass flex items-center px-9">
+          <GoldFrame delay={0.95}/>
+          <m.div {...breathe(0.2)}>
+            <div className="eyebrow" style={{ fontSize:'12px', color:'var(--orange-soft)', marginBottom:'10px' }}>
+              The Promise
+            </div>
+            <div className="display" style={{
+              fontSize:'40px', fontWeight:700, lineHeight:1.02, letterSpacing:'-0.035em',
+              color:'var(--charcoal)'
+            }}>
+              Brighten. Hydrate. <em style={{ fontStyle:'italic', color:'var(--orange)', fontWeight:600 }}>Glow.</em>
+            </div>
+            <div style={{
+              fontSize:'16px', fontWeight:400, color:'var(--charcoal-soft)',
+              marginTop:'8px', lineHeight:1.4
+            }}>
+              Real orange. Real honey. Real radiance.
+            </div>
+          </m.div>
+        </m.div>
+
+        <m.div style={{ gridColumn:'5 / span 2', gridRow:'3', position:'relative' }}
+          initial={{ opacity:0, scale:0.4, y:30 }}
+          animate={{ opacity:1, scale:1, y:0 }}
+          transition={{ type:'spring', stiffness:220, damping:11, delay:0.45 }}>
+          <m.div
+            className="price-pill-orange"
+            animate={{
+              boxShadow: [
+                '0 28px 60px -16px rgba(180, 90, 20, 0.50), 0 10px 22px -8px rgba(180, 90, 20, 0.30), inset 0 1px 0 rgba(255,230,200,0.45), inset 0 -1px 0 rgba(120,60,10,0.25)',
+                '0 28px 80px -12px rgba(200, 110, 30, 0.68), 0 14px 30px -8px rgba(200, 110, 30, 0.46), inset 0 1px 0 rgba(255,235,210,0.55), inset 0 -1px 0 rgba(120,60,10,0.25)',
+                '0 28px 60px -16px rgba(180, 90, 20, 0.50), 0 10px 22px -8px rgba(180, 90, 20, 0.30), inset 0 1px 0 rgba(255,230,200,0.45), inset 0 -1px 0 rgba(120,60,10,0.25)'
+              ]
+            }}
+            transition={{ duration:3, repeat:Infinity, ease:'easeInOut' }}
+            style={{
+              width:'100%', height:'100%', borderRadius:'28px',
+              display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
+              position:'relative'
+            }}>
+            <div className="eyebrow" style={{
+              fontSize:'11px', color:'rgba(255, 235, 210, 0.85)',
+              letterSpacing:'0.32em', marginBottom:'2px'
+            }}>
+              From
+            </div>
+            <div className="display tabular" style={{
+              fontSize:'96px', fontWeight:700, letterSpacing:'-0.05em',
+              lineHeight:1, color:'#FBF3E8',
+              display:'flex', alignItems:'baseline'
+            }}>
+              <span style={{
+                fontSize:'42px', fontWeight:600, color:'#FFD9A6',
+                marginRight:'4px', transform:'translateY(-22px)', display:'inline-block'
+              }}>$</span>
+              55
+            </div>
+          <div style={{ fontSize:'11px', fontWeight:400, color:'#FBF3E8', lineHeight:1.35, textAlign:'center', letterSpacing:'0.02em', marginTop:'6px', maxWidth:'190px' }}>
+              Gel polish & add-ons available
+            </div>
+          </m.div>
+        </m.div>
+
+        {/* ─── Row D — 3 benefit cards ─── */}
+        <div style={{ gridColumn:'1 / -1', gridRow:'4',
+          display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'22px' }}>
+          {benefits.map((b,i)=>(
+            <m.div key={i} {...springIn(0.60 + i*0.10)}
+              className="glass px-7 py-7 flex flex-col justify-between relative">
+              <m.div {...breathe(i*0.3)}>
+                <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+                  <div style={{ width:'56px', height:'56px', borderRadius:'16px',
+                    background:'linear-gradient(135deg, rgba(255,228,190,0.95), rgba(255,200,140,0.85))',
+                    border:'1px solid rgba(232,130,28,0.35)',
+                    display:'flex', alignItems:'center', justifyContent:'center',
+                    boxShadow:'inset 0 1px 0 rgba(255,255,255,0.6), 0 5px 12px -3px rgba(180,90,20,0.22)' }}>
+                    {b.icon}
+                  </div>
+                  <span className="eyebrow tabular" style={{ fontSize:'11px', color:'var(--charcoal-muted)' }}>
+                    0{i+1}
+                  </span>
+                </div>
+                <div className="display" style={{
+                  fontSize:'26px', fontWeight:700, letterSpacing:'-0.03em',
+                  marginTop:'20px', color:'var(--charcoal)', lineHeight:1.05
+                }}>
+                  {b.title}
+                </div>
+                <div style={{
+                  fontSize:'15px', fontWeight:400, color:'var(--charcoal-soft)',
+                  marginTop:'10px', lineHeight:1.4
+                }}>
+                  {b.body}
+                </div>
+              </m.div>
+              <GoldFrame delay={0.85 + i*0.1} r={22}/>
+            </m.div>
+          ))}
+        </div>
+
+        {/* ─── Row E — Included ritual (5 items, single horizontal row) ─── */}
+        <m.div {...springIn(0.90)} style={{ gridColumn:'1 / -1', gridRow:'5', position:'relative' }}
+          className="glass glass-strong">
+          <GoldFrame delay={1.30}/>
+          <div style={{ padding:'24px 32px 22px', height:'100%', display:'flex', flexDirection:'column' }}>
+            <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom:'14px' }}>
+              <div className="eyebrow" style={{ fontSize:'12px', color:'var(--orange-soft)' }}>
+                Included in this Treatment
+              </div>
+              <span className="eyebrow tabular" style={{ fontSize:'11px', color:'var(--charcoal-muted)' }}>
+                5 Steps Included
+              </span>
+            </div>
+
+            <div style={{
+              display:'grid', gridTemplateColumns:'repeat(5, 1fr)',
+              gap:'10px', flex:1, alignItems:'stretch'
+            }}>
+              {included.map((item, i)=>(
+                <m.div key={item.n}
+                  initial={{ opacity:0, x:-14 }}
+                  animate={{ opacity:1, x:0 }}
+                  transition={{ delay:0.95 + i*0.08, duration:0.5, ease:'easeOut' }}
+                  style={{
+                    display:'flex', flexDirection:'column', alignItems:'center',
+                    textAlign:'center', padding:'4px 6px', position:'relative'
+                  }}>
+                  <m.span className="step-num"
+                    initial={{ scale:0, opacity:0 }}
+                    animate={{ scale:1, opacity:1 }}
+                    transition={{ delay:1.02 + i*0.08, type:'spring', stiffness:260, damping:14 }}>
+                    {item.n}
+                  </m.span>
+                  <div style={{
+                    width:'44px', height:'44px', marginTop:'12px', marginBottom:'10px',
+                    display:'flex', alignItems:'center', justifyContent:'center'
+                  }}>
+                    {item.icon}
+                  </div>
+                  <div className="display" style={{
+                    fontSize:'17px', fontWeight:700, letterSpacing:'-0.025em',
+                    color:'var(--charcoal)', lineHeight:1.1
+                  }}>
+                    {item.title}
+                  </div>
+                </m.div>
+              ))}
+            </div>
+          </div>
+        </m.div>
+
+        {/* ─── Row F — Footer pill ─── */}
+        <m.div {...springIn(1.50)} style={{ gridColumn:'1 / -1', gridRow:'6' }}
+          className="glass glass-strong flex items-center justify-center relative">
+          <GoldFrame delay={1.7}/>
+          <m.div {...breathe(1.5)} style={{ display:'flex', alignItems:'center', gap:'18px' }}>
+            <span className="eyebrow" style={{ fontSize:'14px', color:'var(--charcoal-muted)' }}>
+              Ready when you are
+            </span>
+            <span style={{
+              fontFamily:'Inter Tight', fontWeight:700, fontSize:'26px',
+              letterSpacing:'-0.025em', color:'var(--charcoal)',
+              display:'inline-flex', alignItems:'center', gap:'14px'
+            }}>
+              Ask at the front desk
+              <m.span
+                animate={{ x:[0,6,0] }} transition={{ duration:1.6, repeat:Infinity, ease:'easeInOut' }}
+                style={{ display:'inline-flex' }}>
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                  <path d="M5 14 H22 M16 8 L22 14 L16 20" stroke="#E8821C" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </m.span>
+            </span>
+          </m.div>
+        </m.div>
+
+      </div>
+    </>
+  );
+}
+
+/* ── benefit icons ─────────────────────────────────────────── */
+function SunIcon(){
+  return (
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+      <circle cx="16" cy="16" r="6" stroke="#1F1B16" strokeWidth="1.6" fill="rgba(232,130,28,0.30)"/>
+      <g stroke="#E8821C" strokeWidth="1.8" strokeLinecap="round">
+        <line x1="16" y1="3" x2="16" y2="7"/>
+        <line x1="16" y1="25" x2="16" y2="29"/>
+        <line x1="3" y1="16" x2="7" y2="16"/>
+        <line x1="25" y1="16" x2="29" y2="16"/>
+        <line x1="6.5" y1="6.5" x2="9.5" y2="9.5"/>
+        <line x1="22.5" y1="22.5" x2="25.5" y2="25.5"/>
+        <line x1="6.5" y1="25.5" x2="9.5" y2="22.5"/>
+        <line x1="22.5" y1="9.5" x2="25.5" y2="6.5"/>
+      </g>
+      <path d="M13 15 a3 3 0 0 0 3 3" stroke="#B8965A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+    </svg>
+  );
+}
+function HoneyIcon(){
+  return (
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+      {/* honeycomb cell + dipper */}
+      <path d="M16 5 L23 9 V17 L16 21 L9 17 V9 Z" stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(229,166,65,0.30)"/>
+      <path d="M16 9 L19.5 11 V15 L16 17 L12.5 15 V11 Z" stroke="#B8965A" strokeWidth="1.4" strokeLinejoin="round" fill="rgba(229,166,65,0.45)"/>
+      <path d="M16 22 V28" stroke="#B8965A" strokeWidth="1.6" strokeLinecap="round"/>
+      <path d="M14 26 C 15 27, 17 27, 18 26" stroke="#E8821C" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+    </svg>
+  );
+}
+function OrangeIcon(){
+  return (
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+      <circle cx="16" cy="17" r="10" stroke="#1F1B16" strokeWidth="1.6" fill="rgba(232,130,28,0.32)"/>
+      {/* segments */}
+      <g stroke="#B8965A" strokeWidth="1.1" fill="none">
+        <line x1="16" y1="7" x2="16" y2="27"/>
+        <line x1="6" y1="17" x2="26" y2="17"/>
+        <line x1="9" y1="10" x2="23" y2="24"/>
+        <line x1="23" y1="10" x2="9" y2="24"/>
+      </g>
+      {/* leaf */}
+      <path d="M14 6 C 16 3, 19 4, 19 7 C 17.5 7.5, 15 7.5, 14 6 Z" stroke="#1F1B16" strokeWidth="1.3" strokeLinejoin="round" fill="rgba(124,156,90,0.55)"/>
+    </svg>
+  );
+}
+
+/* ── included-ritual icons ─────────────────────────────────────────── */
+function SaltBowlIcon(){
+  return (
+    <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+      {/* steam */}
+      <path d="M15 5 C 15 3, 17 3, 17 5 C 17 7, 15 7, 15 9" stroke="#B8965A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+      <path d="M20 4 C 20 2, 22 2, 22 4 C 22 6, 20 6, 20 8" stroke="#B8965A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+      {/* bowl */}
+      <path d="M6 18 H 32 C 31 27, 26 31, 19 31 C 12 31, 7 27, 6 18 Z"
+        stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(184,150,90,0.22)"/>
+      <ellipse cx="19" cy="18" rx="13" ry="2" stroke="#1F1B16" strokeWidth="1.6" fill="rgba(184,150,90,0.32)"/>
+      {/* salt flakes */}
+      <circle cx="14" cy="17" r="0.8" fill="#FBF3E8"/>
+      <circle cx="20" cy="17" r="0.8" fill="#FBF3E8"/>
+      <circle cx="24" cy="17.5" r="0.7" fill="#FBF3E8"/>
+    </svg>
+  );
+}
+function ScrubJarIcon(){
+  return (
+    <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+      <rect x="11" y="9" width="16" height="4" rx="1.2" stroke="#1F1B16" strokeWidth="1.6" fill="rgba(229,166,65,0.40)"/>
+      <path d="M12 13 H 26 V 28 C 26 29.5, 24.5 30, 23 30 H 15 C 13.5 30, 12 29.5, 12 28 Z"
+        stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(229,166,65,0.22)"/>
+      {/* honey + sugar granules */}
+      <circle cx="15" cy="18" r="0.9" fill="#B8965A"/>
+      <circle cx="19" cy="19.5" r="1" fill="#E8821C"/>
+      <circle cx="22.5" cy="17.5" r="0.9" fill="#B8965A"/>
+      <circle cx="16.5" cy="22" r="0.9" fill="#E8821C"/>
+      <circle cx="20" cy="24" r="1" fill="#B8965A"/>
+      <circle cx="23" cy="22.5" r="0.8" fill="#E8821C"/>
+      <path d="M14 27 H 24" stroke="#B8965A" strokeWidth="1.3" strokeLinecap="round"/>
+    </svg>
+  );
+}
+function MudJarIcon(){
+  return (
+    <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+      <rect x="11" y="9" width="16" height="4" rx="1.2" stroke="#1F1B16" strokeWidth="1.6" fill="rgba(124,156,90,0.40)"/>
+      <path d="M12 13 H 26 V 28 C 26 29.5, 24.5 30, 23 30 H 15 C 13.5 30, 12 29.5, 12 28 Z"
+        stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(124,156,90,0.22)"/>
+      <path d="M14 19 C 17 17, 21 18, 24 19" stroke="#7C9C5A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+      <path d="M14 23 C 17 21, 21 22, 24 23" stroke="#7C9C5A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+      <circle cx="17" cy="26" r="0.8" fill="#7C9C5A"/>
+      <circle cx="21" cy="26" r="0.8" fill="#7C9C5A"/>
+    </svg>
+  );
+}
+function LotionIcon(){
+  return (
+    <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+      <path d="M16 9 H 22 V 12 H 16 Z" stroke="#1F1B16" strokeWidth="1.6" fill="rgba(184,150,90,0.30)"/>
+      <path d="M14 12 H 24 L 23 15 H 15 Z" stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(184,150,90,0.20)"/>
+      <path d="M15 15 H 23 V 29 C 23 30, 22 30.5, 21 30.5 H 17 C 16 30.5, 15 30, 15 29 Z"
+        stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(184,150,90,0.16)"/>
+      <path d="M22 9 V 6 H 25 V 8" stroke="#E8821C" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+      <line x1="17" y1="21" x2="21" y2="21" stroke="#B8965A" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="17" y1="24" x2="21" y2="24" stroke="#B8965A" strokeWidth="1.4" strokeLinecap="round"/>
+    </svg>
+  );
+}
+function OrangeSliceIcon(){
+  return (
+    <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+      {/* half-orange */}
+      <path d="M5 22 A 14 14 0 0 1 33 22 Z" stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(232,130,28,0.32)"/>
+      <path d="M5 22 H 33" stroke="#1F1B16" strokeWidth="1.6"/>
+      {/* segment lines radiating from center base */}
+      <g stroke="#B8965A" strokeWidth="1.2" fill="none">
+        <line x1="19" y1="22" x2="19" y2="9"/>
+        <line x1="19" y1="22" x2="11" y2="13"/>
+        <line x1="19" y1="22" x2="27" y2="13"/>
+        <line x1="19" y1="22" x2="8" y2="19"/>
+        <line x1="19" y1="22" x2="30" y2="19"/>
+      </g>
+      {/* leaf */}
+      <path d="M17 7 C 19 4, 22 5, 22 8 C 20.5 8.5, 18 8.5, 17 7 Z" stroke="#1F1B16" strokeWidth="1.2" strokeLinejoin="round" fill="rgba(124,156,90,0.55)"/>
+    </svg>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

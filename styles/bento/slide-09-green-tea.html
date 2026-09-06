@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1080, initial-scale=1" />
+<title>Zen Nail Spa — Green Tea Pedicure</title>
+
+<!-- fonts vendored locally -->
+
+<link href="../../vendor/fonts/fonts.css" rel="stylesheet">
+
+<link href="../../vendor/mini-tw.css" rel="stylesheet">
+<script src="../../vendor/react.production.min.js"></script>
+<script src="../../vendor/react-dom.production.min.js"></script>
+<script src="../../vendor/framer-motion.js"></script>
+<script src="../../vendor/babel.min.js"></script>
+
+<style>
+  :root{
+    --cream-100:#F5E6D8;
+    --cream-200:#E8D5C4;
+    --cream-300:#D4B8A0;
+    --blush:#E8C4B4;
+    --sage:#B5C4A8;
+    --gold:#B8965A;
+    --gold-hi:#D4B886;
+    --charcoal:#1F1B16;
+    --charcoal-soft:rgba(31,27,22,0.78);
+    --charcoal-muted:rgba(31,27,22,0.55);
+    --glass-fill:rgba(255, 251, 246, 0.42);
+    --glass-stroke:rgba(255, 255, 255, 0.55);
+    --glass-shadow: 0 24px 60px -20px rgba(60, 40, 20, 0.22), 0 6px 16px -8px rgba(60, 40, 20, 0.16);
+
+    /* Slide 9 — Green Tea fresh antioxidant accent (brighter leaf-tea green,
+       distinct from slide 4 forest #2D4A3E and slide 7 sage #8CA38C) */
+    --tea:#6E9A52;
+    --tea-deep:#557A3D;
+    --tea-soft:rgba(110,154,82,0.86);
+    --tea-muted:rgba(110,154,82,0.55);
+    --tea-leaf:#8FB86A;
+    --tea-pale:#C2D9A6;
+  }
+  html, body{
+    width:1080px; height:1920px; margin:0; padding:0;
+    background:#E8D5C4;
+    overflow:hidden;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--charcoal);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  #root{ width:1080px; height:1920px; position:relative; }
+  .display{ font-family:'Inter Tight', 'Inter', sans-serif; letter-spacing:-0.035em; }
+  .tabular{ font-variant-numeric: tabular-nums; }
+  .eyebrow{ font-family:'Inter', sans-serif; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; }
+
+  .stage{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 900px 700px at 18% 18%, rgba(232, 196, 180, 0.85), transparent 60%),
+      radial-gradient(ellipse 800px 600px at 88% 35%, rgba(245, 230, 216, 0.75), transparent 65%),
+      radial-gradient(ellipse 700px 700px at 30% 90%, rgba(181, 196, 168, 0.45), transparent 65%),
+      radial-gradient(ellipse 1100px 900px at 110% 110%, rgba(212, 184, 160, 0.7), transparent 70%),
+      linear-gradient(168deg, #F5E6D8 0%, #EBD3C0 45%, #E0BFA8 100%);
+  }
+
+  /* atmospheric drifting orbs */
+  .orb{
+    position:absolute; border-radius:50%;
+    filter: blur(60px);
+    mix-blend-mode: multiply;
+    opacity: 0.55;
+    pointer-events:none;
+  }
+  .orb-1{ width:520px; height:520px; left:-80px; top:120px; background: radial-gradient(circle, #E8C4B4 0%, transparent 65%); }
+  .orb-2{ width:600px; height:600px; right:-120px; top:480px; background: radial-gradient(circle, #F5E6D8 0%, transparent 65%); }
+  .orb-3{ width:480px; height:480px; left:60px; bottom:-40px; background: radial-gradient(circle, #B5C4A8 0%, transparent 60%); opacity:0.32; }
+  .orb-4{ width:420px; height:420px; right:80px; bottom:240px; background: radial-gradient(circle, #D4B8A0 0%, transparent 65%); }
+  /* New: fresh green-tea antioxidant motif orb */
+  .orb-tea{ width:520px; height:520px; left:-80px; top:820px; background: radial-gradient(circle, #6E9A52 0%, transparent 62%); opacity:0.15; }
+  .orb-leaf{ width:380px; height:380px; right:-30px; top:960px; background: radial-gradient(circle, #8FB86A 0%, transparent 64%); opacity:0.19; }
+
+  /* tea-leaf sprig corner decoration — very subtle */
+  .sprig-deco{
+    position:absolute; pointer-events:none;
+    opacity:0.16;
+    mix-blend-mode:multiply;
+  }
+
+  /* grain overlay */
+  .grain{
+    position:absolute; inset:0; pointer-events:none; opacity:0.07; mix-blend-mode:overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .glass{
+    position:relative;
+    background: var(--glass-fill);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    backdrop-filter: blur(24px) saturate(140%);
+    border: 1px solid var(--glass-stroke);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.45);
+    border-radius: 28px;
+    overflow:hidden;
+  }
+  .glass-strong{
+    background: rgba(255, 251, 246, 0.58);
+  }
+  .glass::after{
+    content:""; position:absolute; left:0; right:0; top:0; height:50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0));
+    pointer-events:none;
+  }
+  .gold-frame{
+    position:absolute; inset:0; pointer-events:none;
+    border-radius:inherit;
+  }
+
+  /* Fresh green-tea price pill — solid fill, cream text */
+  .price-pill-tea{
+    background:
+      radial-gradient(ellipse 80% 60% at 30% 22%, rgba(220,235,200,0.24), transparent 55%),
+      linear-gradient(158deg, #82AC63 0%, #6E9A52 55%, #557A3D 100%);
+    border: 1.5px solid rgba(212, 184, 134, 0.55);
+    box-shadow:
+      0 30px 64px -18px rgba(55, 90, 35, 0.50),
+      0 12px 26px -8px rgba(55, 90, 35, 0.30),
+      inset 0 1px 0 rgba(228,240,210,0.38),
+      inset 0 -1px 0 rgba(38,60,25,0.28);
+  }
+  .price-pill-tea::before{
+    content:""; position:absolute; inset:6px;
+    border-radius:22px;
+    border: 1px solid rgba(212, 184, 134, 0.32);
+    pointer-events:none;
+  }
+
+  .hero-img{
+    width:100%; height:100%; object-fit:cover; object-position: center 40%;
+    display:block;
+  }
+  .hero-fallback{
+    width:100%; height:100%; position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 56%, rgba(224, 240, 206, 0.95), transparent 75%),
+      linear-gradient(170deg, #DCEBC8 0%, #CADCAE 50%, #B4CC92 100%);
+  }
+  .hero-vignette{
+    position:absolute; inset:0; pointer-events:none;
+    background:
+      linear-gradient(180deg, rgba(28,40,20,0.00) 48%, rgba(24,38,16,0.60) 100%),
+      linear-gradient(90deg, rgba(24,38,16,0.18) 0%, rgba(24,38,16,0) 35%);
+  }
+  .hero-eyebrow-pill{
+    background: rgba(244, 248, 238, 0.90);
+    border: 1px solid rgba(110, 154, 82, 0.42);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  .sprig-icon-wrap{
+    width:44px; height:44px; border-radius:13px;
+    background:linear-gradient(135deg, rgba(232,242,220,0.95), rgba(186,210,150,0.62));
+    border:1px solid rgba(110,154,82,0.32);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.6), 0 4px 10px -2px rgba(55,90,35,0.18);
+  }
+
+  .pin-dot-tea{
+    width:8px; height:8px; border-radius:50%; background:var(--tea);
+    box-shadow: 0 0 0 4px rgba(110,154,82,0.18);
+  }
+
+  /* hairline rules for eyebrow headers */
+  .hair-rule{
+    height:1px; background: linear-gradient(90deg, transparent, rgba(184,150,90,0.55), transparent);
+    flex:1; max-width:220px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" data-presets="react">
+const { useEffect, useState, useRef, useMemo } = React;
+const m = window.Motion.motion;
+
+function App(){
+
+  // gentle, slow spring entry — calmest tier (matches slide 6)
+  const springIn = (delay=0)=>({
+    initial:{ opacity:0, y:40, scale:0.95 },
+    animate:{ opacity:1, y:0, scale:1 },
+    transition:{ type:'spring', stiffness:80, damping:16, delay }
+  });
+
+  // continuous breathing per card
+  const breathe = (phase=0)=>({
+    animate:{ y: [0, -2, 0, 2, 0] },
+    transition:{ duration:4, repeat:Infinity, ease:'easeInOut', delay: phase }
+  });
+
+  const GoldFrame = ({ r=28, delay=0.4, color="rgba(184,150,90,0.55)" })=> (
+    <svg className="gold-frame" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <m.rect
+        x="0.5" y="0.5" width="99" height="99" rx={r/2.4} ry={r/2.4}
+        fill="none" stroke={color} strokeWidth="0.18"
+        pathLength="1"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 1 }}
+        transition={{ duration: 1.5, delay, ease: 'easeOut' }}
+      />
+    </svg>
+  );
+
+  // Hairline-drawing eyebrow header (rules grow outward from center text)
+  const EyebrowHeader = ({ children, color="var(--charcoal-muted)", delay=0 })=>(
+    <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'20px', position:'relative' }}>
+      <m.div className="hair-rule"
+        initial={{ scaleX:0, opacity:0 }} animate={{ scaleX:1, opacity:1 }}
+        transition={{ duration:1.0, delay, ease:'easeOut' }}
+        style={{ transformOrigin:'right center' }}/>
+      <span className="eyebrow" style={{ fontSize:'14px', color, letterSpacing:'0.26em', whiteSpace:'nowrap' }}>
+        {children}
+      </span>
+      <m.div className="hair-rule"
+        initial={{ scaleX:0, opacity:0 }} animate={{ scaleX:1, opacity:1 }}
+        transition={{ duration:1.0, delay, ease:'easeOut' }}
+        style={{ transformOrigin:'left center' }}/>
+    </div>
+  );
+
+  const benefits = [
+    { icon: <AntiAgeIcon/>, title:'Anti-Aging',
+      body:'Rich in antioxidants to protect and renew skin texture.' },
+    { icon: <DetoxIcon/>,   title:'Deep Detox',
+      body:'Draws out impurities while soothing swollen feet.' },
+    { icon: <AromaIcon/>,   title:'Aromatherapy',
+      body:'The subtle, fresh scent calms the mind and reduces stress.' },
+  ];
+
+  const included = [
+    { title:'Aromatic Green Tea Soak',  icon:<SoakIcon/> },
+    { title:'Exfoliating Sugar Scrub',  icon:<ScrubIcon/> },
+    { title:'Hydrating Mud Mask',       icon:<MaskIcon/> },
+    { title:'Relaxing Lotion Massage',  icon:<MassageIcon/> },
+  ];
+
+  return (
+    <>
+      {/* atmospheric stage */}
+      <div className="stage" aria-hidden="true">
+        <m.div className="orb orb-1"
+          animate={{ x:[0,30,-10,0], y:[0,-20,10,0] }}
+          transition={{ duration:18, repeat:Infinity, ease:'easeInOut' }} />
+        <m.div className="orb orb-2"
+          animate={{ x:[0,-25,15,0], y:[0,15,-12,0] }}
+          transition={{ duration:22, repeat:Infinity, ease:'easeInOut', delay:1.5 }} />
+        <m.div className="orb orb-3"
+          animate={{ x:[0,18,-22,0], y:[0,-14,8,0] }}
+          transition={{ duration:20, repeat:Infinity, ease:'easeInOut', delay:0.8 }} />
+        <m.div className="orb orb-4"
+          animate={{ x:[0,-18,22,0], y:[0,12,-18,0] }}
+          transition={{ duration:24, repeat:Infinity, ease:'easeInOut', delay:2.2 }} />
+        <m.div className="orb orb-tea"
+          animate={{ x:[0,20,-14,0], y:[0,-16,18,0] }}
+          transition={{ duration:23, repeat:Infinity, ease:'easeInOut', delay:1.0 }} />
+        <m.div className="orb orb-leaf"
+          animate={{ x:[0,-18,14,0], y:[0,14,-10,0] }}
+          transition={{ duration:25, repeat:Infinity, ease:'easeInOut', delay:1.8 }} />
+
+        {/* corner tea-leaf-sprig decorations — very subtle */}
+        <svg className="sprig-deco" style={{ top:'46px', right:'34px', width:'150px', height:'150px' }} viewBox="0 0 100 100">
+          <g stroke="#557A3D" strokeWidth="0.6" fill="none">
+            <path d="M50 94 C 50 64, 50 40, 50 18"/>
+          </g>
+          <g fill="rgba(110,154,82,0.42)" stroke="#557A3D" strokeWidth="0.35">
+            <path d="M50 30 C 42 26, 36 30, 35 40 C 44 42, 50 38, 50 30 Z"/>
+            <path d="M50 44 C 58 40, 64 44, 65 54 C 56 56, 50 52, 50 44 Z"/>
+            <path d="M50 58 C 42 54, 36 58, 35 68 C 44 70, 50 66, 50 58 Z"/>
+            <path d="M50 72 C 58 68, 64 72, 65 82 C 56 84, 50 80, 50 72 Z"/>
+          </g>
+        </svg>
+        <svg className="sprig-deco" style={{ bottom:'40px', left:'28px', width:'170px', height:'170px', transform:'scaleX(-1)' }} viewBox="0 0 100 100">
+          <g stroke="#6E9A52" strokeWidth="0.55" fill="none">
+            <path d="M50 94 C 50 64, 50 40, 50 18"/>
+          </g>
+          <g fill="rgba(143,184,106,0.42)" stroke="#6E9A52" strokeWidth="0.32">
+            <path d="M50 32 C 42 28, 36 32, 35 42 C 44 44, 50 40, 50 32 Z"/>
+            <path d="M50 48 C 58 44, 64 48, 65 58 C 56 60, 50 56, 50 48 Z"/>
+            <path d="M50 64 C 42 60, 36 64, 35 74 C 44 76, 50 72, 50 64 Z"/>
+          </g>
+        </svg>
+
+        <div className="grain"/>
+      </div>
+
+      {/* content frame — fewest content blocks, generous breathing room (mirrors slide 6) */}
+      <div className="relative w-full h-full" style={{ padding:'52px 60px', display:'grid',
+        gridTemplateColumns:'repeat(6, 1fr)',
+        gridTemplateRows:'76px 620px 220px 54px 336px 252px 90px',
+        gap:'26px'
+      }}>
+
+        {/* ─── Row A — brand strip ─── */}
+        <m.div {...springIn(0.05)} style={{ gridColumn:'1 / -1', gridRow:'1' }}
+          className="glass glass-strong flex items-center justify-between px-9">
+          <GoldFrame delay={0.5}/>
+          <div className="flex items-baseline gap-4">
+            <span className="display tabular" style={{ fontSize:'30px', fontWeight:800, letterSpacing:'-0.04em' }}>
+              ZEN
+            </span>
+            <span className="eyebrow" style={{ fontSize:'14px', color:'var(--charcoal-soft)' }}>
+              Nail Spa
+            </span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="pin-dot-tea"/>
+            <span className="eyebrow" style={{ fontSize:'13px', color:'var(--tea-soft)' }}>
+              Antioxidant Pedicure · Zen House
+            </span>
+          </div>
+        </m.div>
+
+        {/* ─── Row B — Hero card with real photo ─── */}
+        <m.div {...springIn(0.15)} style={{ gridColumn:'1 / -1', gridRow:'2' }}
+          className="glass relative overflow-hidden">
+          <m.div style={{ width:'100%', height:'100%' }}
+            initial={{ scale:0.95 }}
+            animate={{ scale:[1, 1.015, 1] }}
+            transition={{ scale:{ duration:5, repeat:Infinity, ease:'easeInOut' }, opacity:{ duration:1.4 } }}>
+            <img src="assets/green-tea-hero.png" alt="Fresh green tea water splash with swirling tea leaves"
+              className="hero-img"
+              onError={(e)=>{ e.currentTarget.style.display='none'; e.currentTarget.parentElement.insertAdjacentHTML('beforeend', '<div class=\"hero-fallback\"></div>'); }}/>
+          </m.div>
+          <div className="hero-vignette"/>
+
+          {/* eyebrow pill top-left */}
+          <m.div className="hero-eyebrow-pill absolute"
+            style={{ top:'28px', left:'28px', padding:'10px 18px', borderRadius:'999px',
+              display:'inline-flex', alignItems:'center', gap:'10px' }}
+            initial={{ opacity:0, y:-10 }} animate={{ opacity:1, y:0 }}
+            transition={{ delay:1.0, duration:0.7 }}>
+            <span style={{ width:'8px', height:'8px', background:'var(--tea)', borderRadius:'50%' }}/>
+            <span className="eyebrow" style={{ fontSize:'12px', color:'var(--charcoal)', letterSpacing:'0.20em' }}>
+              Zen Pedicure · Antioxidant Treatment
+            </span>
+          </m.div>
+
+          {/* title block bottom-left */}
+          <div className="absolute" style={{ left:'44px', right:'44px', bottom:'40px' }}>
+            <m.div initial={{ opacity:0, y:24 }} animate={{ opacity:1, y:0 }}
+              transition={{ delay:1.1, duration:0.8, ease:'easeOut' }}>
+              <h1 className="display" style={{
+                fontSize:'88px', fontWeight:800, lineHeight:0.94, letterSpacing:'-0.05em',
+                color:'#FBF3E8', margin:0,
+                textShadow:'0 2px 14px rgba(20,34,12,0.45)'
+              }}>
+                Green Tea<br/>Pedicure
+              </h1>
+              <div style={{
+                fontFamily:'Inter Tight', fontWeight:500, fontStyle:'italic',
+                fontSize:'24px', letterSpacing:'-0.012em',
+                color:'#EDF2E4', lineHeight:1.3, marginTop:'18px', maxWidth:'640px',
+                textShadow:'0 2px 10px rgba(20,34,12,0.45)'
+              }}>
+                Rejuvenate your soles with nature's most powerful antioxidant.
+              </div>
+            </m.div>
+          </div>
+
+          <GoldFrame delay={0.7}/>
+        </m.div>
+
+        {/* ─── Row C — Tagline (cols 1–4) + Price pill (cols 5–6) ─── */}
+        <m.div {...springIn(0.32)} style={{ gridColumn:'1 / span 4', gridRow:'3' }}
+          className="glass flex items-center px-10">
+          <GoldFrame delay={1.0}/>
+          <m.div {...breathe(0.2)}>
+            <div className="eyebrow" style={{ fontSize:'12px', color:'var(--tea-soft)', marginBottom:'12px' }}>
+              The Promise
+            </div>
+            <div className="display" style={{
+              fontSize:'38px', fontWeight:700, lineHeight:1.04, letterSpacing:'-0.035em',
+              color:'var(--charcoal)'
+            }}>
+              Renew. Detox. <em style={{ fontStyle:'italic', color:'var(--tea)', fontWeight:600 }}>Calm.</em>
+            </div>
+            <div style={{
+              fontFamily:'Inter Tight', fontStyle:'italic',
+              fontSize:'18px', fontWeight:500, color:'var(--charcoal-soft)',
+              marginTop:'10px', lineHeight:1.4, letterSpacing:'-0.01em'
+            }}>
+              Antioxidant-rich green tea for tired feet
+            </div>
+          </m.div>
+        </m.div>
+
+        <m.div style={{ gridColumn:'5 / span 2', gridRow:'3', position:'relative' }}
+          initial={{ opacity:0, scale:0.4, y:30 }}
+          animate={{ opacity:1, scale:1, y:0 }}
+          transition={{ type:'spring', stiffness:200, damping:11, delay:0.45 }}>
+          <m.div
+            className="price-pill-tea"
+            animate={{
+              boxShadow: [
+                '0 30px 64px -18px rgba(55, 90, 35, 0.50), 0 12px 26px -8px rgba(55, 90, 35, 0.30), inset 0 1px 0 rgba(228,240,210,0.38), inset 0 -1px 0 rgba(38,60,25,0.28)',
+                '0 30px 84px -14px rgba(80, 125, 55, 0.70), 0 16px 34px -8px rgba(80, 125, 55, 0.46), inset 0 1px 0 rgba(238,248,220,0.48), inset 0 -1px 0 rgba(38,60,25,0.28)',
+                '0 30px 64px -18px rgba(55, 90, 35, 0.50), 0 12px 26px -8px rgba(55, 90, 35, 0.30), inset 0 1px 0 rgba(228,240,210,0.38), inset 0 -1px 0 rgba(38,60,25,0.28)'
+              ]
+            }}
+            transition={{ duration:3, repeat:Infinity, ease:'easeInOut' }}
+            style={{
+              width:'100%', height:'100%', borderRadius:'28px',
+              display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
+              position:'relative'
+            }}>
+            <div className="eyebrow" style={{
+              fontSize:'12px', color:'rgba(234, 244, 220, 0.88)',
+              letterSpacing:'0.34em', marginBottom:'2px'
+            }}>
+              From
+            </div>
+            <div className="display tabular" style={{
+              fontSize:'98px', fontWeight:700, letterSpacing:'-0.05em',
+              lineHeight:1, color:'#FBF3E8',
+              display:'flex', alignItems:'baseline'
+            }}>
+              <span style={{
+                fontSize:'42px', fontWeight:600, color:'#E4F0D2',
+                marginRight:'4px', transform:'translateY(-22px)', display:'inline-block'
+              }}>$</span>
+              45
+            </div>
+          <div style={{ fontSize:'11px', fontWeight:400, color:'#FBF3E8', lineHeight:1.35, textAlign:'center', letterSpacing:'0.02em', marginTop:'6px', maxWidth:'190px' }}>
+              Gel polish & add-ons available
+            </div>
+          </m.div>
+        </m.div>
+
+        {/* ─── Row D — "WHY CHOOSE GREEN TEA?" header ─── */}
+        <div style={{ gridColumn:'1 / -1', gridRow:'4', display:'flex', alignItems:'center', justifyContent:'center' }}>
+          <EyebrowHeader color="var(--charcoal-soft)" delay={0.6}>
+            Why Choose Green Tea?
+          </EyebrowHeader>
+        </div>
+
+        {/* ─── Row E — 3 benefit cards ─── */}
+        <div style={{ gridColumn:'1 / -1', gridRow:'5',
+          display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'30px' }}>
+          {benefits.map((b,i)=>(
+            <m.div key={i} {...springIn(0.70 + i*0.08)}
+              className="glass px-7 py-7 flex flex-col justify-between relative">
+              <m.div {...breathe(i*0.3)}>
+                <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+                  <div className="sprig-icon-wrap" style={{ width:'56px', height:'56px', borderRadius:'16px' }}>
+                    {b.icon}
+                  </div>
+                  <span className="eyebrow tabular" style={{ fontSize:'11px', color:'var(--charcoal-muted)' }}>
+                    0{i+1}
+                  </span>
+                </div>
+                <div className="display" style={{
+                  fontSize:'28px', fontWeight:700, letterSpacing:'-0.03em',
+                  marginTop:'18px', color:'var(--charcoal)', lineHeight:1.08
+                }}>
+                  {b.title}
+                </div>
+                <div style={{
+                  fontSize:'16px', fontWeight:400, color:'var(--charcoal-soft)',
+                  marginTop:'10px', lineHeight:1.42
+                }}>
+                  {b.body}
+                </div>
+              </m.div>
+              <GoldFrame delay={0.9 + i*0.1} r={22}/>
+            </m.div>
+          ))}
+        </div>
+
+        {/* ─── Row F — Wide "What's Included" card ─── */}
+        <m.div {...springIn(1.10)} style={{ gridColumn:'1 / -1', gridRow:'6', position:'relative' }}
+          className="glass glass-strong">
+          <GoldFrame delay={1.5}/>
+          <div style={{ padding:'30px 36px 32px', height:'100%', display:'flex', flexDirection:'column' }}>
+            <div style={{ marginBottom:'22px' }}>
+              <EyebrowHeader color="var(--tea-soft)" delay={1.15}>
+                What's Included
+              </EyebrowHeader>
+            </div>
+
+            <div style={{
+              display:'grid', gridTemplateColumns:'repeat(4, 1fr)',
+              gap:'16px', flex:1, alignItems:'center'
+            }}>
+              {included.map((item, i)=>(
+                <m.div key={i}
+                  initial={{ opacity:0, x:-16 }}
+                  animate={{ opacity:1, x:0 }}
+                  transition={{ delay:1.20 + i*0.07, duration:0.55, ease:'easeOut' }}
+                  style={{
+                    display:'flex', flexDirection:'column', alignItems:'center',
+                    textAlign:'center', padding:'4px 8px', position:'relative'
+                  }}>
+                  <m.div className="sprig-icon-wrap"
+                    style={{ width:'58px', height:'58px', borderRadius:'17px' }}
+                    initial={{ scale:0, opacity:0 }}
+                    animate={{ scale:1, opacity:1 }}
+                    transition={{ delay:1.26 + i*0.07, type:'spring', stiffness:240, damping:15 }}>
+                    {item.icon}
+                  </m.div>
+                  <div className="display" style={{
+                    fontSize:'19px', fontWeight:700, letterSpacing:'-0.025em',
+                    color:'var(--charcoal)', lineHeight:1.2, marginTop:'16px'
+                  }}>
+                    {item.title}
+                  </div>
+                </m.div>
+              ))}
+            </div>
+          </div>
+        </m.div>
+
+        {/* ─── Row G — Footer pill ─── */}
+        <m.div {...springIn(1.60)} style={{ gridColumn:'1 / -1', gridRow:'7' }}
+          className="glass glass-strong flex items-center justify-center relative">
+          <GoldFrame delay={1.9}/>
+          <m.div {...breathe(1.5)} style={{ display:'flex', alignItems:'center', gap:'18px' }}>
+            <span style={{
+              fontFamily:'Inter Tight', fontWeight:700, fontSize:'25px',
+              letterSpacing:'-0.025em', color:'var(--charcoal)',
+              display:'inline-flex', alignItems:'center', gap:'16px'
+            }}>
+              <span>Zen Nail Spa</span>
+              <span style={{ color:'var(--tea)', fontWeight:600 }}>·</span>
+              <span className="tabular">(919) 316-7856</span>
+              <span style={{ color:'var(--tea)', fontWeight:600 }}>·</span>
+              <span style={{ color:'var(--charcoal-soft)', fontWeight:600 }}>Ask the front desk</span>
+            </span>
+          </m.div>
+        </m.div>
+
+      </div>
+    </>
+  );
+}
+
+/* ── benefit icons ─────────────────────────────────────────── */
+function AntiAgeIcon(){
+  /* anti-aging — tea leaf + renewal sparkle */
+  return (
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+      <path d="M16 5 C 9 8, 6 14, 7 22 C 15 23, 22 18, 25 9 C 21 7, 18 5, 16 5 Z"
+        stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(110,154,82,0.26)"/>
+      <path d="M11 19 C 14 15, 18 12, 23 10" stroke="#557A3D" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+      <path d="M24 5 L 25 8 L 28 9 L 25 10 L 24 13 L 23 10 L 20 9 L 23 8 Z"
+        stroke="#8FB86A" strokeWidth="1.1" strokeLinejoin="round" fill="rgba(143,184,106,0.45)"/>
+    </svg>
+  );
+}
+function DetoxIcon(){
+  /* deep detox — droplet drawing out impurities */
+  return (
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+      <path d="M16 4 C 16 4, 8 13, 8 19 a8 8 0 0 0 16 0 C 24 13, 16 4, 16 4 z"
+        stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(110,154,82,0.26)"/>
+      <path d="M12 19 a4 4 0 0 0 4 4" stroke="#557A3D" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+      <circle cx="22.5" cy="9" r="1.5" fill="rgba(143,184,106,0.6)" stroke="#557A3D" strokeWidth="0.5"/>
+      <circle cx="26" cy="13" r="1.1" fill="rgba(143,184,106,0.5)" stroke="#557A3D" strokeWidth="0.4"/>
+    </svg>
+  );
+}
+function AromaIcon(){
+  /* aromatherapy — leaf with rising fresh scent wisps */
+  return (
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+      <path d="M16 14 C 10 16, 7 20, 8 28 C 16 29, 23 24, 25 16 C 21 14, 18 13, 16 14 Z"
+        stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(110,154,82,0.26)"/>
+      <path d="M12 25 C 15 21, 19 18, 23 17" stroke="#557A3D" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+      <path d="M13 10 C 13 7, 16 7, 16 10 C 16 13, 13 12, 13 9" stroke="#8FB86A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+      <path d="M19 8 C 19 5, 22 5, 22 8 C 22 11, 19 10, 19 7" stroke="#8FB86A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+    </svg>
+  );
+}
+
+/* ── included-ritual icons ─────────────────────────────────────────── */
+function SoakIcon(){
+  /* aromatic green tea soak — bowl with tea leaf + steam */
+  return (
+    <svg width="34" height="34" viewBox="0 0 38 38" fill="none">
+      {/* tea leaf */}
+      <path d="M19 4 C 15 6, 13 9, 14 14 C 19 15, 23 12, 24 7 C 22 5, 20 4, 19 4 Z"
+        stroke="#557A3D" strokeWidth="0.8" strokeLinejoin="round" fill="rgba(110,154,82,0.55)"/>
+      <path d="M16 12 C 18 10, 20 8, 23 7" stroke="#557A3D" strokeWidth="0.7" strokeLinecap="round" fill="none"/>
+      {/* steam wisps */}
+      <path d="M26 6 C 26 4, 28 4, 28 6 C 28 8, 26 8, 26 10" stroke="#8FB86A" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
+      {/* bowl */}
+      <path d="M6 19 H 32 C 31 28, 26 32, 19 32 C 12 32, 7 28, 6 19 Z"
+        stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(110,154,82,0.20)"/>
+      <ellipse cx="19" cy="19" rx="13" ry="2" stroke="#1F1B16" strokeWidth="1.6" fill="rgba(110,154,82,0.30)"/>
+    </svg>
+  );
+}
+function ScrubIcon(){
+  /* exfoliating sugar scrub — jar with granules */
+  return (
+    <svg width="34" height="34" viewBox="0 0 38 38" fill="none">
+      <rect x="11" y="9" width="16" height="4" rx="1.2" stroke="#1F1B16" strokeWidth="1.6" fill="rgba(143,184,106,0.45)"/>
+      <path d="M12 13 H 26 V 28 C 26 29.5, 24.5 30, 23 30 H 15 C 13.5 30, 12 29.5, 12 28 Z"
+        stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(110,154,82,0.20)"/>
+      <circle cx="15" cy="18" r="0.9" fill="#8FB86A"/>
+      <circle cx="19" cy="19.5" r="1" fill="#557A3D"/>
+      <circle cx="22.5" cy="17.5" r="0.9" fill="#8FB86A"/>
+      <circle cx="16.5" cy="22" r="0.9" fill="#557A3D"/>
+      <circle cx="20" cy="24" r="1" fill="#8FB86A"/>
+      <circle cx="23" cy="22.5" r="0.8" fill="#557A3D"/>
+      <path d="M14 27 H 24" stroke="#8FB86A" strokeWidth="1.3" strokeLinecap="round"/>
+    </svg>
+  );
+}
+function MaskIcon(){
+  /* hydrating mud mask — jar with swirl */
+  return (
+    <svg width="34" height="34" viewBox="0 0 38 38" fill="none">
+      <rect x="11" y="9" width="16" height="4" rx="1.2" stroke="#1F1B16" strokeWidth="1.6" fill="rgba(143,184,106,0.45)"/>
+      <path d="M12 13 H 26 V 28 C 26 29.5, 24.5 30, 23 30 H 15 C 13.5 30, 12 29.5, 12 28 Z"
+        stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(110,154,82,0.20)"/>
+      <path d="M14 19 C 17 17, 21 18, 24 19" stroke="#557A3D" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+      <path d="M14 23 C 17 21, 21 22, 24 23" stroke="#557A3D" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+      <circle cx="17" cy="26" r="0.8" fill="#8FB86A"/>
+      <circle cx="21" cy="26" r="0.8" fill="#8FB86A"/>
+    </svg>
+  );
+}
+function MassageIcon(){
+  /* relaxing lotion massage — bottle + soothing strokes */
+  return (
+    <svg width="34" height="34" viewBox="0 0 38 38" fill="none">
+      <path d="M16 9 H 22 V 12 H 16 Z" stroke="#1F1B16" strokeWidth="1.6" fill="rgba(110,154,82,0.30)"/>
+      <path d="M14 12 H 24 L 23 15 H 15 Z" stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(110,154,82,0.20)"/>
+      <path d="M15 15 H 23 V 29 C 23 30, 22 30.5, 21 30.5 H 17 C 16 30.5, 15 30, 15 29 Z"
+        stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(110,154,82,0.16)"/>
+      <path d="M22 9 V 6 H 25 V 8" stroke="#557A3D" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+      <line x1="17" y1="21" x2="21" y2="21" stroke="#8FB86A" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="17" y1="24" x2="21" y2="24" stroke="#8FB86A" strokeWidth="1.4" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

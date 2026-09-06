@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1080, initial-scale=1" />
+<title>Zen Nail Spa — Charcoal Detox Pedicure</title>
+
+<!-- fonts vendored locally -->
+
+<link href="../../vendor/fonts/fonts.css" rel="stylesheet">
+
+<link href="../../vendor/mini-tw.css" rel="stylesheet">
+<script src="../../vendor/react.production.min.js"></script>
+<script src="../../vendor/react-dom.production.min.js"></script>
+<script src="../../vendor/framer-motion.js"></script>
+<script src="../../vendor/babel.min.js"></script>
+
+<style>
+  :root{
+    --cream-100:#F5E6D8;
+    --cream-200:#E8D5C4;
+    --cream-300:#D4B8A0;
+    --blush:#E8C4B4;
+    --sage:#B5C4A8;
+    --gold:#B8965A;
+    --gold-hi:#D4B886;
+    --charcoal:#1F1B16;
+    --charcoal-soft:rgba(31,27,22,0.78);
+    --charcoal-muted:rgba(31,27,22,0.55);
+    --glass-fill:rgba(255, 251, 246, 0.42);
+    --glass-stroke:rgba(255, 255, 255, 0.55);
+    --glass-shadow: 0 24px 60px -20px rgba(60, 40, 20, 0.22), 0 6px 16px -8px rgba(60, 40, 20, 0.16);
+  }
+  html, body{
+    width:1080px; height:1920px; margin:0; padding:0;
+    background:#E8D5C4;
+    overflow:hidden;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--charcoal);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  #root{ width:1080px; height:1920px; position:relative; }
+  .display{ font-family:'Inter Tight', 'Inter', sans-serif; letter-spacing:-0.035em; }
+  .tabular{ font-variant-numeric: tabular-nums; }
+  .eyebrow{ font-family:'Inter', sans-serif; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; }
+
+  .stage{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 900px 700px at 18% 18%, rgba(232, 196, 180, 0.85), transparent 60%),
+      radial-gradient(ellipse 800px 600px at 88% 35%, rgba(245, 230, 216, 0.75), transparent 65%),
+      radial-gradient(ellipse 700px 700px at 30% 90%, rgba(181, 196, 168, 0.45), transparent 65%),
+      radial-gradient(ellipse 1100px 900px at 110% 110%, rgba(212, 184, 160, 0.7), transparent 70%),
+      linear-gradient(168deg, #F5E6D8 0%, #EBD3C0 45%, #E0BFA8 100%);
+  }
+
+  /* atmospheric drifting orbs */
+  .orb{
+    position:absolute; border-radius:50%;
+    filter: blur(60px);
+    mix-blend-mode: multiply;
+    opacity: 0.55;
+    pointer-events:none;
+  }
+  .orb-1{ width:520px; height:520px; left:-80px; top:120px; background: radial-gradient(circle, #E8C4B4 0%, transparent 65%); }
+  .orb-2{ width:600px; height:600px; right:-120px; top:480px; background: radial-gradient(circle, #F5E6D8 0%, transparent 65%); }
+  .orb-3{ width:480px; height:480px; left:60px; bottom:-40px; background: radial-gradient(circle, #B5C4A8 0%, transparent 60%); opacity:0.32; }
+  .orb-4{ width:420px; height:420px; right:80px; bottom:240px; background: radial-gradient(circle, #D4B8A0 0%, transparent 65%); }
+
+  /* grain overlay */
+  .grain{
+    position:absolute; inset:0; pointer-events:none; opacity:0.07; mix-blend-mode:overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .glass{
+    position:relative;
+    background: var(--glass-fill);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    backdrop-filter: blur(24px) saturate(140%);
+    border: 1px solid var(--glass-stroke);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.45);
+    border-radius: 28px;
+    overflow:hidden;
+  }
+  .glass-strong{
+    background: rgba(255, 251, 246, 0.58);
+  }
+  .glass::after{
+    /* faint top sheen */
+    content:""; position:absolute; left:0; right:0; top:0; height:50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0));
+    pointer-events:none;
+  }
+  /* gold hairline svg overlay positions inside each glass card */
+  .gold-frame{
+    position:absolute; inset:0; pointer-events:none;
+    border-radius:inherit;
+  }
+
+  .checkmark{
+    width:28px; height:28px; flex-shrink:0;
+    display:inline-flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    background: linear-gradient(135deg, #D4B886, #B8965A);
+    box-shadow: 0 4px 10px -2px rgba(184,150,90,0.45), inset 0 1px 0 rgba(255,255,255,0.5);
+  }
+  .pin-dot{
+    width:8px; height:8px; border-radius:50%; background:var(--gold);
+    box-shadow: 0 0 0 4px rgba(184,150,90,0.18);
+  }
+
+  .price-pill{
+    background: linear-gradient(160deg, rgba(255,251,246,0.85) 0%, rgba(255,243,228,0.55) 100%);
+    border: 1.5px solid rgba(212, 184, 134, 0.6);
+    box-shadow:
+      0 28px 60px -20px rgba(120, 80, 30, 0.32),
+      0 8px 18px -6px rgba(120, 80, 30, 0.18),
+      inset 0 1px 0 rgba(255,255,255,0.7),
+      inset 0 -1px 0 rgba(184,150,90,0.2);
+    -webkit-backdrop-filter: blur(28px) saturate(150%);
+    backdrop-filter: blur(28px) saturate(150%);
+  }
+
+  .hero-img{
+    width:100%; height:100%; object-fit:cover; object-position: center 30%;
+  }
+  .hero-vignette{
+    position:absolute; inset:0; pointer-events:none;
+    background:
+      linear-gradient(180deg, rgba(31,27,22,0) 50%, rgba(31,27,22,0.72) 100%),
+      linear-gradient(90deg, rgba(31,27,22,0.18) 0%, rgba(31,27,22,0) 35%);
+  }
+  .hero-eyebrow-pill{
+    background: rgba(245, 230, 216, 0.85);
+    border: 1px solid rgba(184, 150, 90, 0.4);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" data-presets="react">
+const { useEffect, useState, useRef, useMemo } = React;
+const m = window.Motion.motion;
+const AnimatePresence = window.Motion.AnimatePresence;
+
+function App(){
+
+  // staggered spring entry
+  const springIn = (delay=0)=>({
+    initial:{ opacity:0, y:40, scale:0.95 },
+    animate:{ opacity:1, y:0, scale:1 },
+    transition:{ type:'spring', stiffness:100, damping:15, delay }
+  });
+
+  // continuous breathing per card
+  const breathe = (phase=0)=>({
+    animate:{ y: [0, -2, 0, 2, 0] },
+    transition:{ duration:4, repeat:Infinity, ease:'easeInOut', delay: phase }
+  });
+
+  // gold border draw
+  const GoldFrame = ({ r=28, delay=0.4 })=> (
+    <svg className="gold-frame" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <m.rect
+        x="0.5" y="0.5" width="99" height="99" rx={r/2.4} ry={r/2.4}
+        fill="none" stroke="rgba(184,150,90,0.55)" strokeWidth="0.18"
+        pathLength="1"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: 1 }}
+        transition={{ duration: 1.4, delay, ease: 'easeOut' }}
+      />
+    </svg>
+  );
+
+  const benefits = [
+    { icon: <DropletIcon/>,  title:'Deep Cleansing',   body:'Lifts buildup, leaves feet refreshed.' },
+    { icon: <SparkleIcon/>,   title:'Smoother Skin',    body:'Charcoal mask softens rough areas.' },
+    { icon: <LotusIcon/>,     title:'Relaxing Massage', body:'Soothes tired, aching feet.' },
+    { icon: <FootIcon/>,      title:'Polished Finish',  body:'Smooth, clean, sandal-ready.' },
+  ];
+  const included = [
+    'Sea Salt Soak', 'Sugar Scrub',
+    'Charcoal Mask', 'Massage Butter',
+    'Steam Therapy', '10-Min Massage',
+    'Warm Paraffin Wax',
+  ];
+
+  return (
+    <>
+      {/* atmospheric stage */}
+      <div className="stage" aria-hidden="true">
+        <m.div className="orb orb-1"
+          animate={{ x:[0,30,-10,0], y:[0,-20,10,0] }}
+          transition={{ duration:18, repeat:Infinity, ease:'easeInOut' }} />
+        <m.div className="orb orb-2"
+          animate={{ x:[0,-25,15,0], y:[0,15,-12,0] }}
+          transition={{ duration:22, repeat:Infinity, ease:'easeInOut', delay:1.5 }} />
+        <m.div className="orb orb-3"
+          animate={{ x:[0,18,-22,0], y:[0,-14,8,0] }}
+          transition={{ duration:20, repeat:Infinity, ease:'easeInOut', delay:0.8 }} />
+        <m.div className="orb orb-4"
+          animate={{ x:[0,-18,22,0], y:[0,12,-18,0] }}
+          transition={{ duration:24, repeat:Infinity, ease:'easeInOut', delay:2.2 }} />
+        <div className="grain"/>
+      </div>
+
+      {/* content frame: 60px gutter, 24px gap */}
+      <div className="relative w-full h-full" style={{ padding:'56px 60px', display:'grid',
+        gridTemplateColumns:'repeat(6, 1fr)',
+        gridTemplateRows:'76px 600px 184px 280px 532px',
+        gap:'22px'
+      }}>
+
+        {/* ─── Row 1 — brand strip ─── */}
+        <m.div {...springIn(0.05)} style={{ gridColumn:'1 / -1', gridRow:'1' }}
+          className="glass glass-strong flex items-center justify-between px-9">
+          <GoldFrame delay={0.5}/>
+          <div className="flex items-baseline gap-4">
+            <span className="display tabular" style={{ fontSize:'30px', fontWeight:800, letterSpacing:'-0.04em' }}>
+              ZEN
+            </span>
+            <span className="eyebrow" style={{ fontSize:'14px', color:'var(--charcoal-soft)' }}>
+              Nail Spa
+            </span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="pin-dot"/>
+            <span className="eyebrow" style={{ fontSize:'13px', color:'var(--charcoal-soft)' }}>
+              Durham, NC
+            </span>
+          </div>
+        </m.div>
+
+        {/* ─── Row 2 — hero card ─── */}
+        <m.div {...springIn(0.15)} style={{ gridColumn:'1 / -1', gridRow:'2' }}
+          className="glass relative overflow-hidden">
+          <m.div style={{ width:'100%', height:'100%' }}
+            initial={{ scale:0.92 }} animate={{ scale:1 }}
+            transition={{ duration:1.4, ease:[0.16,1,0.3,1] }}>
+            <img src="assets/hero.png" alt="Charcoal Detox Pedicure" className="hero-img"/>
+          </m.div>
+          <div className="hero-vignette"/>
+
+          {/* eyebrow pill top-left */}
+          <m.div className="hero-eyebrow-pill absolute"
+            style={{ top:'28px', left:'28px', padding:'10px 18px', borderRadius:'999px',
+              display:'inline-flex', alignItems:'center', gap:'10px' }}
+            initial={{ opacity:0, y:-10 }} animate={{ opacity:1, y:0 }}
+            transition={{ delay:0.9, duration:0.6 }}>
+            <span style={{ width:'8px', height:'8px', background:'var(--gold)', borderRadius:'50%' }}/>
+            <span className="eyebrow" style={{ fontSize:'12px', color:'var(--charcoal)' }}>
+              Signature · This Season
+            </span>
+          </m.div>
+
+          {/* title block bottom-left */}
+          <div className="absolute" style={{ left:'40px', right:'40px', bottom:'34px' }}>
+            <m.div initial={{ opacity:0, y:24 }} animate={{ opacity:1, y:0 }}
+              transition={{ delay:1.0, duration:0.7, ease:'easeOut' }}>
+              <div className="eyebrow" style={{ fontSize:'13px', color:'rgba(245,230,216,0.85)', marginBottom:'10px' }}>
+                Pedicure · 60 min
+              </div>
+              <h1 className="display" style={{
+                fontSize:'82px', fontWeight:700, lineHeight:0.95, letterSpacing:'-0.045em',
+                color:'#FBF3E8', margin:0
+              }}>
+                Charcoal<br/>Detox<br/>Pedicure
+              </h1>
+            </m.div>
+          </div>
+          <GoldFrame delay={0.7}/>
+        </m.div>
+
+        {/* ─── Row 3 — tagline (cols 1–4) + price pill (cols 5–6) ─── */}
+        <m.div {...springIn(0.25)} style={{ gridColumn:'1 / span 4', gridRow:'3' }}
+          className="glass flex items-center px-9">
+          <GoldFrame delay={0.9}/>
+          <m.div {...breathe(0.2)}>
+            <div className="eyebrow" style={{ fontSize:'12px', color:'var(--charcoal-muted)', marginBottom:'10px' }}>
+              The Promise
+            </div>
+            <div className="display" style={{
+              fontSize:'36px', fontWeight:600, lineHeight:1.05, letterSpacing:'-0.025em',
+              color:'var(--charcoal)'
+            }}>
+              Deep clean.<br/>Smooth skin.<br/>Relaxed feet.
+            </div>
+          </m.div>
+        </m.div>
+
+        <m.div style={{ gridColumn:'5 / span 2', gridRow:'3', position:'relative' }}
+          initial={{ opacity:0, scale:0.5 }} animate={{ opacity:1, scale:1 }}
+          transition={{ type:'spring', stiffness:220, damping:12, delay:0.6 }}>
+          <div className="price-pill" style={{
+            width:'100%', height:'100%', borderRadius:'28px',
+            display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
+            position:'relative'
+          }}>
+            <div className="eyebrow" style={{ fontSize:'11px', color:'var(--charcoal-soft)', letterSpacing:'0.30em', marginBottom:'2px' }}>From</div>
+            <div className="display tabular" style={{
+              fontSize:'94px', fontWeight:700, letterSpacing:'-0.05em',
+              lineHeight:1, color:'var(--charcoal)',
+              display:'flex', alignItems:'baseline'
+            }}>
+              <span style={{ fontSize:'42px', fontWeight:600, color:'var(--gold)', marginRight:'4px',
+                transform:'translateY(-22px)', display:'inline-block' }}>$</span>
+              63
+            </div>
+          <div style={{ fontSize:'11px', fontWeight:400, color:'var(--charcoal-soft)', lineHeight:1.35, textAlign:'center', letterSpacing:'0.02em', marginTop:'6px', maxWidth:'190px' }}>
+              Gel polish & add-ons available
+            </div>
+          </div>
+        </m.div>
+
+        {/* ─── Row 4 — 2×2 benefits ─── */}
+        <div style={{ gridColumn:'1 / -1', gridRow:'4',
+          display:'grid', gridTemplateColumns:'1fr 1fr', gridTemplateRows:'1fr 1fr', gap:'22px' }}>
+          {benefits.map((b,i)=>(
+            <m.div key={i} {...springIn(0.35 + i*0.08)}
+              className="glass px-7 py-6 flex flex-col justify-between relative">
+              <m.div {...breathe(i*0.3)}>
+                <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+                  <div style={{ width:'48px', height:'48px', borderRadius:'14px',
+                    background:'linear-gradient(135deg, rgba(245,230,216,0.95), rgba(232,196,180,0.85))',
+                    border:'1px solid rgba(184,150,90,0.35)',
+                    display:'flex', alignItems:'center', justifyContent:'center',
+                    boxShadow:'inset 0 1px 0 rgba(255,255,255,0.6), 0 4px 10px -2px rgba(120,80,30,0.18)' }}>
+                    {b.icon}
+                  </div>
+                  <span className="eyebrow tabular" style={{ fontSize:'11px', color:'var(--charcoal-muted)' }}>
+                    0{i+1}
+                  </span>
+                </div>
+                <div className="display" style={{
+                  fontSize:'30px', fontWeight:700, letterSpacing:'-0.035em',
+                  marginTop:'18px', color:'var(--charcoal)', lineHeight:1.05
+                }}>
+                  {b.title}
+                </div>
+                <div style={{
+                  fontSize:'17px', fontWeight:400, color:'var(--charcoal-soft)',
+                  marginTop:'8px', lineHeight:1.35
+                }}>
+                  {b.body}
+                </div>
+              </m.div>
+              <GoldFrame delay={0.6 + i*0.1} r={22}/>
+            </m.div>
+          ))}
+        </div>
+
+        {/* ─── Row 5 — Included card (wide) ─── */}
+        <m.div {...springIn(0.7)} style={{ gridColumn:'1 / -1', gridRow:'5', position:'relative' }}
+          className="glass glass-strong px-9 py-8 flex flex-col justify-between">
+          <GoldFrame delay={1.1}/>
+          <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between' }}>
+            <div>
+              <div className="eyebrow" style={{ fontSize:'12px', color:'var(--charcoal-muted)', marginBottom:'8px' }}>
+                Everything Included
+              </div>
+              <div className="display" style={{
+                fontSize:'40px', fontWeight:700, letterSpacing:'-0.035em', color:'var(--charcoal)', lineHeight:1
+              }}>
+                7 steps included.
+              </div>
+            </div>
+            <div style={{
+              fontFamily:'Inter Tight', fontWeight:700, fontSize:'18px',
+              color:'var(--gold)', letterSpacing:'-0.01em',
+              padding:'10px 18px', border:'1px solid rgba(184,150,90,0.4)', borderRadius:'999px',
+              background:'rgba(255,251,246,0.5)'
+            }} className="tabular">
+              From $63
+            </div>
+          </div>
+
+          <div style={{
+            display:'grid', gridTemplateColumns:'1fr 1fr', gridTemplateRows:'repeat(4, 1fr)',
+            columnGap:'40px', rowGap:'14px', marginTop:'22px', flex:1
+          }}>
+            {included.map((step,i)=>(
+              <m.div key={i}
+                initial={{ opacity:0, x:-12 }} animate={{ opacity:1, x:0 }}
+                transition={{ delay:1.0 + i*0.12, duration:0.45, ease:'easeOut' }}
+                style={{ display:'flex', alignItems:'center', gap:'14px' }}>
+                <m.span className="checkmark"
+                  initial={{ scale:0, opacity:0 }} animate={{ scale:1, opacity:1 }}
+                  transition={{ delay:1.05 + i*0.12, type:'spring', stiffness:260, damping:14 }}>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3.5 8.5 L6.5 11.5 L12.5 4.5" stroke="#FFFBF6" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </m.span>
+                <span style={{
+                  fontFamily:'Inter Tight', fontWeight:600, fontSize:'21px',
+                  letterSpacing:'-0.018em', color:'var(--charcoal)'
+                }}>
+                  {step}
+                </span>
+              </m.div>
+            ))}
+          </div>
+        </m.div>
+
+      </div>
+    </>
+  );
+}
+
+/* ── icons ─────────────────────────────────────────── */
+function DropletIcon(){
+  return (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+      <path d="M12 3 C 12 3, 5 11, 5 16 a7 7 0 0 0 14 0 C 19 11, 12 3, 12 3 z"
+        stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(184,150,90,0.18)"/>
+      <path d="M9 15 a3 3 0 0 0 3 3" stroke="#B8965A" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+    </svg>
+  );
+}
+function SparkleIcon(){
+  return (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+      <path d="M12 2 L13.6 9 L20.5 10.5 L13.6 12 L12 19 L10.4 12 L3.5 10.5 L10.4 9 Z"
+        stroke="#1F1B16" strokeWidth="1.5" strokeLinejoin="round" fill="rgba(184,150,90,0.18)"/>
+      <circle cx="19.5" cy="4.5" r="1.4" fill="#B8965A"/>
+      <circle cx="4.5" cy="18.5" r="1" fill="#B8965A"/>
+    </svg>
+  );
+}
+function LotusIcon(){
+  return (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+      <path d="M12 6 C 9 9, 8 13, 12 17 C 16 13, 15 9, 12 6 Z" stroke="#1F1B16" strokeWidth="1.5" fill="rgba(184,150,90,0.18)"/>
+      <path d="M4 14 C 6 10, 9 11, 12 17 C 9 18, 6 17, 4 14 Z" stroke="#1F1B16" strokeWidth="1.5" fill="rgba(184,150,90,0.10)"/>
+      <path d="M20 14 C 18 10, 15 11, 12 17 C 15 18, 18 17, 20 14 Z" stroke="#1F1B16" strokeWidth="1.5" fill="rgba(184,150,90,0.10)"/>
+      <line x1="4" y1="19" x2="20" y2="19" stroke="#B8965A" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+function FootIcon(){
+  return (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+      <path d="M8 4 C 6 6, 5.5 9, 7 13 C 8 16, 7 20, 10 21 C 13 21, 14 18, 14 14 C 14 9, 11 4, 8 4 Z"
+        stroke="#1F1B16" strokeWidth="1.5" strokeLinejoin="round" fill="rgba(184,150,90,0.18)"/>
+      <circle cx="15.5" cy="4.5" r="1.2" stroke="#1F1B16" strokeWidth="1.2" fill="rgba(184,150,90,0.3)"/>
+      <circle cx="17.5" cy="7" r="1" stroke="#1F1B16" strokeWidth="1.2" fill="rgba(184,150,90,0.3)"/>
+      <circle cx="18" cy="10" r="0.9" stroke="#1F1B16" strokeWidth="1.2" fill="rgba(184,150,90,0.3)"/>
+      <circle cx="17" cy="13" r="0.8" stroke="#1F1B16" strokeWidth="1.2" fill="rgba(184,150,90,0.3)"/>
+    </svg>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
