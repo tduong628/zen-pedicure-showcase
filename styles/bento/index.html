@@ -250,19 +250,19 @@ function App(){
 
 
   const benefits = [
-    { icon:<DropletIcon/>, title:'Deep Cleansing', body:'Lifts buildup, leaves feet refreshed.' },
-    { icon:<SparkleIcon/>, title:'Smoother Skin', body:'Charcoal mask softens rough areas.' },
-    { icon:<LotusIcon/>, title:'Relaxing Massage', body:'Soothes tired, aching feet.' },
-    { icon:<FootIcon/>, title:'Polished Finish', body:'Smooth, clean, sandal-ready.' }
+    { icon:<img src="assets/icons/icon-hydration-droplet.png" alt="hydration droplet" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/>, title:'Deep Cleansing', body:'Lifts buildup, leaves feet refreshed.' },
+    { icon:<img src="assets/icons/icon-glow-sparkle.png" alt="glow sparkle" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/>, title:'Smoother Skin', body:'Charcoal mask softens rough areas.' },
+    { icon:<img src="assets/icons/icon-calm-relief.png" alt="calm relief" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/>, title:'Relaxing Massage', body:'Soothes tired, aching feet.' },
+    { icon:<img src="assets/icons/icon-polish-gel.png" alt="polish gel" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/>, title:'Polished Finish', body:'Smooth, clean, sandal-ready.' }
   ];
   const steps = [
-    { title:'Sea Salt Soak', icon:<BowlSteamIcon/> },
-    { title:'Sugar Scrub', icon:<ScrubIcon/> },
-    { title:'Charcoal Mask', icon:<JarIcon/> },
-    { title:'Massage Butter', icon:<LotionIcon/> },
-    { title:'Steam Therapy', icon:<SteamIcon/> },
-    { title:'10-Min Massage', icon:<LotusIcon/> },
-    { title:'Warm Paraffin Wax', icon:<ParaffinIcon/> }
+    { title:'Sea Salt Soak', icon:<img src="assets/icons/icon-warm-soak.png" alt="warm soak" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/> },
+    { title:'Sugar Scrub', icon:<img src="assets/icons/icon-sugar-scrub.png" alt="sugar scrub" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/> },
+    { title:'Charcoal Mask', icon:<img src="assets/icons/icon-cream-mask.png" alt="cream mask" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/> },
+    { title:'Massage Butter', icon:<img src="assets/icons/icon-lotion-massage.png" alt="lotion massage" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/> },
+    { title:'Steam Therapy', icon:<img src="assets/icons/icon-steam-therapy.png" alt="steam therapy" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/> },
+    { title:'10-Min Massage', icon:<img src="assets/icons/icon-calm-relief.png" alt="calm relief" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/> },
+    { title:'Warm Paraffin Wax', icon:<img src="assets/icons/icon-paraffin-wax.png" alt="paraffin wax" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/> }
   ];
   return <>
     <div className="stage" aria-hidden="true">
@@ -387,114 +387,7 @@ function ChevronIcon(){
     </svg>
   );
 }
-function DropletIcon(){
-  return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-      <path d="M12 3 C 12 3, 5 11, 5 16 a7 7 0 0 0 14 0 C 19 11, 12 3, 12 3 z"
-        stroke="#7A2130" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(184,150,90,0.18)"/>
-      <path d="M9 15 a3 3 0 0 0 3 3" stroke="#C9A24A" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-    </svg>
-  );
-}
-function SparkleIcon(){
-  return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-      <path d="M12 2 L13.6 9 L20.5 10.5 L13.6 12 L12 19 L10.4 12 L3.5 10.5 L10.4 9 Z"
-        stroke="#7A2130" strokeWidth="1.5" strokeLinejoin="round" fill="rgba(184,150,90,0.18)"/>
-      <circle cx="19.5" cy="4.5" r="1.4" fill="#C9A24A"/>
-      <circle cx="4.5" cy="18.5" r="1" fill="#C9A24A"/>
-    </svg>
-  );
-}
-function LotusIcon(){
-  return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-      <path d="M12 6 C 9 9, 8 13, 12 17 C 16 13, 15 9, 12 6 Z" stroke="#7A2130" strokeWidth="1.5" fill="rgba(184,150,90,0.18)"/>
-      <path d="M4 14 C 6 10, 9 11, 12 17 C 9 18, 6 17, 4 14 Z" stroke="#7A2130" strokeWidth="1.5" fill="rgba(184,150,90,0.10)"/>
-      <path d="M20 14 C 18 10, 15 11, 12 17 C 15 18, 18 17, 20 14 Z" stroke="#7A2130" strokeWidth="1.5" fill="rgba(184,150,90,0.10)"/>
-      <line x1="4" y1="19" x2="20" y2="19" stroke="#C9A24A" strokeWidth="1.5" strokeLinecap="round"/>
-    </svg>
-  );
-}
-function FootIcon(){
-  return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-      <path d="M8 4 C 6 6, 5.5 9, 7 13 C 8 16, 7 20, 10 21 C 13 21, 14 18, 14 14 C 14 9, 11 4, 8 4 Z"
-        stroke="#7A2130" strokeWidth="1.5" strokeLinejoin="round" fill="rgba(184,150,90,0.18)"/>
-      <circle cx="15.5" cy="4.5" r="1.2" stroke="#7A2130" strokeWidth="1.2" fill="rgba(184,150,90,0.3)"/>
-      <circle cx="17.5" cy="7" r="1" stroke="#7A2130" strokeWidth="1.2" fill="rgba(184,150,90,0.3)"/>
-      <circle cx="18" cy="10" r="0.9" stroke="#7A2130" strokeWidth="1.2" fill="rgba(184,150,90,0.3)"/>
-      <circle cx="17" cy="13" r="0.8" stroke="#7A2130" strokeWidth="1.2" fill="rgba(184,150,90,0.3)"/>
-    </svg>
-  );
-}
 
-function ParaffinIcon(){
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <ellipse cx="18" cy="24" rx="13" ry="6" stroke="#7A2130" strokeWidth="1.6" fill="rgba(201,162,74,0.28)"/>
-      <path d="M9 24 C 9 20, 11 17, 13 16" stroke="#7A2130" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
-      <path d="M27 24 C 27 20, 25 17, 23 16" stroke="#7A2130" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
-      <path d="M13 10 C 13 8, 15 8, 15 10 C 15 12, 13 12, 13 14" stroke="#7A2130" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
-      <path d="M19 8 C 19 6, 21 6, 21 8 C 21 10, 19 10, 19 12" stroke="#7A2130" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
-      <path d="M24 12 C 24 10, 26 10, 26 12 C 26 14, 24 14, 24 16" stroke="#7A2130" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
-    </svg>
-  );
-}
-function BowlSteamIcon(){
-  return (
-    <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
-      <path d="M14 8 C 14 5, 16 5, 16 8 C 16 10, 14 10, 14 12" stroke="#7A2130" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-      <path d="M19 7 C 19 4, 21 4, 21 7 C 21 9, 19 9, 19 11" stroke="#7A2130" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-      <path d="M5 16 H 31 C 30 25, 25 29, 18 29 C 11 29, 6 25, 5 16 Z"
-        stroke="#7A2130" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.20)"/>
-      <ellipse cx="18" cy="16" rx="13" ry="2" stroke="#7A2130" strokeWidth="1.6" fill="rgba(201,162,74,0.30)"/>
-    </svg>
-  );
-}
-function ScrubIcon(){
-  return (
-    <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
-      <path d="M8 22 L 12 12 H 24 L 28 22 Z" stroke="#7A2130" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.20)"/>
-      <line x1="8" y1="22" x2="28" y2="22" stroke="#7A2130" strokeWidth="1.6"/>
-      <circle cx="14" cy="17" r="1.1" fill="#7A2130"/>
-      <circle cx="18" cy="15" r="1.1" fill="#7A2130"/>
-      <circle cx="22" cy="18" r="1.1" fill="#7A2130"/>
-      <circle cx="16" cy="20" r="0.9" fill="#7A2130"/>
-      <circle cx="21" cy="20" r="0.9" fill="#7A2130"/>
-      <path d="M11 26 H 25" stroke="#7A2130" strokeWidth="1.5" strokeLinecap="round"/>
-    </svg>
-  );
-}
-function JarIcon(){
-  return (
-    <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
-      <rect x="10" y="8" width="16" height="4" rx="1.2" stroke="#7A2130" strokeWidth="1.6" fill="rgba(201,162,74,0.30)"/>
-      <path d="M11 12 H 25 V 27 C 25 28.5, 23.5 29, 22 29 H 14 C 12.5 29, 11 28.5, 11 27 Z"
-        stroke="#7A2130" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.18)"/>
-      <path d="M14 18 C 16 16, 20 16, 22 18" stroke="#7A2130" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
-      <path d="M13 22 C 16 20, 20 20, 23 22" stroke="#7A2130" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
-    </svg>
-  );
-}
-function LotionIcon(){
-  return (
-    <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
-      <path d="M15 8 H 21 V 11 H 15 Z" stroke="#7A2130" strokeWidth="1.6" fill="rgba(201,162,74,0.30)"/>
-      <path d="M13 11 H 23 L 22 14 H 14 Z" stroke="#7A2130" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.18)"/>
-      <path d="M14 14 H 22 V 28 C 22 29, 21 29.5, 20 29.5 H 16 C 15 29.5, 14 29, 14 28 Z"
-        stroke="#7A2130" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.15)"/>
-      <path d="M21 8 V 5 H 24 V 7" stroke="#7A2130" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-      <line x1="16" y1="20" x2="20" y2="20" stroke="#7A2130" strokeWidth="1.4" strokeLinecap="round"/>
-      <line x1="16" y1="23" x2="20" y2="23" stroke="#7A2130" strokeWidth="1.4" strokeLinecap="round"/>
-    </svg>
-  );
-}
-function SteamIcon(){
-  return <svg width="34" height="34" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-    <path d="M10 25 C4 19 16 16 10 9 M18 27 C12 20 24 16 18 7 M26 25 C20 19 32 16 26 9 M7 31 H29" stroke="var(--fw-burgundy)" strokeWidth="1.6" strokeLinecap="round"/>
-  </svg>;
-}
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </script>

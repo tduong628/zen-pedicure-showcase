@@ -258,19 +258,19 @@ function App(){
   );
 
   const benefits = [
-    { icon: <AnxietyIcon/>, title:'Natural Anxiety Relief',
+    { icon: <img src="assets/icons/icon-aroma-candle.png" alt="Natural anxiety relief aroma" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/>, title:'Natural Anxiety Relief',
       body:"Lavender's aroma naturally lowers cortisol, instantly melting away daily stress." },
-    { icon: <SootheIcon/>,  title:'Anti-Inflammatory Care',
+    { icon: <img src="assets/icons/icon-lotion-massage.png" alt="Anti-inflammatory massage care" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/>,  title:'Anti-Inflammatory Care',
       body:'Natural oils soothe swollen joints and tired muscles after a long day on your feet.' },
-    { icon: <RestoreIcon/>, title:'Skin Restoration',
+    { icon: <img src="assets/icons/icon-hydration-droplet.png" alt="Skin restoration hydration" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/>, title:'Skin Restoration',
       body:'Gentle antiseptic properties heal dry skin while moisturizing for a soft, velvet finish.' },
   ];
 
   const included = [
-    { n:1, title:'Aromatic Lavender Soak',  icon:<SoakIcon/> },
-    { n:2, title:'Sugar Scrub Exfoliation', icon:<ScrubIcon/> },
-    { n:3, title:'Nourishing Mask',         icon:<MaskIcon/> },
-    { n:4, title:'Relaxing Lotion Massage', icon:<MassageIcon/> },
+    { n:1, title:'Aromatic Lavender Soak',  icon:<img src="assets/icons/icon-warm-soak.png" alt="Aromatic lavender soak" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/> },
+    { n:2, title:'Sugar Scrub Exfoliation', icon:<img src="assets/icons/icon-sugar-scrub.png" alt="Sugar scrub exfoliation" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/> },
+    { n:3, title:'Nourishing Mask',         icon:<img src="assets/icons/icon-cream-mask.png" alt="Nourishing mask" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/> },
+    { n:4, title:'Relaxing Lotion Massage', icon:<img src="assets/icons/icon-lotion-massage.png" alt="Relaxing lotion massage" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/> },
   ];
 
   const includedItems = [];
@@ -567,99 +567,6 @@ function LeafCluster({ corner }){
     <div style={{ position:'absolute', ...pos, transform:flip, pointerEvents:'none', zIndex:0, opacity:0.85 }}>
       <LeafClusterSVG/>
     </div>
-  );
-}
-
-/* ── benefit icons — recolored to the Fall/Winter burgundy/gold palette ── */
-function AnxietyIcon(){
-  return (
-    <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
-      <path d="M16 4 C 10 4, 7 9, 7 14 C 7 18, 9 20, 9 23 L 9 26 C 9 27.5, 10 28, 11 28 L 20 28 C 21 28, 22 27.5, 22 26 L 22 22 C 24 21, 25.5 18, 25.5 14 C 25.5 9, 22 4, 16 4 Z"
-        stroke="#2B221A" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(122,33,48,0.20)"/>
-      <path d="M11 15 C 13 12, 15 18, 17 15 C 19 12, 21 18, 22 15" stroke="#8C2A3A" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-    </svg>
-  );
-}
-function SootheIcon(){
-  return (
-    <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
-      <path d="M16 8 C 13 11, 12 15, 16 20 C 20 15, 19 11, 16 8 Z" stroke="#2B221A" strokeWidth="1.5" strokeLinejoin="round" fill="rgba(122,33,48,0.20)"/>
-      <path d="M6 17 C 8 13, 11 14, 16 20 C 12 21, 8 20, 6 17 Z" stroke="#2B221A" strokeWidth="1.4" strokeLinejoin="round" fill="rgba(201,162,74,0.22)"/>
-      <path d="M26 17 C 24 13, 21 14, 16 20 C 20 21, 24 20, 26 17 Z" stroke="#2B221A" strokeWidth="1.4" strokeLinejoin="round" fill="rgba(201,162,74,0.22)"/>
-      <line x1="7" y1="24" x2="25" y2="24" stroke="#8C2A3A" strokeWidth="1.5" strokeLinecap="round"/>
-      <circle cx="16" cy="24" r="1.1" fill="#C9A24A"/>
-    </svg>
-  );
-}
-function RestoreIcon(){
-  return (
-    <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
-      <path d="M16 4 C 16 4, 8 13, 8 19 a8 8 0 0 0 16 0 C 24 13, 16 4, 16 4 z"
-        stroke="#2B221A" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(122,33,48,0.20)"/>
-      <path d="M12 19 a4 4 0 0 0 4 4" stroke="#8C2A3A" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-      <path d="M24 6 L 25 9 L 28 10 L 25 11 L 24 14 L 23 11 L 20 10 L 23 9 Z"
-        stroke="#C9A24A" strokeWidth="1.1" strokeLinejoin="round" fill="rgba(201,162,74,0.45)"/>
-    </svg>
-  );
-}
-
-/* ── included-ritual icons — recolored ─────────────────────── */
-function SoakIcon(){
-  return (
-    <svg width="34" height="34" viewBox="0 0 38 38" fill="none">
-      <path d="M19 4 C 19 8, 18 12, 17 16" stroke="#8C2A3A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
-      <g fill="rgba(122,33,48,0.35)" stroke="#7A2130" strokeWidth="0.4">
-        <ellipse cx="18.4" cy="7" rx="2" ry="1.2" transform="rotate(-30 18.4 7)"/>
-        <ellipse cx="18.2" cy="10" rx="2" ry="1.2" transform="rotate(-25 18.2 10)"/>
-        <ellipse cx="17.6" cy="13" rx="2" ry="1.2" transform="rotate(-22 17.6 13)"/>
-      </g>
-      <path d="M24 6 C 24 4, 26 4, 26 6 C 26 8, 24 8, 24 10" stroke="#C9A24A" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
-      <path d="M6 19 H 32 C 31 28, 26 32, 19 32 C 12 32, 7 28, 6 19 Z"
-        stroke="#2B221A" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.20)"/>
-      <ellipse cx="19" cy="19" rx="13" ry="2" stroke="#2B221A" strokeWidth="1.6" fill="rgba(201,162,74,0.30)"/>
-    </svg>
-  );
-}
-function ScrubIcon(){
-  return (
-    <svg width="34" height="34" viewBox="0 0 38 38" fill="none">
-      <rect x="11" y="9" width="16" height="4" rx="1.2" stroke="#2B221A" strokeWidth="1.6" fill="rgba(201,162,74,0.35)"/>
-      <path d="M12 13 H 26 V 28 C 26 29.5, 24.5 30, 23 30 H 15 C 13.5 30, 12 29.5, 12 28 Z"
-        stroke="#2B221A" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(122,33,48,0.16)"/>
-      <circle cx="15" cy="18" r="0.9" fill="#C9A24A"/>
-      <circle cx="19" cy="19.5" r="1" fill="#8C2A3A"/>
-      <circle cx="22.5" cy="17.5" r="0.9" fill="#C9A24A"/>
-      <circle cx="16.5" cy="22" r="0.9" fill="#8C2A3A"/>
-      <circle cx="20" cy="24" r="1" fill="#C9A24A"/>
-      <circle cx="23" cy="22.5" r="0.8" fill="#8C2A3A"/>
-      <path d="M14 27 H 24" stroke="#C9A24A" strokeWidth="1.3" strokeLinecap="round"/>
-    </svg>
-  );
-}
-function MaskIcon(){
-  return (
-    <svg width="34" height="34" viewBox="0 0 38 38" fill="none">
-      <rect x="11" y="9" width="16" height="4" rx="1.2" stroke="#2B221A" strokeWidth="1.6" fill="rgba(201,162,74,0.35)"/>
-      <path d="M12 13 H 26 V 28 C 26 29.5, 24.5 30, 23 30 H 15 C 13.5 30, 12 29.5, 12 28 Z"
-        stroke="#2B221A" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(122,33,48,0.16)"/>
-      <path d="M14 19 C 17 17, 21 18, 24 19" stroke="#8C2A3A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
-      <path d="M14 23 C 17 21, 21 22, 24 23" stroke="#8C2A3A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
-      <circle cx="17" cy="26" r="0.8" fill="#C9A24A"/>
-      <circle cx="21" cy="26" r="0.8" fill="#C9A24A"/>
-    </svg>
-  );
-}
-function MassageIcon(){
-  return (
-    <svg width="34" height="34" viewBox="0 0 38 38" fill="none">
-      <path d="M16 9 H 22 V 12 H 16 Z" stroke="#2B221A" strokeWidth="1.6" fill="rgba(201,162,74,0.35)"/>
-      <path d="M14 12 H 24 L 23 15 H 15 Z" stroke="#2B221A" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(122,33,48,0.16)"/>
-      <path d="M15 15 H 23 V 29 C 23 30, 22 30.5, 21 30.5 H 17 C 16 30.5, 15 30, 15 29 Z"
-        stroke="#2B221A" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(122,33,48,0.12)"/>
-      <path d="M22 9 V 6 H 25 V 8" stroke="#8C2A3A" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-      <line x1="17" y1="21" x2="21" y2="21" stroke="#C9A24A" strokeWidth="1.4" strokeLinecap="round"/>
-      <line x1="17" y1="24" x2="21" y2="24" stroke="#C9A24A" strokeWidth="1.4" strokeLinecap="round"/>
-    </svg>
   );
 }
 

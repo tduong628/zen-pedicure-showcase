@@ -118,16 +118,6 @@
     border: 1px solid rgba(184, 134, 46, 0.28);
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
   }
-  .fw-photo-vanilla{
-    background:
-      radial-gradient(ellipse 90% 75% at 50% 30%, rgba(255,251,240,0.9), rgba(243,227,201,0.4) 70%),
-      linear-gradient(160deg, #F6ECD6 0%, #E9D3AE 100%);
-  }
-  .fw-photo-honeyoat{
-    background:
-      radial-gradient(ellipse 90% 75% at 50% 30%, rgba(255,244,222,0.85), rgba(224,180,120,0.35) 70%),
-      linear-gradient(160deg, #EED6AC 0%, #CE9A56 100%);
-  }
 
   .fw-ribbon{
     display:inline-block;
@@ -269,12 +259,12 @@ function App(){
   );
 
   const steps = [
-    { n:1, title:'Warm Soak',          body:'A warm, soothing soak to relax, soften and cleanse tired feet.',   icon:<BowlSteamIcon/> },
-    { n:2, title:'Sugar Scrub',        body:'Gently exfoliates dead skin cells for smooth, renewed feet.',       icon:<ScrubIcon/> },
-    { n:3, title:'Cream Masque',       body:'Deeply hydrates and nourishes dry, tired skin.',                    icon:<JarIcon/> },
-    { n:4, title:'Massage Lotion',     body:'Nourishing lotion massage for silky softness and relaxation.',      icon:<LotionIcon/> },
-    { n:5, title:'Hot Stone Massage',  body:'Warm stones melt away stress and improve circulation.',             icon:<StonesIcon/> },
-    { n:6, title:'Paraffin Treatment', body:'Locks in moisture and leaves skin incredibly soft.',                icon:<ParaffinIcon/> },
+    { n:1, title:'Warm Soak',          body:'A warm, soothing soak to relax, soften and cleanse tired feet.',   icon:<img src="assets/icons/icon-warm-soak.png" alt="warm soak" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/> },
+    { n:2, title:'Sugar Scrub',        body:'Gently exfoliates dead skin cells for smooth, renewed feet.',       icon:<img src="assets/icons/icon-sugar-scrub.png" alt="sugar scrub" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/> },
+    { n:3, title:'Cream Masque',       body:'Deeply hydrates and nourishes dry, tired skin.',                    icon:<img src="assets/icons/icon-cream-mask.png" alt="cream mask" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/> },
+    { n:4, title:'Massage Lotion',     body:'Nourishing lotion massage for silky softness and relaxation.',      icon:<img src="assets/icons/icon-lotion-massage.png" alt="lotion massage" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/> },
+    { n:5, title:'Hot Stone Massage',  body:'Warm stones melt away stress and improve circulation.',             icon:<img src="assets/icons/icon-hot-stone.png" alt="hot stone" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/> },
+    { n:6, title:'Paraffin Treatment', body:'Locks in moisture and leaves skin incredibly soft.',                icon:<img src="assets/icons/icon-paraffin-wax.png" alt="paraffin wax" style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:'50%'}}/> },
   ];
 
   const stepItems = [];
@@ -406,11 +396,11 @@ function App(){
             style={{ padding:'24px' }}>
             <GoldFrame delay={0.95} color="rgba(184, 134, 46, 0.4)"/>
             <m.div {...breathe(0.1)} style={{ display:'flex', flexDirection:'column', height:'100%' }}>
-              <m.div className="fw-photo-wrap fw-photo-vanilla"
+              <m.div className="fw-photo-wrap"
                 animate={{ scale:[1, 1.015, 1] }}
                 transition={{ duration:5, repeat:Infinity, ease:'easeInOut' }}
                 style={{ marginBottom:'16px' }}>
-                <VanillaIcon/>
+                <img src="assets/golden-vanilla-hero.png" alt="Lit candle with vanilla orchid and beans" style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center 60%',borderRadius:'inherit',display:'block'}}/>
               </m.div>
               <div className="fw-ribbon" style={{
                 background:'linear-gradient(150deg, var(--fw-burgundy-light) 0%, var(--fw-burgundy) 100%)',
@@ -459,11 +449,11 @@ function App(){
             style={{ padding:'24px' }}>
             <GoldFrame delay={1.0} color="rgba(184, 134, 46, 0.4)"/>
             <m.div {...breathe(0.35)} style={{ display:'flex', flexDirection:'column', height:'100%' }}>
-              <m.div className="fw-photo-wrap fw-photo-honeyoat"
+              <m.div className="fw-photo-wrap"
                 animate={{ scale:[1, 1.015, 1] }}
                 transition={{ duration:5, repeat:Infinity, ease:'easeInOut', delay:0.8 }}
                 style={{ marginBottom:'16px' }}>
-                <HoneyOatIcon/>
+                <img src="assets/honey-oat-hero.png" alt="Honey jar and dipper with a bowl of oats" style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:'center 45%',borderRadius:'inherit',display:'block'}}/>
               </m.div>
               <div className="fw-ribbon" style={{
                 background:'linear-gradient(150deg, var(--fw-burgundy-light) 0%, var(--fw-burgundy) 100%)',
@@ -722,108 +712,6 @@ function MapleLeafIcon(){
                C 14 10, 17 9, 18 5 Z"
         stroke="#A83A24" strokeWidth="1.3" strokeLinejoin="round" strokeLinecap="round" fill="rgba(217,100,43,0.24)"/>
       <path d="M18 20 L18 31" stroke="#A83A24" strokeWidth="1.3" strokeLinecap="round"/>
-    </svg>
-  );
-}
-function VanillaIcon(){
-  return (
-    <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
-      <g opacity="0.92">
-        <path d="M30 62 C 26 50, 26 34, 32 20" stroke="#8C6A2E" strokeWidth="2.2" strokeLinecap="round" fill="none"/>
-        <path d="M40 64 C 37 50, 38 32, 44 18" stroke="#6E5223" strokeWidth="2.2" strokeLinecap="round" fill="none"/>
-        <ellipse cx="44" cy="30" rx="18" ry="9" fill="#F7ECD8" stroke="#C9A24A" strokeWidth="1.4" transform="rotate(-18 44 30)"/>
-        <circle cx="38" cy="28" r="1.6" fill="#7A2130"/>
-        <circle cx="44" cy="26" r="1.6" fill="#7A2130"/>
-        <circle cx="50" cy="27" r="1.6" fill="#7A2130"/>
-        <circle cx="41" cy="33" r="1.6" fill="#7A2130"/>
-        <circle cx="48" cy="33" r="1.6" fill="#7A2130"/>
-      </g>
-    </svg>
-  );
-}
-function HoneyOatIcon(){
-  return (
-    <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
-      <g opacity="0.92">
-        <path d="M28 26 H 46 L 43 58 C 43 62, 39 64, 37 64 C 35 64, 31 62, 31 58 Z"
-          stroke="#8C5A1E" strokeWidth="1.8" fill="rgba(206,154,86,0.35)"/>
-        <ellipse cx="37" cy="26" rx="9" ry="3" stroke="#8C5A1E" strokeWidth="1.6" fill="rgba(206,154,86,0.4)"/>
-        <path d="M37 32 C 34 44, 40 48, 37 58" stroke="#B8862E" strokeWidth="1.6" strokeLinecap="round" fill="none"/>
-        <path d="M56 20 L 56 40 C 56 46, 62 46, 62 40 L 62 20" stroke="#7A5A2E" strokeWidth="1.8" fill="none"/>
-        <path d="M52 20 H 66" stroke="#7A5A2E" strokeWidth="1.8" strokeLinecap="round"/>
-      </g>
-    </svg>
-  );
-}
-function ParaffinIcon(){
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-      <ellipse cx="18" cy="24" rx="13" ry="6" stroke="#2B221A" strokeWidth="1.6" fill="rgba(201,162,74,0.28)"/>
-      <path d="M9 24 C 9 20, 11 17, 13 16" stroke="#C9A24A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
-      <path d="M27 24 C 27 20, 25 17, 23 16" stroke="#C9A24A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
-      <path d="M13 10 C 13 8, 15 8, 15 10 C 15 12, 13 12, 13 14" stroke="#C9A24A" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
-      <path d="M19 8 C 19 6, 21 6, 21 8 C 21 10, 19 10, 19 12" stroke="#C9A24A" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
-      <path d="M24 12 C 24 10, 26 10, 26 12 C 26 14, 24 14, 24 16" stroke="#C9A24A" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
-    </svg>
-  );
-}
-function BowlSteamIcon(){
-  return (
-    <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
-      <path d="M14 8 C 14 5, 16 5, 16 8 C 16 10, 14 10, 14 12" stroke="#C9A24A" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-      <path d="M19 7 C 19 4, 21 4, 21 7 C 21 9, 19 9, 19 11" stroke="#C9A24A" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-      <path d="M5 16 H 31 C 30 25, 25 29, 18 29 C 11 29, 6 25, 5 16 Z"
-        stroke="#2B221A" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.20)"/>
-      <ellipse cx="18" cy="16" rx="13" ry="2" stroke="#2B221A" strokeWidth="1.6" fill="rgba(201,162,74,0.30)"/>
-    </svg>
-  );
-}
-function ScrubIcon(){
-  return (
-    <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
-      <path d="M8 22 L 12 12 H 24 L 28 22 Z" stroke="#2B221A" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.20)"/>
-      <line x1="8" y1="22" x2="28" y2="22" stroke="#2B221A" strokeWidth="1.6"/>
-      <circle cx="14" cy="17" r="1.1" fill="#C9A24A"/>
-      <circle cx="18" cy="15" r="1.1" fill="#C9A24A"/>
-      <circle cx="22" cy="18" r="1.1" fill="#C9A24A"/>
-      <circle cx="16" cy="20" r="0.9" fill="#C9A24A"/>
-      <circle cx="21" cy="20" r="0.9" fill="#C9A24A"/>
-      <path d="M11 26 H 25" stroke="#C9A24A" strokeWidth="1.5" strokeLinecap="round"/>
-    </svg>
-  );
-}
-function JarIcon(){
-  return (
-    <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
-      <rect x="10" y="8" width="16" height="4" rx="1.2" stroke="#2B221A" strokeWidth="1.6" fill="rgba(201,162,74,0.30)"/>
-      <path d="M11 12 H 25 V 27 C 25 28.5, 23.5 29, 22 29 H 14 C 12.5 29, 11 28.5, 11 27 Z"
-        stroke="#2B221A" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.18)"/>
-      <path d="M14 18 C 16 16, 20 16, 22 18" stroke="#C9A24A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
-      <path d="M13 22 C 16 20, 20 20, 23 22" stroke="#C9A24A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
-    </svg>
-  );
-}
-function LotionIcon(){
-  return (
-    <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
-      <path d="M15 8 H 21 V 11 H 15 Z" stroke="#2B221A" strokeWidth="1.6" fill="rgba(201,162,74,0.30)"/>
-      <path d="M13 11 H 23 L 22 14 H 14 Z" stroke="#2B221A" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.18)"/>
-      <path d="M14 14 H 22 V 28 C 22 29, 21 29.5, 20 29.5 H 16 C 15 29.5, 14 29, 14 28 Z"
-        stroke="#2B221A" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.15)"/>
-      <path d="M21 8 V 5 H 24 V 7" stroke="#C9A24A" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-      <line x1="16" y1="20" x2="20" y2="20" stroke="#C9A24A" strokeWidth="1.4" strokeLinecap="round"/>
-      <line x1="16" y1="23" x2="20" y2="23" stroke="#C9A24A" strokeWidth="1.4" strokeLinecap="round"/>
-    </svg>
-  );
-}
-function StonesIcon(){
-  return (
-    <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
-      <ellipse cx="11" cy="22" rx="7" ry="3" stroke="#2B221A" strokeWidth="1.6" fill="rgba(201,162,74,0.30)"/>
-      <ellipse cx="22" cy="20" rx="8" ry="3.5" stroke="#2B221A" strokeWidth="1.6" fill="rgba(201,162,74,0.22)"/>
-      <ellipse cx="16" cy="16" rx="6" ry="2.5" stroke="#2B221A" strokeWidth="1.6" fill="rgba(201,162,74,0.16)"/>
-      <path d="M13 11 C 13 9, 15 9, 15 11" stroke="#C9A24A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
-      <path d="M18 9 C 18 7, 20 7, 20 9" stroke="#C9A24A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
     </svg>
   );
 }
