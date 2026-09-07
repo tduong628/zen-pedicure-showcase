@@ -8,6 +8,7 @@
 <!-- fonts vendored locally -->
 
 <link href="../../vendor/fonts/fonts.css" rel="stylesheet">
+<link href="../../vendor/fonts-editorial/fonts-editorial.css" rel="stylesheet">
 
 <link href="../../vendor/mini-tw.css" rel="stylesheet">
 <script src="../../vendor/react.production.min.js"></script>
@@ -39,57 +40,62 @@
     --sage-deep:#3F5A48;
     --eucalyptus:#6B8E6D;
     --herb-cream:#EFE6D2;
+    /* Fall/Winter edition additions */
+    --fw-cream:#F7ECD8;
+    --fw-cream-deep:#F3E3C9;
+    --fw-burgundy:#7A2130;
+    --fw-burgundy-light:#8C2A3A;
+    --fw-burgundy-soft:rgba(122,33,48,0.86);
+    --fw-gold:#C9A24A;
+    --fw-gold-deep:#B8862E;
+    --fw-charcoal:#2B221A;
+    --fw-charcoal-soft:rgba(43,34,26,0.78);
+    --fw-charcoal-muted:rgba(43,34,26,0.62);
+    --fw-orange:#D9642B;
+    --fw-crimson:#A83A24;
   }
   html, body{
     width:1080px; height:1920px; margin:0; padding:0;
-    background:#E8D5C4;
+    background:#F3E3C9;
     overflow:hidden;
-    font-family: 'Inter', system-ui, sans-serif;
-    color: var(--charcoal);
+    font-family: 'Jost', sans-serif;
+    cursor:none;
+    color: var(--fw-charcoal);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
   #root{ width:1080px; height:1920px; position:relative; }
-  .display{ font-family:'Inter Tight', 'Inter', sans-serif; letter-spacing:-0.035em; }
+
+  .fw-script{ font-family:'Great Vibes', cursive; font-weight:400; }
+  .fw-sc{ font-family:'Cormorant SC', serif; text-transform:uppercase; }
+  .fw-serif{ font-family:'Cormorant Garamond', serif; }
+  .fw-sans{ font-family:'Jost', sans-serif; }
   .tabular{ font-variant-numeric: tabular-nums; }
-  .eyebrow{ font-family:'Inter', sans-serif; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; }
 
   .stage{
     position:absolute; inset:0;
     background:
-      radial-gradient(ellipse 900px 700px at 18% 18%, rgba(232, 196, 180, 0.85), transparent 60%),
-      radial-gradient(ellipse 800px 600px at 88% 35%, rgba(245, 230, 216, 0.75), transparent 65%),
-      radial-gradient(ellipse 700px 700px at 30% 90%, rgba(181, 196, 168, 0.45), transparent 65%),
-      radial-gradient(ellipse 1100px 900px at 110% 110%, rgba(212, 184, 160, 0.7), transparent 70%),
-      linear-gradient(168deg, #F5E6D8 0%, #EBD3C0 45%, #E0BFA8 100%);
+      radial-gradient(ellipse 900px 700px at 14% 12%, rgba(217, 100, 43, 0.10), transparent 58%),
+      radial-gradient(ellipse 800px 640px at 90% 20%, rgba(201, 162, 74, 0.16), transparent 62%),
+      radial-gradient(ellipse 760px 700px at 20% 92%, rgba(122, 33, 48, 0.08), transparent 62%),
+      radial-gradient(ellipse 1100px 900px at 108% 105%, rgba(217, 100, 43, 0.12), transparent 68%),
+      linear-gradient(168deg, #F9F0DE 0%, #F3E3C9 45%, #ECD5B2 100%);
   }
 
-  /* atmospheric drifting orbs */
   .orb{
     position:absolute; border-radius:50%;
-    filter: blur(60px);
+    filter: blur(64px);
     mix-blend-mode: multiply;
-    opacity: 0.55;
+    opacity: 0.5;
     pointer-events:none;
   }
-  .orb-1{ width:520px; height:520px; left:-80px; top:120px; background: radial-gradient(circle, #E8C4B4 0%, transparent 65%); }
-  .orb-2{ width:600px; height:600px; right:-120px; top:480px; background: radial-gradient(circle, #F5E6D8 0%, transparent 65%); }
-  .orb-3{ width:480px; height:480px; left:60px; bottom:-40px; background: radial-gradient(circle, #B5C4A8 0%, transparent 60%); opacity:0.32; }
-  .orb-4{ width:420px; height:420px; right:80px; bottom:240px; background: radial-gradient(circle, #D4B8A0 0%, transparent 65%); }
-  /* New: forest-green botanical motif orb */
-  .orb-forest{ width:460px; height:460px; left:-80px; top:780px; background: radial-gradient(circle, #2D4A3E 0%, transparent 60%); opacity:0.18; }
-  .orb-sage{ width:380px; height:380px; right:-40px; top:920px; background: radial-gradient(circle, #6B8E6D 0%, transparent 62%); opacity:0.22; }
+  .orb-1{ width:520px; height:520px; left:-90px; top:100px; background: radial-gradient(circle, #D9642B 0%, transparent 65%); opacity:0.14; }
+  .orb-2{ width:600px; height:600px; right:-130px; top:460px; background: radial-gradient(circle, #C9A24A 0%, transparent 65%); opacity:0.16; }
+  .orb-3{ width:480px; height:480px; left:40px; bottom:-40px; background: radial-gradient(circle, #7A2130 0%, transparent 60%); opacity:0.10; }
+  .orb-4{ width:420px; height:420px; right:70px; bottom:260px; background: radial-gradient(circle, #D4B8A0 0%, transparent 65%); opacity:0.20; }
 
-  /* botanical leaf decoration positioned in corners */
-  .leaf-deco{
-    position:absolute; pointer-events:none;
-    opacity:0.18;
-    mix-blend-mode:multiply;
-  }
-
-  /* grain overlay */
   .grain{
-    position:absolute; inset:0; pointer-events:none; opacity:0.07; mix-blend-mode:overlay;
+    position:absolute; inset:0; pointer-events:none; opacity:0.06; mix-blend-mode:overlay;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   }
 
@@ -103,103 +109,131 @@
     border-radius: 28px;
     overflow:hidden;
   }
-  .glass-strong{
-    background: rgba(255, 251, 246, 0.58);
-  }
+  .glass-strong{ background: rgba(255, 251, 246, 0.60); }
   .glass::after{
     content:""; position:absolute; left:0; right:0; top:0; height:50%;
     background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0));
     pointer-events:none;
   }
-  .gold-frame{
-    position:absolute; inset:0; pointer-events:none;
-    border-radius:inherit;
+  .gold-frame{ position:absolute; inset:0; pointer-events:none; border-radius:inherit; }
+
+  .fw-ribbon{
+    display:inline-block;
+    padding:8px 22px;
+    border-radius:10px;
+    color:var(--fw-cream);
+    font-size:26px;
+    font-style:italic;
+    font-weight:600;
+    white-space:nowrap;
+    box-shadow: 0 10px 22px -10px rgba(122,33,48,0.5), inset 0 1px 0 rgba(255,255,255,0.18);
   }
 
-  /* Signature forest-green price pill — premium signature tier */
-  .price-pill-forest{
+  .fw-seal{
+    border-radius:50%;
     background:
-      radial-gradient(ellipse 80% 60% at 30% 22%, rgba(180,210,180,0.18), transparent 55%),
-      linear-gradient(160deg, #3F6051 0%, #2D4A3E 55%, #1F362C 100%);
-    border: 1.5px solid rgba(212, 184, 134, 0.55);
+      radial-gradient(ellipse 80% 70% at 50% 30%, rgba(255,255,255,0.65), transparent 65%),
+      linear-gradient(160deg, var(--fw-cream) 0%, var(--fw-cream-deep) 100%);
+    border: 3px solid var(--fw-gold);
     box-shadow:
-      0 32px 70px -18px rgba(20, 50, 35, 0.55),
-      0 12px 26px -8px rgba(20, 50, 35, 0.32),
-      inset 0 1px 0 rgba(200,230,200,0.30),
-      inset 0 -1px 0 rgba(10,28,18,0.30);
+      0 22px 50px -18px rgba(122,33,48,0.35),
+      0 8px 18px -8px rgba(122,33,48,0.22),
+      inset 0 1px 0 rgba(255,255,255,0.7);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    position:relative;
   }
-  .price-pill-forest::before{
-    content:""; position:absolute; inset:6px;
-    border-radius:22px;
-    border: 1px solid rgba(212, 184, 134, 0.32);
+  .fw-seal::before{
+    content:""; position:absolute; inset:9px;
+    border-radius:50%;
+    border: 1px solid rgba(184, 134, 46, 0.4);
     pointer-events:none;
   }
 
-  /* Hero SVG container */
-  .hero-svg-wrap{
-    width:100%; height:100%; position:absolute; inset:0;
-    background:
-      radial-gradient(ellipse 70% 60% at 50% 55%, rgba(239, 230, 210, 0.95), transparent 75%),
-      linear-gradient(170deg, #F0E4CC 0%, #DCD2B8 50%, #C9BFA3 100%);
-  }
-  .hero-vignette{
-    position:absolute; inset:0; pointer-events:none;
-    background:
-      linear-gradient(180deg, rgba(31,40,32,0.00) 45%, rgba(20,35,28,0.62) 100%),
-      linear-gradient(90deg, rgba(20,35,28,0.20) 0%, rgba(20,35,28,0) 35%);
-  }
-  .hero-eyebrow-pill{
-    background: rgba(245, 240, 220, 0.90);
-    border: 1px solid rgba(45, 74, 62, 0.40);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-  }
-
-  .blend-icon-wrap{
-    width:46px; height:46px; border-radius:14px;
-    background:linear-gradient(135deg, rgba(220,232,210,0.95), rgba(170,200,170,0.65));
-    border:1px solid rgba(45,74,62,0.32);
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,0.6), 0 4px 10px -2px rgba(30,60,40,0.18);
-  }
-
-  .pin-dot-forest{
-    width:8px; height:8px; border-radius:50%; background:var(--forest);
-    box-shadow: 0 0 0 4px rgba(45,74,62,0.18);
-  }
-
-  .step-num{
-    width:32px; height:32px; flex-shrink:0;
-    display:inline-flex; align-items:center; justify-content:center;
+  .fw-logo-ring{
     border-radius:50%;
-    background: linear-gradient(135deg, #D4B886, #B8965A);
-    box-shadow: 0 5px 12px -3px rgba(184,150,90,0.45), inset 0 1px 0 rgba(255,255,255,0.5);
-    color:#FBF3E8;
-    font-family:'Inter Tight', sans-serif;
-    font-weight:700; font-size:15px;
-    letter-spacing:-0.02em;
+    border: 1.5px solid var(--fw-gold);
+    display:flex; align-items:center; justify-content:center;
+    background: radial-gradient(ellipse 80% 70% at 50% 40%, rgba(255,255,255,0.55), transparent 70%);
   }
 
-  /* hairline rules for eyebrow headers */
-  .hair-rule{
-    height:1px; background: linear-gradient(90deg, transparent, rgba(184,150,90,0.55), transparent);
-    flex:1; max-width:200px;
+  .fw-step-icon-frame{
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background: radial-gradient(ellipse 85% 75% at 50% 35%, rgba(255,255,255,0.75), rgba(243,227,201,0.35) 75%);
+    border: 1px solid rgba(184, 134, 46, 0.3);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+    position:relative;
+  }
+  .fw-step-num{
+    position:absolute; top:-8px; left:-8px;
+    width:28px; height:28px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    background: linear-gradient(135deg, var(--fw-burgundy-light), var(--fw-burgundy));
+    box-shadow: 0 6px 14px -4px rgba(122,33,48,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+    color: var(--fw-cream);
+    font-family:'Jost', sans-serif;
+    font-weight:600; font-size:13px;
   }
 
   @media (prefers-reduced-motion: reduce){
     *{ animation: none !important; transition: none !important; }
   }
+
+  *{ box-sizing:border-box; }
+  h1,h2,h3,p{ margin:0; }
+  .content{ position:relative; width:100%; height:100%; padding:48px 58px; display:grid;
+    grid-template-rows:160px 390px 240px 300px 260px 290px 64px; gap:20px; }
+  .gold-frame{ width:100%; height:100%; }
+  .glass > :not(.gold-frame){ position:relative; z-index:1; }
+  .fw-ribbon{ border-radius:999px; background:linear-gradient(150deg,var(--fw-burgundy-light),var(--fw-burgundy)); font-family:'Cormorant Garamond',serif; font-size:22px; }
+  .brand{ display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .brand .brand-eyebrow{ position:absolute; top:27px; right:28px; width:255px; text-align:center; font-size:14px; font-weight:600; letter-spacing:0.12em; line-height:1.5; color:var(--fw-charcoal-soft); }
+  .brand-eyebrow > div{ margin:8px auto 0; }
+  .hero{ padding:32px 38px; display:flex; align-items:center; gap:16px; }
+  .hero-copy{ flex:1; min-width:0; }
+  .hero .eyebrow{ font-size:16px; letter-spacing:0.12em; font-weight:600; color:var(--fw-charcoal-muted); margin:20px 0 12px; }
+  .hero h1{ font-size:64px; font-weight:500; line-height:1.03; letter-spacing:-0.025em; color:var(--fw-burgundy); }
+  .hero h1 em{ display:block; font-size:48px; font-weight:400; margin-top:4px; }
+  .hero p{ font-size:20px; line-height:1.45; color:var(--fw-charcoal-soft); margin-top:16px; max-width:565px; }
+  .hero-art{ width:265px; flex-shrink:0; }
+  .promise-row{ display:grid; grid-template-columns:1fr 254px; gap:24px; align-items:center; }
+  .promise{ height:100%; display:flex; flex-direction:column; justify-content:center; padding:30px; }
+  .promise h2{ font-size:46px; line-height:1.1; font-weight:500; margin:18px 0 12px; }
+  .promise h2 em{ color:var(--fw-burgundy); font-weight:600; }
+  .promise p{ font-size:18px; color:var(--fw-charcoal-soft); }
+  .fw-seal{ width:236px; height:236px; border-width:2px; text-align:center; }
+  .seal-label{ font-size:15px; letter-spacing:0.1em; font-weight:600; color:var(--fw-gold-deep); }
+  .seal-price{ font-size:66px; line-height:1.05; color:var(--fw-burgundy); font-weight:600; margin:7px 0; }
+  .seal-price span{ font-size:26px; font-weight:400; }
+  .seal-note{ max-width:170px; font-size:16px; line-height:1.3; color:var(--fw-charcoal-soft); }
+  .section{ display:flex; flex-direction:column; gap:18px; min-height:0; }
+  .section-heading{ display:flex; justify-content:center; align-items:center; gap:18px; height:36px; flex-shrink:0; }
+  .section-heading h2{ font-size:21px; font-weight:600; letter-spacing:0.12em; color:var(--fw-charcoal); white-space:nowrap; }
+  .cards{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; flex:1; min-height:0; }
+  .info-card{ padding:24px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; }
+  .info-card .fw-step-icon-frame{ width:52px; height:52px; margin-bottom:14px; flex-shrink:0; }
+  .info-card h3{ font-size:24px; font-weight:600; line-height:1.1; color:var(--fw-burgundy); margin-bottom:10px; }
+  .info-card p{ font-size:18px; line-height:1.42; color:var(--fw-charcoal-soft); }
+  .blends .info-card{ padding:22px 24px; }
+  .blends .info-card h3{ color:var(--forest); }
+  .blends .fw-step-icon-frame{ width:44px; height:44px; margin-bottom:10px; }
+  .ritual{ padding:26px 28px; display:flex; flex-direction:column; justify-content:center; gap:30px; }
+  .steps{ display:flex; align-items:flex-start; }
+  .step{ flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; text-align:center; padding:0 5px; }
+  .step .fw-step-icon-frame{ width:76px; height:76px; }
+  .step-title{ font-size:18px; font-weight:600; letter-spacing:0.045em; line-height:1.2; margin-top:15px; }
+  .step-connector{ flex:0 0 15px; margin-top:30px; }
+  .footer{ display:flex; align-items:center; justify-content:center; text-align:center; font-size:16px; font-weight:600; letter-spacing:0.11em; color:var(--fw-charcoal-soft); }
 </style>
 </head>
 <body>
 <div id="root"></div>
 
 <script type="text/babel" data-presets="react">
-const { useEffect, useState, useRef, useMemo } = React;
 const m = window.Motion.motion;
 
 function App(){
-
   const springIn = (delay=0)=>({
     initial:{ opacity:0, y:40, scale:0.95 },
     animate:{ opacity:1, y:0, scale:1 },
@@ -211,7 +245,8 @@ function App(){
     transition:{ duration:4, repeat:Infinity, ease:'easeInOut', delay: phase }
   });
 
-  const GoldFrame = ({ r=28, delay=0.4, color="rgba(184,150,90,0.55)" })=> (
+
+  const GoldFrame = ({ r=28, delay=0.4, color="rgba(184,134,46,0.5)" })=> (
     <svg className="gold-frame" viewBox="0 0 100 100" preserveAspectRatio="none">
       <m.rect
         x="0.5" y="0.5" width="99" height="99" rx={r/2.4} ry={r/2.4}
@@ -224,22 +259,18 @@ function App(){
     </svg>
   );
 
-  // Hairline-drawing eyebrow header (rules grow outward from center text)
-  const EyebrowHeader = ({ children, color="var(--charcoal-muted)", delay=0 })=>(
-    <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'18px', position:'relative' }}>
-      <m.div className="hair-rule"
-        initial={{ scaleX:0, opacity:0 }} animate={{ scaleX:1, opacity:1 }}
-        transition={{ duration:0.9, delay, ease:'easeOut' }}
-        style={{ transformOrigin:'right center' }}/>
-      <span className="eyebrow" style={{ fontSize:'13px', color, letterSpacing:'0.24em', whiteSpace:'nowrap' }}>
-        {children}
-      </span>
-      <m.div className="hair-rule"
-        initial={{ scaleX:0, opacity:0 }} animate={{ scaleX:1, opacity:1 }}
-        transition={{ duration:0.9, delay, ease:'easeOut' }}
-        style={{ transformOrigin:'left center' }}/>
+  const DiamondGlyph = ({ size='9px', color='var(--fw-gold-deep)' })=>(
+    <span style={{ fontSize:size, color, lineHeight:1 }}>&#9670;</span>
+  );
+
+  const DividerRule = ({ width=96 })=>(
+    <div style={{ display:'flex', alignItems:'center', gap:'6px', width:`${width}px` }}>
+      <div style={{ flex:1, height:'1px', background:'linear-gradient(90deg, transparent, var(--fw-gold))' }}/>
+      <DiamondGlyph size="7px"/>
+      <div style={{ flex:1, height:'1px', background:'linear-gradient(90deg, var(--fw-gold), transparent)' }}/>
     </div>
   );
+
 
   const benefits = [
     { icon: <DetoxIcon/>,  title:'Detox & Refresh',
@@ -264,669 +295,149 @@ function App(){
     { n:5, title:'Hot Towel Finish',              icon:<TowelIcon/> },
   ];
 
+  const SectionHeader = ({children})=>(<div className="section-heading"><DividerRule width={120}/><h2 className="fw-sc">{children}</h2><DividerRule width={120}/></div>);
+  const Cards = ({items,delay})=>(<div className="cards">{items.map((item,i)=>(
+    <m.div key={item.title} {...springIn(delay+i*0.07)} className="glass info-card">
+      <GoldFrame delay={delay+0.4+i*0.07}/>
+      <div className="fw-step-icon-frame" aria-hidden="true">{item.icon}</div>
+      <h3 className="fw-sc">{item.title}</h3><p className="fw-sans">{item.body}</p>
+    </m.div>
+  ))}</div>);
+  return (<>
+    <div className="stage" aria-hidden="true">
+      <m.div className="orb orb-1" {...breathe(0)}/><m.div className="orb orb-2" {...breathe(1)}/>
+      <div className="grain"/>{['tl','tr','bl','br'].map(c=><LeafCluster key={c} corner={c}/>)}
+    </div>
+    <main className="content">
+      <m.header {...springIn(0.05)} className="glass glass-strong brand">
+        <GoldFrame delay={0.5}/>
+        <div className="fw-logo-ring" style={{width:88,height:88}}><span className="fw-script" style={{fontSize:40,color:'var(--fw-gold-deep)',transform:'translateY(-2px)'}}>Zen</span></div>
+        <div className="fw-sc" style={{fontSize:15,fontWeight:500,letterSpacing:'0.34em',marginTop:8}}>Nail Spa</div>
+        <div className="brand-eyebrow fw-sc">Signature Pedicure · Zen House Treatment<DividerRule width={110}/></div>
+      </m.header>
+      <m.section {...springIn(0.15)} className="glass glass-strong hero">
+        <GoldFrame delay={0.7}/>
+        <div className="hero-copy">
+          <span className="fw-ribbon">Zen Pedicure · Signature Treatment</span>
+          <div className="fw-sc eyebrow">75-Minute Botanical Foot Treatment</div>
+          <h1 className="fw-serif">Zen Herbal Pedicure<em>Treatment</em></h1>
+          <p className="fw-sans">A warm botanical foot treatment for deep relaxation, detox, and renewal.</p>
+        </div>
+        <m.div className="hero-art" {...breathe(0.2)}><HerbalBowlIllustration/></m.div>
+      </m.section>
+      <div className="promise-row">
+        <m.section {...springIn(0.3)} className="glass promise">
+          <GoldFrame delay={0.95}/><DividerRule width={100}/>
+          <h2 className="fw-serif">Detox. Restore. <em>Breathe.</em></h2>
+          <p className="fw-sans">Eucalyptus · Lavender · Chamomile · Green Tea</p>
+        </m.section>
+        <m.div {...springIn(0.4)} className="fw-seal">
+          <div className="fw-sc seal-label">Signature Service</div>
+          <div className="fw-serif tabular seal-price"><span>From</span> $85</div>
+          <div className="fw-sans seal-note">Gel polish &amp; add-ons available</div>
+        </m.div>
+      </div>
+      <section className="section"><SectionHeader>Why Your Feet Need This</SectionHeader><Cards items={benefits} delay={0.5}/></section>
+      <section className="section blends"><SectionHeader>Botanical Exfoliation Blend</SectionHeader><Cards items={blends} delay={0.65}/></section>
+      <m.section {...springIn(0.85)} className="glass glass-strong ritual">
+        <GoldFrame delay={1.3}/><SectionHeader>Your Included Ritual</SectionHeader>
+        <div className="steps">{included.map((s,i)=>(<React.Fragment key={s.n}>
+          <m.div className="step" initial={{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{delay:0.85+i*0.07,duration:0.5,ease:'easeOut'}}>
+            <div className="fw-step-icon-frame"><m.span className="fw-step-num" initial={{scale:0,opacity:0}} animate={{scale:1,opacity:1}} transition={{delay:0.95+i*0.07,type:'spring',stiffness:260,damping:14}}>{s.n}</m.span>{s.icon}</div>
+            <div className="fw-sc step-title">{s.title}</div>
+          </m.div>
+          {i<included.length-1 && <div className="step-connector" aria-hidden="true"><ChevronIcon/></div>}
+        </React.Fragment>))}</div>
+      </m.section>
+      <m.footer {...springIn(1.3)} className="glass glass-strong fw-sc footer"><GoldFrame delay={1.6} r={20}/><span>Perfect for tired feet, dry skin, and deep relaxation.</span></m.footer>
+    </main>
+  </>);
+}
+function LeafShape({ x=0, y=0, rotate=0, scale=1, color='#7A2130', opacity=0.9 }){
   return (
-    <>
-      {/* atmospheric stage */}
-      <div className="stage" aria-hidden="true">
-        <m.div className="orb orb-1"
-          animate={{ x:[0,30,-10,0], y:[0,-20,10,0] }}
-          transition={{ duration:18, repeat:Infinity, ease:'easeInOut' }} />
-        <m.div className="orb orb-2"
-          animate={{ x:[0,-25,15,0], y:[0,15,-12,0] }}
-          transition={{ duration:22, repeat:Infinity, ease:'easeInOut', delay:1.5 }} />
-        <m.div className="orb orb-3"
-          animate={{ x:[0,18,-22,0], y:[0,-14,8,0] }}
-          transition={{ duration:20, repeat:Infinity, ease:'easeInOut', delay:0.8 }} />
-        <m.div className="orb orb-4"
-          animate={{ x:[0,-18,22,0], y:[0,12,-18,0] }}
-          transition={{ duration:24, repeat:Infinity, ease:'easeInOut', delay:2.2 }} />
-        <m.div className="orb orb-forest"
-          animate={{ x:[0,22,-14,0], y:[0,-16,18,0] }}
-          transition={{ duration:21, repeat:Infinity, ease:'easeInOut', delay:1.0 }} />
-        <m.div className="orb orb-sage"
-          animate={{ x:[0,-20,16,0], y:[0,14,-10,0] }}
-          transition={{ duration:23, repeat:Infinity, ease:'easeInOut', delay:1.8 }} />
-
-        {/* corner botanical decorations — very subtle */}
-        <svg className="leaf-deco" style={{ top:'40px', right:'30px', width:'140px', height:'140px' }} viewBox="0 0 100 100">
-          <g stroke="#2D4A3E" strokeWidth="0.6" fill="none">
-            <path d="M50 90 C 50 60, 30 40, 15 25"/>
-            <path d="M48 80 C 40 76, 32 70, 28 60" />
-            <path d="M52 70 C 60 64, 66 56, 68 44" />
-            <path d="M46 60 C 38 52, 32 42, 30 30" />
-            <path d="M54 50 C 62 42, 66 32, 66 22" />
-          </g>
-          <g fill="rgba(45,74,62,0.40)" stroke="#2D4A3E" strokeWidth="0.4">
-            <ellipse cx="28" cy="58" rx="4" ry="2.4" transform="rotate(-40 28 58)"/>
-            <ellipse cx="34" cy="44" rx="4" ry="2.4" transform="rotate(-45 34 44)"/>
-            <ellipse cx="60" cy="50" rx="4" ry="2.4" transform="rotate(45 60 50)"/>
-            <ellipse cx="64" cy="36" rx="4" ry="2.4" transform="rotate(50 64 36)"/>
-          </g>
-        </svg>
-        <svg className="leaf-deco" style={{ bottom:'30px', left:'24px', width:'160px', height:'160px', transform:'scaleX(-1)' }} viewBox="0 0 100 100">
-          <g stroke="#3F5A48" strokeWidth="0.55" fill="none">
-            <path d="M50 90 C 50 60, 30 40, 15 25"/>
-            <path d="M48 80 C 40 76, 32 70, 28 60" />
-            <path d="M52 70 C 60 64, 66 56, 68 44" />
-            <path d="M46 60 C 38 52, 32 42, 30 30" />
-          </g>
-          <g fill="rgba(63,90,72,0.40)" stroke="#3F5A48" strokeWidth="0.35">
-            <ellipse cx="28" cy="58" rx="4" ry="2.4" transform="rotate(-40 28 58)"/>
-            <ellipse cx="34" cy="44" rx="4" ry="2.4" transform="rotate(-45 34 44)"/>
-            <ellipse cx="60" cy="50" rx="4" ry="2.4" transform="rotate(45 60 50)"/>
-          </g>
-        </svg>
-
-        <div className="grain"/>
-      </div>
-
-      {/* content frame — most rows so far */}
-      <div className="relative w-full h-full" style={{ padding:'42px 60px', display:'grid',
-        gridTemplateColumns:'repeat(6, 1fr)',
-        gridTemplateRows:'70px 542px 162px 48px 250px 48px 192px 192px 72px',
-        gap:'16px'
-      }}>
-
-        {/* ─── Row A — brand strip ─── */}
-        <m.div {...springIn(0.05)} style={{ gridColumn:'1 / -1', gridRow:'1' }}
-          className="glass glass-strong flex items-center justify-between px-9">
-          <GoldFrame delay={0.5}/>
-          <div className="flex items-baseline gap-4">
-            <span className="display tabular" style={{ fontSize:'30px', fontWeight:800, letterSpacing:'-0.04em' }}>
-              ZEN
-            </span>
-            <span className="eyebrow" style={{ fontSize:'14px', color:'var(--charcoal-soft)' }}>
-              Nail Spa
-            </span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="pin-dot-forest"/>
-            <span className="eyebrow" style={{ fontSize:'13px', color:'var(--forest-soft)' }}>
-              Signature Pedicure · Zen House Treatment
-            </span>
-          </div>
-        </m.div>
-
-        {/* ─── Row B — Hero card with SVG illustration ─── */}
-        <m.div {...springIn(0.15)} style={{ gridColumn:'1 / -1', gridRow:'2' }}
-          className="glass relative overflow-hidden">
-          <m.div style={{ width:'100%', height:'100%' }}
-            initial={{ scale:0.92 }}
-            animate={{ scale:[1, 1.015, 1] }}
-            transition={{ scale:{ duration:5, repeat:Infinity, ease:'easeInOut' } }}>
-            <img src="assets/zen-herbal-hero.png" alt="Herbal foot bath with eucalyptus, lavender and chamomile"
-              style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
-              onError={(e)=>{ e.currentTarget.style.display='none'; e.currentTarget.parentElement.insertAdjacentHTML('beforeend', '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">SVG fallback</div>'); }}/>
-          </m.div>
-          <div className="hero-vignette"/>
-
-          {/* eyebrow pill top-left */}
-          <m.div className="hero-eyebrow-pill absolute"
-            style={{ top:'24px', left:'24px', padding:'10px 18px', borderRadius:'999px',
-              display:'inline-flex', alignItems:'center', gap:'10px' }}
-            initial={{ opacity:0, y:-10 }} animate={{ opacity:1, y:0 }}
-            transition={{ delay:0.9, duration:0.6 }}>
-            <span style={{ width:'8px', height:'8px', background:'var(--forest)', borderRadius:'50%' }}/>
-            <span className="eyebrow" style={{ fontSize:'12px', color:'var(--charcoal)' }}>
-              Zen Pedicure · Signature Treatment
-            </span>
-          </m.div>
-
-          {/* title block bottom-left */}
-          <div className="absolute" style={{ left:'40px', right:'40px', bottom:'34px' }}>
-            <m.div initial={{ opacity:0, y:24 }} animate={{ opacity:1, y:0 }}
-              transition={{ delay:1.0, duration:0.7, ease:'easeOut' }}>
-              <div className="eyebrow" style={{ fontSize:'13px', color:'#E8DDB8', marginBottom:'12px', letterSpacing:'0.22em' }}>
-                75-Minute Botanical Foot Treatment
-              </div>
-              <h1 className="display" style={{
-                fontSize:'82px', fontWeight:800, lineHeight:0.94, letterSpacing:'-0.05em',
-                color:'#FBF3E8', margin:0,
-                textShadow:'0 2px 14px rgba(20,35,28,0.45)'
-              }}>
-                Zen Herbal<br/>Pedicure
-              </h1>
-              <div className="display" style={{
-                fontStyle:'italic', fontWeight:600, fontSize:'42px',
-                color:'#D4B886', marginTop:'10px', letterSpacing:'-0.03em',
-                textShadow:'0 2px 10px rgba(20,35,28,0.45)'
-              }}>
-                Treatment
-              </div>
-              <div style={{
-                fontFamily:'Inter Tight', fontWeight:500, fontStyle:'italic',
-                fontSize:'20px', letterSpacing:'-0.012em',
-                color:'#F0E6C8', lineHeight:1.3, marginTop:'14px', maxWidth:'620px',
-                textShadow:'0 2px 10px rgba(20,35,28,0.45)'
-              }}>
-                A warm botanical foot treatment for deep relaxation, detox, and renewal.
-              </div>
-            </m.div>
-          </div>
-
-          <GoldFrame delay={0.7}/>
-        </m.div>
-
-        {/* ─── Row C — Tagline + Price pill ─── */}
-        <m.div {...springIn(0.30)} style={{ gridColumn:'1 / span 4', gridRow:'3' }}
-          className="glass flex items-center px-9">
-          <GoldFrame delay={0.95}/>
-          <m.div {...breathe(0.2)}>
-            <div className="eyebrow" style={{ fontSize:'12px', color:'var(--forest-soft)', marginBottom:'10px' }}>
-              The Promise
-            </div>
-            <div className="display" style={{
-              fontSize:'38px', fontWeight:700, lineHeight:1.04, letterSpacing:'-0.035em',
-              color:'var(--charcoal)'
-            }}>
-              Detox. Restore. <em style={{ fontStyle:'italic', color:'var(--forest)', fontWeight:600 }}>Breathe.</em>
-            </div>
-            <div style={{
-              fontFamily:'Inter Tight', fontStyle:'italic',
-              fontSize:'17px', fontWeight:500, color:'var(--gold)',
-              marginTop:'8px', lineHeight:1.4, letterSpacing:'-0.01em'
-            }}>
-              Eucalyptus · Lavender · Chamomile · Green Tea
-            </div>
-          </m.div>
-        </m.div>
-
-        <m.div style={{ gridColumn:'5 / span 2', gridRow:'3', position:'relative' }}
-          initial={{ opacity:0, scale:0.4, y:30 }}
-          animate={{ opacity:1, scale:1, y:0 }}
-          transition={{ type:'spring', stiffness:220, damping:11, delay:0.45 }}>
-          <m.div
-            className="price-pill-forest"
-            animate={{
-              boxShadow: [
-                '0 32px 70px -18px rgba(20, 50, 35, 0.55), 0 12px 26px -8px rgba(20, 50, 35, 0.32), inset 0 1px 0 rgba(200,230,200,0.30), inset 0 -1px 0 rgba(10,28,18,0.30)',
-                '0 32px 90px -14px rgba(40, 80, 55, 0.72), 0 16px 34px -8px rgba(40, 80, 55, 0.46), inset 0 1px 0 rgba(220,240,220,0.40), inset 0 -1px 0 rgba(10,28,18,0.30)',
-                '0 32px 70px -18px rgba(20, 50, 35, 0.55), 0 12px 26px -8px rgba(20, 50, 35, 0.32), inset 0 1px 0 rgba(200,230,200,0.30), inset 0 -1px 0 rgba(10,28,18,0.30)'
-              ]
-            }}
-            transition={{ duration:3, repeat:Infinity, ease:'easeInOut' }}
-            style={{
-              width:'100%', height:'100%', borderRadius:'28px',
-              display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
-              position:'relative', padding:'10px 6px'
-            }}>
-            <div className="eyebrow" style={{
-              fontSize:'11px', color:'rgba(220, 235, 220, 0.85)',
-              letterSpacing:'0.34em', marginBottom:'-2px'
-            }}>
-              From
-            </div>
-            <div className="display tabular" style={{
-              fontSize:'92px', fontWeight:700, letterSpacing:'-0.05em',
-              lineHeight:1, color:'#FBF3E8',
-              display:'flex', alignItems:'baseline'
-            }}>
-              <span style={{
-                fontSize:'42px', fontWeight:600, color:'#D4B886',
-                marginRight:'4px', transform:'translateY(-22px)', display:'inline-block'
-              }}>$</span>
-              85
-            </div>
-            <div className="eyebrow" style={{
-              fontSize:'10px', color:'#D4B886',
-              letterSpacing:'0.30em', marginTop:'6px'
-            }}>
-              Signature Service
-            </div>
-          <div style={{ fontSize:'11px', fontWeight:400, color:'#FBF3E8', lineHeight:1.35, textAlign:'center', letterSpacing:'0.02em', marginTop:'6px', maxWidth:'190px' }}>
-              Gel polish & add-ons available
-            </div>
-          </m.div>
-        </m.div>
-
-        {/* ─── Row D — "WHY YOUR FEET NEED THIS" header ─── */}
-        <div style={{ gridColumn:'1 / -1', gridRow:'4', display:'flex', alignItems:'center', justifyContent:'center' }}>
-          <EyebrowHeader color="var(--charcoal-soft)" delay={0.6}>
-            Why Your Feet Need This
-          </EyebrowHeader>
-        </div>
-
-        {/* ─── Row E — 3 main benefit cards ─── */}
-        <div style={{ gridColumn:'1 / -1', gridRow:'5',
-          display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'18px' }}>
-          {benefits.map((b,i)=>(
-            <m.div key={i} {...springIn(0.70 + i*0.08)}
-              className="glass px-6 py-6 flex flex-col justify-between relative">
-              <m.div {...breathe(i*0.3)}>
-                <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
-                  <div className="blend-icon-wrap" style={{ width:'52px', height:'52px', borderRadius:'15px' }}>
-                    {b.icon}
-                  </div>
-                  <span className="eyebrow tabular" style={{ fontSize:'11px', color:'var(--charcoal-muted)' }}>
-                    0{i+1}
-                  </span>
-                </div>
-                <div className="display" style={{
-                  fontSize:'24px', fontWeight:700, letterSpacing:'-0.03em',
-                  marginTop:'18px', color:'var(--charcoal)', lineHeight:1.05
-                }}>
-                  {b.title}
-                </div>
-                <div style={{
-                  fontSize:'14px', fontWeight:400, color:'var(--charcoal-soft)',
-                  marginTop:'8px', lineHeight:1.4
-                }}>
-                  {b.body}
-                </div>
-              </m.div>
-              <GoldFrame delay={0.95 + i*0.08} r={22}/>
-            </m.div>
-          ))}
-        </div>
-
-        {/* ─── Row F — "BOTANICAL EXFOLIATION BLEND" header ─── */}
-        <div style={{ gridColumn:'1 / -1', gridRow:'6', display:'flex', alignItems:'center', justifyContent:'center' }}>
-          <EyebrowHeader color="var(--forest-soft)" delay={1.0}>
-            Botanical Exfoliation Blend
-          </EyebrowHeader>
-        </div>
-
-        {/* ─── Row G — 3 blend cards (slimmer) ─── */}
-        <div style={{ gridColumn:'1 / -1', gridRow:'7',
-          display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'18px' }}>
-          {blends.map((b,i)=>(
-            <m.div key={i} {...springIn(1.10 + i*0.08)}
-              className="glass px-5 py-5 flex flex-col relative">
-              <m.div {...breathe(i*0.35 + 0.1)} style={{ display:'flex', alignItems:'center', gap:'14px' }}>
-                <div className="blend-icon-wrap">
-                  {b.icon}
-                </div>
-                <div style={{ flex:1 }}>
-                  <div className="display" style={{
-                    fontSize:'19px', fontWeight:700, letterSpacing:'-0.02em',
-                    color:'var(--forest)', lineHeight:1.0
-                  }}>
-                    {b.title}
-                  </div>
-                </div>
-              </m.div>
-              <div style={{
-                fontSize:'13px', fontWeight:400, color:'var(--charcoal-soft)',
-                marginTop:'12px', lineHeight:1.4
-              }}>
-                {b.body}
-              </div>
-              <GoldFrame delay={1.30 + i*0.08} r={22}/>
-            </m.div>
-          ))}
-        </div>
-
-        {/* ─── Row H — Included ritual (5 items wide row) ─── */}
-        <m.div {...springIn(1.40)} style={{ gridColumn:'1 / -1', gridRow:'8', position:'relative' }}
-          className="glass glass-strong">
-          <GoldFrame delay={1.65}/>
-          <div style={{ padding:'18px 28px 18px', height:'100%', display:'flex', flexDirection:'column' }}>
-            <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom:'10px' }}>
-              <div className="eyebrow" style={{ fontSize:'12px', color:'var(--forest-soft)' }}>
-                What's Included in the 75-Minute Treatment
-              </div>
-              <span className="eyebrow tabular" style={{ fontSize:'11px', color:'var(--charcoal-muted)' }}>
-                5 Steps Included
-              </span>
-            </div>
-
-            <div style={{
-              display:'grid', gridTemplateColumns:'repeat(5, 1fr)',
-              gap:'8px', flex:1, alignItems:'stretch'
-            }}>
-              {included.map((item, i)=>(
-                <m.div key={item.n}
-                  initial={{ opacity:0, x:-14 }}
-                  animate={{ opacity:1, x:0 }}
-                  transition={{ delay:1.50 + i*0.06, duration:0.5, ease:'easeOut' }}
-                  style={{
-                    display:'flex', flexDirection:'column', alignItems:'center',
-                    textAlign:'center', padding:'2px 4px', position:'relative'
-                  }}>
-                  <m.span className="step-num"
-                    initial={{ scale:0, opacity:0 }}
-                    animate={{ scale:1, opacity:1 }}
-                    transition={{ delay:1.55 + i*0.06, type:'spring', stiffness:260, damping:14 }}>
-                    {item.n}
-                  </m.span>
-                  <div style={{
-                    width:'42px', height:'42px', marginTop:'8px', marginBottom:'6px',
-                    display:'flex', alignItems:'center', justifyContent:'center'
-                  }}>
-                    {item.icon}
-                  </div>
-                  <div className="display" style={{
-                    fontSize:'14px', fontWeight:700, letterSpacing:'-0.02em',
-                    color:'var(--charcoal)', lineHeight:1.15
-                  }}>
-                    {item.title}
-                  </div>
-                </m.div>
-              ))}
-            </div>
-          </div>
-        </m.div>
-
-        {/* ─── Row I — Footer pill ─── */}
-        <m.div {...springIn(1.85)} style={{ gridColumn:'1 / -1', gridRow:'9' }}
-          className="glass glass-strong flex items-center justify-center relative">
-          <GoldFrame delay={2.05}/>
-          <m.div {...breathe(1.5)} style={{ display:'flex', alignItems:'center', gap:'14px' }}>
-            <span style={{
-              fontFamily:'Inter Tight', fontWeight:600, fontStyle:'italic', fontSize:'22px',
-              letterSpacing:'-0.018em', color:'var(--charcoal)'
-            }}>
-              Perfect for tired feet, dry skin, and deep relaxation.
-            </span>
-            <m.span
-              animate={{ x:[0,6,0] }} transition={{ duration:1.6, repeat:Infinity, ease:'easeInOut' }}
-              style={{ display:'inline-flex' }}>
-              <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
-                <path d="M5 14 H22 M16 8 L22 14 L16 20" stroke="#2D4A3E" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </m.span>
-          </m.div>
-        </m.div>
-
-      </div>
-    </>
+    <g transform={`translate(${x},${y}) rotate(${rotate}) scale(${scale})`} opacity={opacity}>
+      <path d="M0,0 C 20,-12 46,-8 60,10 C 46,24 20,28 0,26 C -6,16 -5,6 0,0 Z" fill={color}/>
+      <path d="M2,4 L 50,10" stroke="rgba(0,0,0,0.18)" strokeWidth="1" fill="none"/>
+    </g>
   );
 }
-
-/* ─────────────────────────────────────────────────────────────── */
-/* Hero SVG illustration — wooden bowl with herbs & steam            */
-/* ─────────────────────────────────────────────────────────────── */
-function HeroSVG(){
+function LeafClusterSVG(){
   return (
-    <div className="hero-svg-wrap">
-      <svg viewBox="0 0 1080 560" preserveAspectRatio="xMidYMid slice" style={{ width:'100%', height:'100%', display:'block' }}>
-        <defs>
-          <radialGradient id="bgGlow" cx="50%" cy="55%" r="60%">
-            <stop offset="0%" stopColor="#F5EBD4" stopOpacity="1"/>
-            <stop offset="60%" stopColor="#E5D7B8" stopOpacity="1"/>
-            <stop offset="100%" stopColor="#C8BB9A" stopOpacity="1"/>
-          </radialGradient>
-          <radialGradient id="waterGrad" cx="50%" cy="50%" r="55%">
-            <stop offset="0%" stopColor="#C9A04A" stopOpacity="0.95"/>
-            <stop offset="55%" stopColor="#9B7A2E" stopOpacity="0.92"/>
-            <stop offset="100%" stopColor="#5C4716" stopOpacity="0.95"/>
-          </radialGradient>
-          <linearGradient id="bowlOuter" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#8C6437"/>
-            <stop offset="50%" stopColor="#6B4824"/>
-            <stop offset="100%" stopColor="#3F2A14"/>
-          </linearGradient>
-          <linearGradient id="bowlRim" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#A07845"/>
-            <stop offset="100%" stopColor="#6B4824"/>
-          </linearGradient>
-          <radialGradient id="bowlInner" cx="50%" cy="40%" r="60%">
-            <stop offset="0%" stopColor="#7A5226"/>
-            <stop offset="100%" stopColor="#3F2A14"/>
-          </radialGradient>
-          <linearGradient id="towelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#F0E4CC"/>
-            <stop offset="100%" stopColor="#D8C9AC"/>
-          </linearGradient>
-          <radialGradient id="leafGrad" cx="40%" cy="40%" r="60%">
-            <stop offset="0%" stopColor="#9BBE85"/>
-            <stop offset="100%" stopColor="#4A6E3F"/>
-          </radialGradient>
-          <radialGradient id="leafDark" cx="40%" cy="40%" r="60%">
-            <stop offset="0%" stopColor="#7BA070"/>
-            <stop offset="100%" stopColor="#2D4A3E"/>
-          </radialGradient>
-          <radialGradient id="chamoCenter" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#E8B548"/>
-            <stop offset="100%" stopColor="#A6802A"/>
-          </radialGradient>
-          <linearGradient id="lavenderGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#9B7BC4"/>
-            <stop offset="100%" stopColor="#6E548E"/>
-          </linearGradient>
-          <radialGradient id="orangeSlice" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#F4B36C"/>
-            <stop offset="60%" stopColor="#D88836"/>
-            <stop offset="100%" stopColor="#9C5818"/>
-          </radialGradient>
-          <radialGradient id="pebble" cx="40%" cy="35%" r="60%">
-            <stop offset="0%" stopColor="#6E6657"/>
-            <stop offset="100%" stopColor="#2E2A24"/>
-          </radialGradient>
-        </defs>
-
-        {/* background */}
-        <rect width="1080" height="560" fill="url(#bgGlow)"/>
-
-        {/* subtle backdrop leaf shadows */}
-        <g opacity="0.10" fill="#2D4A3E">
-          <path d="M80 60 C 120 110, 170 130, 230 140 C 200 90, 150 60, 80 60 Z"/>
-          <path d="M980 80 C 940 130, 900 160, 850 175 C 880 130, 920 90, 980 80 Z"/>
-          <path d="M40 460 C 90 430, 140 430, 190 450 C 140 470, 90 470, 40 460 Z"/>
-          <path d="M1010 470 C 960 440, 900 440, 860 460 C 920 480, 970 480, 1010 470 Z"/>
-        </g>
-
-        {/* linen towel */}
-        <g>
-          <ellipse cx="540" cy="490" rx="500" ry="50" fill="#C7B999" opacity="0.55"/>
-          <path d="M70 410 L 1010 410 L 1040 540 L 40 540 Z" fill="url(#towelGrad)" stroke="#B2A079" strokeWidth="1.5"/>
-          {/* linen weave lines */}
-          <g stroke="#B2A079" strokeWidth="0.6" opacity="0.35">
-            {[420,432,444,456,468,480,492,504,516,528].map((y,i)=>(
-              <line key={i} x1="40" y1={y} x2="1040" y2={y}/>
-            ))}
-          </g>
-          <g stroke="#B2A079" strokeWidth="0.4" opacity="0.25">
-            {[100,180,260,340,420,500,580,660,740,820,900,980].map((x,i)=>(
-              <line key={i} x1={x} y1="410" x2={x+8} y2="540"/>
-            ))}
-          </g>
-          {/* fringe */}
-          <g stroke="#A89271" strokeWidth="1.4" opacity="0.7">
-            {Array.from({length:60}).map((_,i)=>(
-              <line key={i} x1={45+i*16} y1="540" x2={47+i*16} y2={552 + (i%3)*4}/>
-            ))}
-          </g>
-        </g>
-
-        {/* steam wisps (behind bowl) */}
-        <g opacity="0.55" fill="none" stroke="#FBF3E8" strokeWidth="2.5" strokeLinecap="round">
-          <path d="M380 100 C 370 130, 395 150, 380 180 C 365 210, 390 235, 378 260"/>
-          <path d="M460 70 C 450 105, 475 130, 460 160 C 445 195, 470 220, 458 250"/>
-          <path d="M540 50 C 528 90, 555 120, 540 155 C 525 190, 552 220, 540 250"/>
-          <path d="M620 70 C 608 105, 635 130, 620 160 C 605 195, 632 220, 620 250"/>
-          <path d="M700 100 C 690 130, 715 150, 700 180 C 685 210, 710 235, 698 260"/>
-        </g>
-        <g opacity="0.32" fill="none" stroke="#FBF3E8" strokeWidth="4" strokeLinecap="round">
-          <path d="M430 90 C 420 130, 445 160, 430 195 C 415 230, 440 255, 428 280"/>
-          <path d="M580 60 C 568 100, 595 130, 580 165 C 565 200, 592 230, 580 260"/>
-          <path d="M660 90 C 650 130, 675 160, 660 195 C 645 230, 670 255, 658 280"/>
-        </g>
-
-        {/* wooden bowl — outer back rim */}
-        <ellipse cx="540" cy="295" rx="370" ry="68" fill="url(#bowlRim)"/>
-        {/* bowl body */}
-        <path d="M 170 295
-                 C 170 460, 320 510, 540 510
-                 C 760 510, 910 460, 910 295 Z"
-              fill="url(#bowlOuter)"/>
-        {/* bowl wood grain rings */}
-        <g stroke="#3F2A14" strokeWidth="0.8" fill="none" opacity="0.35">
-          <path d="M200 340 C 320 410, 760 410, 880 340"/>
-          <path d="M210 380 C 320 450, 760 450, 870 380"/>
-          <path d="M250 430 C 340 480, 740 480, 830 430"/>
-        </g>
-        {/* bowl inner water surface (ellipse) */}
-        <ellipse cx="540" cy="295" rx="350" ry="60" fill="url(#waterGrad)"/>
-        {/* subtle water highlight */}
-        <ellipse cx="450" cy="280" rx="120" ry="12" fill="#F4D38A" opacity="0.30"/>
-        <ellipse cx="650" cy="290" rx="80" ry="8" fill="#F4D38A" opacity="0.20"/>
-        {/* dark inner rim shadow */}
-        <ellipse cx="540" cy="295" rx="350" ry="60" fill="none" stroke="#2A1E0E" strokeWidth="3" opacity="0.55"/>
-        {/* outer bowl top rim highlight */}
-        <ellipse cx="540" cy="293" rx="370" ry="68" fill="none" stroke="#B89066" strokeWidth="2" opacity="0.7"/>
-
-        {/* === Floating elements on water === */}
-        {/* River pebbles cluster (left) */}
-        <g>
-          <ellipse cx="295" cy="305" rx="22" ry="13" fill="url(#pebble)" opacity="0.92"/>
-          <ellipse cx="318" cy="315" rx="18" ry="11" fill="url(#pebble)" opacity="0.92"/>
-          <ellipse cx="278" cy="318" rx="15" ry="9" fill="url(#pebble)" opacity="0.88"/>
-          <ellipse cx="338" cy="298" rx="13" ry="8" fill="url(#pebble)" opacity="0.85"/>
-        </g>
-
-        {/* Pebbles cluster (right) */}
-        <g>
-          <ellipse cx="775" cy="312" rx="20" ry="12" fill="url(#pebble)" opacity="0.92"/>
-          <ellipse cx="798" cy="302" rx="16" ry="10" fill="url(#pebble)" opacity="0.90"/>
-          <ellipse cx="755" cy="320" rx="14" ry="9" fill="url(#pebble)" opacity="0.85"/>
-        </g>
-
-        {/* Eucalyptus sprig (top) — stem + paired leaves */}
-        <g transform="translate(420 250) rotate(-15)">
-          <path d="M0 0 L 180 -8" stroke="#5C7A4F" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
-          {/* leaf pairs */}
-          {[0,28,56,84,112,140,168].map((x,i)=>(
-            <g key={i} transform={`translate(${x} 0)`}>
-              <ellipse cx="6" cy="-13" rx="13" ry="7" fill="url(#leafGrad)" transform="rotate(-30 6 -13)" opacity="0.92"/>
-              <ellipse cx="6" cy="8" rx="13" ry="7" fill="url(#leafGrad)" transform="rotate(30 6 8)" opacity="0.92"/>
-            </g>
-          ))}
-          {/* terminal leaf */}
-          <ellipse cx="180" cy="-3" rx="11" ry="6" fill="url(#leafGrad)" transform="rotate(0 180 -3)"/>
-        </g>
-
-        {/* Second eucalyptus sprig (right side, angled different) */}
-        <g transform="translate(580 270) rotate(8)">
-          <path d="M0 0 L 140 4" stroke="#5C7A4F" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
-          {[0,24,48,72,96,120].map((x,i)=>(
-            <g key={i} transform={`translate(${x} 0)`}>
-              <ellipse cx="5" cy="-11" rx="11" ry="6" fill="url(#leafDark)" transform="rotate(-25 5 -11)" opacity="0.88"/>
-              <ellipse cx="5" cy="7" rx="11" ry="6" fill="url(#leafDark)" transform="rotate(25 5 7)" opacity="0.88"/>
-            </g>
-          ))}
-        </g>
-
-        {/* Lavender sprigs */}
-        <g transform="translate(395 322) rotate(60)">
-          <line x1="0" y1="0" x2="0" y2="-65" stroke="#5C7A4F" strokeWidth="1.8"/>
-          {[0,8,16,24,32,40,48].map((y,i)=>(
-            <g key={i} transform={`translate(0 ${-65 + y})`}>
-              <ellipse cx="-4" cy="0" rx="3.5" ry="5" fill="url(#lavenderGrad)" opacity="0.95"/>
-              <ellipse cx="4" cy="0" rx="3.5" ry="5" fill="url(#lavenderGrad)" opacity="0.95"/>
-            </g>
-          ))}
-        </g>
-        <g transform="translate(720 305) rotate(-50)">
-          <line x1="0" y1="0" x2="0" y2="-55" stroke="#5C7A4F" strokeWidth="1.8"/>
-          {[0,8,16,24,32,40].map((y,i)=>(
-            <g key={i} transform={`translate(0 ${-55 + y})`}>
-              <ellipse cx="-3.5" cy="0" rx="3.2" ry="4.5" fill="url(#lavenderGrad)" opacity="0.92"/>
-              <ellipse cx="3.5" cy="0" rx="3.2" ry="4.5" fill="url(#lavenderGrad)" opacity="0.92"/>
-            </g>
-          ))}
-        </g>
-
-        {/* Chamomile flowers (white daisies with yellow centers) */}
-        <g transform="translate(490 310)">
-          {Array.from({length:8}).map((_,i)=>{
-            const a = (i*45)*Math.PI/180;
-            const cx = Math.cos(a)*11;
-            const cy = Math.sin(a)*11;
-            return <ellipse key={i} cx={cx} cy={cy} rx="8" ry="4.5" fill="#FBF3E8" stroke="#D8C9AC" strokeWidth="0.5" transform={`rotate(${i*45} ${cx} ${cy})`}/>;
-          })}
-          <circle cx="0" cy="0" r="6" fill="url(#chamoCenter)"/>
-        </g>
-        <g transform="translate(620 322) scale(0.85)">
-          {Array.from({length:8}).map((_,i)=>{
-            const a = (i*45)*Math.PI/180;
-            const cx = Math.cos(a)*11;
-            const cy = Math.sin(a)*11;
-            return <ellipse key={i} cx={cx} cy={cy} rx="8" ry="4.5" fill="#FBF3E8" stroke="#D8C9AC" strokeWidth="0.5" transform={`rotate(${i*45} ${cx} ${cy})`}/>;
-          })}
-          <circle cx="0" cy="0" r="6" fill="url(#chamoCenter)"/>
-        </g>
-        <g transform="translate(680 296) scale(0.7)">
-          {Array.from({length:8}).map((_,i)=>{
-            const a = (i*45)*Math.PI/180;
-            const cx = Math.cos(a)*11;
-            const cy = Math.sin(a)*11;
-            return <ellipse key={i} cx={cx} cy={cy} rx="8" ry="4.5" fill="#FBF3E8" stroke="#D8C9AC" strokeWidth="0.5" transform={`rotate(${i*45} ${cx} ${cy})`}/>;
-          })}
-          <circle cx="0" cy="0" r="6" fill="url(#chamoCenter)"/>
-        </g>
-
-        {/* Dried orange slice */}
-        <g transform="translate(560 326)">
-          <circle cx="0" cy="0" r="28" fill="url(#orangeSlice)" stroke="#7C4514" strokeWidth="1.5"/>
-          <circle cx="0" cy="0" r="22" fill="none" stroke="#A6602A" strokeWidth="1" opacity="0.6"/>
-          {/* segments */}
-          <g stroke="#7C4514" strokeWidth="1" fill="none" opacity="0.7">
-            {Array.from({length:8}).map((_,i)=>{
-              const a = (i*45)*Math.PI/180;
-              return <line key={i} x1="0" y1="0" x2={Math.cos(a)*22} y2={Math.sin(a)*22}/>;
-            })}
-          </g>
-          {/* pulp dots */}
-          <g fill="#F4D38A" opacity="0.85">
-            <circle cx="8" cy="-10" r="2"/>
-            <circle cx="-10" cy="-6" r="2"/>
-            <circle cx="-4" cy="12" r="2"/>
-            <circle cx="12" cy="6" r="2"/>
-            <circle cx="-12" cy="8" r="2"/>
-          </g>
-        </g>
-        <g transform="translate(440 330) scale(0.75)">
-          <circle cx="0" cy="0" r="28" fill="url(#orangeSlice)" stroke="#7C4514" strokeWidth="1.5"/>
-          <g stroke="#7C4514" strokeWidth="1" fill="none" opacity="0.7">
-            {Array.from({length:8}).map((_,i)=>{
-              const a = (i*45)*Math.PI/180;
-              return <line key={i} x1="0" y1="0" x2={Math.cos(a)*22} y2={Math.sin(a)*22}/>;
-            })}
-          </g>
-        </g>
-
-        {/* Saffron threads heap */}
-        <g transform="translate(665 332)">
-          {[
-            [0,0,12], [4,-2,8], [-3,1,-15], [6,-4,22], [-5,3,28],
-            [2,2,-7], [-7,-1,18], [8,1,-22], [-2,-3,3], [5,4,12]
-          ].map(([x,y,r],i)=>(
-            <line key={i} x1={x-7} y1={y} x2={x+7} y2={y} stroke="#C4451E" strokeWidth="1.6" strokeLinecap="round" transform={`rotate(${r} ${x} ${y})`} opacity="0.92"/>
-          ))}
-          {[
-            [-1,-4,40], [3,-5,55], [0,5,12], [-4,4,-30]
-          ].map(([x,y,r],i)=>(
-            <line key={`b${i}`} x1={x-6} y1={y} x2={x+6} y2={y} stroke="#E55A22" strokeWidth="1.4" strokeLinecap="round" transform={`rotate(${r} ${x} ${y})`} opacity="0.9"/>
-          ))}
-        </g>
-
-        {/* Tiny floating leaf accents on water */}
-        <g opacity="0.85">
-          <ellipse cx="350" cy="290" rx="9" ry="4.5" fill="url(#leafGrad)" transform="rotate(15 350 290)"/>
-          <ellipse cx="760" cy="285" rx="8" ry="4" fill="url(#leafGrad)" transform="rotate(-20 760 285)"/>
-          <ellipse cx="380" cy="335" rx="7" ry="3.5" fill="url(#leafDark)" transform="rotate(40 380 335)"/>
-          <ellipse cx="740" cy="338" rx="8" ry="4" fill="url(#leafDark)" transform="rotate(-30 740 338)"/>
-        </g>
-
-        {/* Water ripple highlights */}
-        <g fill="none" stroke="#FBF3E8" strokeWidth="0.8" opacity="0.35">
-          <ellipse cx="490" cy="310" rx="42" ry="6"/>
-          <ellipse cx="600" cy="318" rx="38" ry="5"/>
-          <ellipse cx="560" cy="328" rx="30" ry="4"/>
-        </g>
-      </svg>
+    <svg width="230" height="230" viewBox="0 0 230 230" style={{ overflow:'visible' }}>
+      <LeafShape x={4}  y={10} rotate={18}  scale={1.5}  color="#7A2130" opacity={0.92}/>
+      <LeafShape x={24} y={44} rotate={-8}  scale={1.7}  color="#D9642B" opacity={0.9}/>
+      <LeafShape x={8}  y={62} rotate={42}  scale={1.3}  color="#C9A24A" opacity={0.85}/>
+      <LeafShape x={46} y={12} rotate={64}  scale={1.15} color="#A83A24" opacity={0.88}/>
+      <LeafShape x={58} y={58} rotate={-28} scale={1.05} color="#B8862E" opacity={0.8}/>
+      <LeafShape x={16} y={26} rotate={-52} scale={0.9}  color="#8C2A3A" opacity={0.85}/>
+      <circle cx="30" cy="20" r="4" fill="#A83A24" opacity="0.8"/>
+      <circle cx="46" cy="34" r="3.4" fill="#7A2130" opacity="0.75"/>
+      <circle cx="18" cy="46" r="3" fill="#B8862E" opacity="0.75"/>
+    </svg>
+  );
+}
+function LeafCluster({ corner }){
+  const flip = {
+    tl: 'none',
+    tr: 'scaleX(-1)',
+    bl: 'scaleY(-1)',
+    br: 'scale(-1,-1)'
+  }[corner];
+  const pos = {
+    tl: { top:'-14px', left:'-14px' },
+    tr: { top:'-14px', right:'-14px' },
+    bl: { bottom:'-14px', left:'-14px' },
+    br: { bottom:'-14px', right:'-14px' }
+  }[corner];
+  return (
+    <div style={{ position:'absolute', ...pos, transform:flip, pointerEvents:'none', zIndex:0, opacity:0.22 }}>
+      <LeafClusterSVG/>
     </div>
   );
 }
 
-/* ── benefit icons ─────────────────────────────────────────── */
+/* ── icons ─────────────────────────────────────────── */
+function ChevronIcon(){
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+      <path d="M8 4 L 17 12 L 8 20" stroke="var(--fw-gold-deep)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </svg>
+  );
+}
+
+/* A quiet botanical bath illustration, drawn inline with the collection palette. */
+function HerbalBowlIllustration(){
+  return (<svg viewBox="0 0 280 300" role="img" aria-label="Warm herbal foot-soak bowl with botanical sprigs">
+    <defs><linearGradient id="herbal-bowl" x1="0" y1="0" x2="0" y2="1"><stop stopColor="#F3E3C9"/><stop offset="1" stopColor="#C9A24A" stopOpacity="0.45"/></linearGradient></defs>
+    <circle cx="140" cy="150" r="124" fill="rgba(201,162,74,0.06)" stroke="rgba(184,134,46,0.28)"/>
+    <circle cx="140" cy="150" r="116" fill="none" stroke="rgba(184,134,46,0.13)"/>
+    <g fill="none" stroke="#C9A24A" strokeWidth="2" strokeLinecap="round">
+      <path d="M113 117 C93 97 126 88 111 65"/><path d="M143 108 C125 86 158 77 143 49"/><path d="M170 118 C153 101 182 87 170 69"/>
+    </g>
+    <g stroke="#2D4A3E" strokeWidth="1.4" fill="rgba(107,142,109,0.25)">
+      <path d="M68 174 Q54 121 35 88" fill="none"/>
+      <ellipse cx="43" cy="108" rx="8" ry="18" transform="rotate(-40 43 108)"/><ellipse cx="60" cy="123" rx="8" ry="18" transform="rotate(24 60 123)"/>
+      <ellipse cx="51" cy="145" rx="8" ry="18" transform="rotate(-48 51 145)"/>
+      <path d="M207 182 Q223 130 239 101" fill="none"/>
+      <ellipse cx="232" cy="124" rx="7" ry="17" transform="rotate(35 232 124)"/><ellipse cx="215" cy="145" rx="7" ry="17" transform="rotate(-25 215 145)"/>
+    </g>
+    <ellipse cx="140" cy="245" rx="90" ry="9" fill="rgba(122,33,48,0.06)"/>
+    <path d="M48 158 Q51 234 140 240 Q229 234 232 158Z" fill="url(#herbal-bowl)" stroke="#B8862E" strokeWidth="2"/>
+    <g stroke="#B8862E" strokeWidth="1" opacity="0.45" fill="none"><path d="M73 173 Q77 212 94 229"/><path d="M105 180 L114 235"/><path d="M140 182 V238"/><path d="M175 180 L166 235"/><path d="M207 173 Q203 212 186 229"/></g>
+    <ellipse cx="140" cy="158" rx="92" ry="29" fill="#F7ECD8" stroke="#B8862E" strokeWidth="2"/>
+    <ellipse cx="140" cy="158" rx="81" ry="20" fill="rgba(107,142,109,0.12)" stroke="rgba(184,134,46,0.4)"/>
+    <path d="M86 156 Q99 145 113 156 Q100 165 86 156Z" fill="#6B8E6D" opacity="0.65"/>
+    <path d="M160 165 Q174 154 187 164 Q174 174 160 165Z" fill="#2D4A3E" opacity="0.45"/>
+    <g transform="translate(139 150)">{[0,60,120,180,240,300].map(a=><ellipse key={a} cx="0" cy="-8" rx="4" ry="7" transform={`rotate(${a})`} fill="#FFF9ED" stroke="#C9A24A" strokeWidth="0.6"/>)}<circle r="4" fill="#C9A24A"/></g>
+    <path d="M72 208 Q140 244 208 208" fill="none" stroke="#7A2130" strokeWidth="3" opacity="0.65"/>
+  </svg>);
+}
 function DetoxIcon(){
   return (
     <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
       {/* leaf in water droplet */}
       <path d="M16 4 C 16 4, 7 14, 7 20 a9 9 0 0 0 18 0 C 25 14, 16 4, 16 4 Z"
-        stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(107,142,109,0.30)"/>
+        stroke="#2B221A" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(107,142,109,0.30)"/>
       <path d="M11 19 C 13 16, 19 16, 21 19 C 19 22, 13 22, 11 19 Z"
         stroke="#2D4A3E" strokeWidth="1.2" fill="rgba(45,74,62,0.45)"/>
       <line x1="11" y1="19" x2="21" y2="19" stroke="#2D4A3E" strokeWidth="1" opacity="0.6"/>
@@ -938,10 +449,10 @@ function ReliefIcon(){
     <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
       {/* foot + ripple */}
       <path d="M11 5 C 9 7, 8.5 11, 10 15 C 11 18, 10 22, 13 23 C 16 23, 17 20, 17 16 C 17 11, 14 5, 11 5 Z"
-        stroke="#1F1B16" strokeWidth="1.5" strokeLinejoin="round" fill="rgba(184,150,90,0.22)"/>
-      <circle cx="18.5" cy="5.5" r="1.2" stroke="#1F1B16" strokeWidth="1.1" fill="rgba(184,150,90,0.4)"/>
-      <circle cx="20.5" cy="8" r="1" stroke="#1F1B16" strokeWidth="1.1" fill="rgba(184,150,90,0.4)"/>
-      <circle cx="21" cy="11" r="0.9" stroke="#1F1B16" strokeWidth="1.1" fill="rgba(184,150,90,0.4)"/>
+        stroke="#2B221A" strokeWidth="1.5" strokeLinejoin="round" fill="rgba(184,150,90,0.22)"/>
+      <circle cx="18.5" cy="5.5" r="1.2" stroke="#2B221A" strokeWidth="1.1" fill="rgba(184,150,90,0.4)"/>
+      <circle cx="20.5" cy="8" r="1" stroke="#2B221A" strokeWidth="1.1" fill="rgba(184,150,90,0.4)"/>
+      <circle cx="21" cy="11" r="0.9" stroke="#2B221A" strokeWidth="1.1" fill="rgba(184,150,90,0.4)"/>
       {/* relief waves */}
       <path d="M21 18 C 24 17, 26 19, 28 18" stroke="#2D4A3E" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
       <path d="M22 22 C 24 21, 26 23, 28 22" stroke="#2D4A3E" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
@@ -952,12 +463,12 @@ function ReliefIcon(){
 function LotusIcon(){
   return (
     <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
-      <path d="M16 7 C 12 11, 11 16, 16 21 C 21 16, 20 11, 16 7 Z" stroke="#1F1B16" strokeWidth="1.5" fill="rgba(107,142,109,0.30)"/>
-      <path d="M5 17 C 7 13, 11 14, 16 21 C 12 22, 8 21, 5 17 Z" stroke="#1F1B16" strokeWidth="1.4" fill="rgba(107,142,109,0.20)"/>
-      <path d="M27 17 C 25 13, 21 14, 16 21 C 20 22, 24 21, 27 17 Z" stroke="#1F1B16" strokeWidth="1.4" fill="rgba(107,142,109,0.20)"/>
-      <path d="M9 14 C 11 11, 14 12, 16 21 C 13 20, 10 18, 9 14 Z" stroke="#1F1B16" strokeWidth="1.3" fill="rgba(45,74,62,0.20)"/>
-      <path d="M23 14 C 21 11, 18 12, 16 21 C 19 20, 22 18, 23 14 Z" stroke="#1F1B16" strokeWidth="1.3" fill="rgba(45,74,62,0.20)"/>
-      <line x1="4" y1="23" x2="28" y2="23" stroke="#B8965A" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M16 7 C 12 11, 11 16, 16 21 C 21 16, 20 11, 16 7 Z" stroke="#2B221A" strokeWidth="1.5" fill="rgba(107,142,109,0.30)"/>
+      <path d="M5 17 C 7 13, 11 14, 16 21 C 12 22, 8 21, 5 17 Z" stroke="#2B221A" strokeWidth="1.4" fill="rgba(107,142,109,0.20)"/>
+      <path d="M27 17 C 25 13, 21 14, 16 21 C 20 22, 24 21, 27 17 Z" stroke="#2B221A" strokeWidth="1.4" fill="rgba(107,142,109,0.20)"/>
+      <path d="M9 14 C 11 11, 14 12, 16 21 C 13 20, 10 18, 9 14 Z" stroke="#2B221A" strokeWidth="1.3" fill="rgba(45,74,62,0.20)"/>
+      <path d="M23 14 C 21 11, 18 12, 16 21 C 19 20, 22 18, 23 14 Z" stroke="#2B221A" strokeWidth="1.3" fill="rgba(45,74,62,0.20)"/>
+      <line x1="4" y1="23" x2="28" y2="23" stroke="#C9A24A" strokeWidth="1.5" strokeLinecap="round"/>
     </svg>
   );
 }
@@ -1002,11 +513,11 @@ function LavenderLeafIcon(){
       {/* lavender buds */}
       {[6,9,12,15,18].map((y,i)=>(
         <g key={i} transform={`translate(0 ${y})`}>
-          <ellipse cx="11" cy="0" rx="2.4" ry="3.2" fill="rgba(155,123,196,0.85)" stroke="#6E548E" strokeWidth="0.7"/>
-          <ellipse cx="17" cy="0" rx="2.4" ry="3.2" fill="rgba(155,123,196,0.85)" stroke="#6E548E" strokeWidth="0.7"/>
+          <ellipse cx="11" cy="0" rx="2.4" ry="3.2" fill="rgba(122,33,48,0.55)" stroke="#7A2130" strokeWidth="0.7"/>
+          <ellipse cx="17" cy="0" rx="2.4" ry="3.2" fill="rgba(122,33,48,0.55)" stroke="#7A2130" strokeWidth="0.7"/>
         </g>
       ))}
-      <ellipse cx="14" cy="4" rx="2.4" ry="3.2" fill="rgba(155,123,196,0.85)" stroke="#6E548E" strokeWidth="0.7"/>
+      <ellipse cx="14" cy="4" rx="2.4" ry="3.2" fill="rgba(122,33,48,0.55)" stroke="#7A2130" strokeWidth="0.7"/>
       {/* leaf */}
       <path d="M9 23 C 11 21, 14 21, 14 26 C 11 26, 9 25, 9 23 Z" fill="rgba(107,142,109,0.55)" stroke="#2D4A3E" strokeWidth="0.8"/>
       <path d="M19 23 C 17 21, 14 21, 14 26 C 17 26, 19 25, 19 23 Z" fill="rgba(107,142,109,0.55)" stroke="#2D4A3E" strokeWidth="0.8"/>
@@ -1019,12 +530,12 @@ function SoakIcon(){
   return (
     <svg width="34" height="34" viewBox="0 0 38 38" fill="none">
       {/* steam */}
-      <path d="M15 4 C 15 2, 17 2, 17 4 C 17 6, 15 6, 15 8" stroke="#B8965A" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
-      <path d="M21 3 C 21 1, 23 1, 23 3 C 23 5, 21 5, 21 7" stroke="#B8965A" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
+      <path d="M15 4 C 15 2, 17 2, 17 4 C 17 6, 15 6, 15 8" stroke="#C9A24A" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
+      <path d="M21 3 C 21 1, 23 1, 23 3 C 23 5, 21 5, 21 7" stroke="#C9A24A" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
       {/* bowl */}
       <path d="M6 17 H 32 C 31 26, 26 30, 19 30 C 12 30, 7 26, 6 17 Z"
-        stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(45,74,62,0.22)"/>
-      <ellipse cx="19" cy="17" rx="13" ry="2" stroke="#1F1B16" strokeWidth="1.6" fill="rgba(45,74,62,0.40)"/>
+        stroke="#2B221A" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(45,74,62,0.22)"/>
+      <ellipse cx="19" cy="17" rx="13" ry="2" stroke="#2B221A" strokeWidth="1.6" fill="rgba(45,74,62,0.40)"/>
       {/* floating leaves */}
       <ellipse cx="15" cy="17" rx="2.4" ry="1.2" fill="rgba(107,142,109,0.85)" transform="rotate(-25 15 17)"/>
       <ellipse cx="22" cy="17" rx="2.4" ry="1.2" fill="rgba(107,142,109,0.85)" transform="rotate(25 22 17)"/>
@@ -1036,9 +547,9 @@ function RenuspaIcon(){
     <svg width="34" height="34" viewBox="0 0 38 38" fill="none">
       {/* foot in basin with massage waves */}
       <path d="M14 5 C 12 7, 11.5 10, 13 14 C 14 16, 13 19, 15.5 20 C 17.5 20, 19 18, 19 15 C 19 11, 16.5 5, 14 5 Z"
-        stroke="#1F1B16" strokeWidth="1.4" strokeLinejoin="round" fill="rgba(184,150,90,0.22)"/>
-      <circle cx="20.5" cy="6" r="1.1" stroke="#1F1B16" strokeWidth="1" fill="rgba(184,150,90,0.4)"/>
-      <circle cx="22.5" cy="8.5" r="0.95" stroke="#1F1B16" strokeWidth="1" fill="rgba(184,150,90,0.4)"/>
+        stroke="#2B221A" strokeWidth="1.4" strokeLinejoin="round" fill="rgba(184,150,90,0.22)"/>
+      <circle cx="20.5" cy="6" r="1.1" stroke="#2B221A" strokeWidth="1" fill="rgba(184,150,90,0.4)"/>
+      <circle cx="22.5" cy="8.5" r="0.95" stroke="#2B221A" strokeWidth="1" fill="rgba(184,150,90,0.4)"/>
       {/* basin */}
       <path d="M5 22 H 33 C 32 30, 27 33, 19 33 C 11 33, 6 30, 5 22 Z"
         stroke="#2D4A3E" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(45,74,62,0.18)"/>
@@ -1056,8 +567,8 @@ function SteamIcon(){
       <path d="M19 4 C 18 8, 21 10, 19 14 C 17 18, 20 20, 19 24" stroke="#5C7A4F" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
       <path d="M27 6 C 26 9, 29 11, 27 14 C 25 17, 28 19, 27 22" stroke="#5C7A4F" strokeWidth="1.6" strokeLinecap="round" fill="none"/>
       {/* heat source */}
-      <ellipse cx="19" cy="29" rx="11" ry="3" stroke="#1F1B16" strokeWidth="1.6" fill="rgba(45,74,62,0.40)"/>
-      <ellipse cx="19" cy="29" rx="7" ry="1.6" fill="#B8965A" opacity="0.6"/>
+      <ellipse cx="19" cy="29" rx="11" ry="3" stroke="#2B221A" strokeWidth="1.6" fill="rgba(45,74,62,0.40)"/>
+      <ellipse cx="19" cy="29" rx="7" ry="1.6" fill="#C9A24A" opacity="0.6"/>
     </svg>
   );
 }
@@ -1065,9 +576,9 @@ function ExfoliateIcon(){
   return (
     <svg width="34" height="34" viewBox="0 0 38 38" fill="none">
       {/* mortar */}
-      <rect x="10" y="9" width="18" height="4" rx="1.4" stroke="#1F1B16" strokeWidth="1.6" fill="rgba(107,142,109,0.40)"/>
+      <rect x="10" y="9" width="18" height="4" rx="1.4" stroke="#2B221A" strokeWidth="1.6" fill="rgba(107,142,109,0.40)"/>
       <path d="M11 13 H 27 V 28 C 27 30, 25 30.5, 23 30.5 H 15 C 13 30.5, 11 30, 11 28 Z"
-        stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(107,142,109,0.20)"/>
+        stroke="#2B221A" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(107,142,109,0.20)"/>
       {/* herb crumbs */}
       <circle cx="15" cy="18" r="0.9" fill="#2D4A3E"/>
       <circle cx="19" cy="19.5" r="1" fill="#5C7A4F"/>
@@ -1076,7 +587,7 @@ function ExfoliateIcon(){
       <circle cx="20" cy="24" r="1" fill="#2D4A3E"/>
       <circle cx="23.5" cy="22.5" r="0.8" fill="#5C7A4F"/>
       {/* pestle */}
-      <path d="M26 6 L 30 4 L 32 8 L 28 10 Z" stroke="#1F1B16" strokeWidth="1.4" strokeLinejoin="round" fill="rgba(184,150,90,0.6)"/>
+      <path d="M26 6 L 30 4 L 32 8 L 28 10 Z" stroke="#2B221A" strokeWidth="1.4" strokeLinejoin="round" fill="rgba(184,150,90,0.6)"/>
     </svg>
   );
 }
@@ -1084,19 +595,20 @@ function TowelIcon(){
   return (
     <svg width="34" height="34" viewBox="0 0 38 38" fill="none">
       {/* steam */}
-      <path d="M14 5 C 14 3, 16 3, 16 5 C 16 7, 14 7, 14 9" stroke="#B8965A" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
-      <path d="M22 5 C 22 3, 24 3, 24 5 C 24 7, 22 7, 22 9" stroke="#B8965A" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
+      <path d="M14 5 C 14 3, 16 3, 16 5 C 16 7, 14 7, 14 9" stroke="#C9A24A" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
+      <path d="M22 5 C 22 3, 24 3, 24 5 C 24 7, 22 7, 22 9" stroke="#C9A24A" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
       {/* rolled towel */}
-      <rect x="5" y="14" width="28" height="14" rx="7" stroke="#1F1B16" strokeWidth="1.6" fill="rgba(240,228,204,0.95)"/>
-      <ellipse cx="11" cy="21" rx="4.5" ry="6.5" stroke="#1F1B16" strokeWidth="1.4" fill="rgba(216,201,172,0.85)"/>
-      <ellipse cx="11" cy="21" rx="2" ry="3" stroke="#B8965A" strokeWidth="1" fill="none"/>
+      <rect x="5" y="14" width="28" height="14" rx="7" stroke="#2B221A" strokeWidth="1.6" fill="rgba(240,228,204,0.95)"/>
+      <ellipse cx="11" cy="21" rx="4.5" ry="6.5" stroke="#2B221A" strokeWidth="1.4" fill="rgba(216,201,172,0.85)"/>
+      <ellipse cx="11" cy="21" rx="2" ry="3" stroke="#C9A24A" strokeWidth="1" fill="none"/>
       {/* fold lines */}
-      <line x1="18" y1="17" x2="18" y2="25" stroke="#B8965A" strokeWidth="0.9" opacity="0.6"/>
-      <line x1="24" y1="17" x2="24" y2="25" stroke="#B8965A" strokeWidth="0.9" opacity="0.6"/>
-      <line x1="30" y1="17" x2="30" y2="25" stroke="#B8965A" strokeWidth="0.9" opacity="0.6"/>
+      <line x1="18" y1="17" x2="18" y2="25" stroke="#C9A24A" strokeWidth="0.9" opacity="0.6"/>
+      <line x1="24" y1="17" x2="24" y2="25" stroke="#C9A24A" strokeWidth="0.9" opacity="0.6"/>
+      <line x1="30" y1="17" x2="30" y2="25" stroke="#C9A24A" strokeWidth="0.9" opacity="0.6"/>
     </svg>
   );
 }
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </script>

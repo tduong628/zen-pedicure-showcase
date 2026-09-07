@@ -8,6 +8,7 @@
 <!-- fonts vendored locally -->
 
 <link href="../../vendor/fonts/fonts.css" rel="stylesheet">
+<link href="../../vendor/fonts-editorial/fonts-editorial.css" rel="stylesheet">
 
 <link href="../../vendor/mini-tw.css" rel="stylesheet">
 <script src="../../vendor/react.production.min.js"></script>
@@ -32,68 +33,59 @@
     --glass-fill:rgba(255, 251, 246, 0.42);
     --glass-stroke:rgba(255, 255, 255, 0.55);
     --glass-shadow: 0 24px 60px -20px rgba(60, 40, 20, 0.22), 0 6px 16px -8px rgba(60, 40, 20, 0.16);
+    /* Fall/Winter edition additions */
+    --fw-cream:#F7ECD8;
+    --fw-cream-deep:#F3E3C9;
+    --fw-burgundy:#7A2130;
+    --fw-burgundy-light:#8C2A3A;
+    --fw-burgundy-soft:rgba(122,33,48,0.86);
+    --fw-gold:#C9A24A;
+    --fw-gold-deep:#B8862E;
+    --fw-charcoal:#2B221A;
+    --fw-charcoal-soft:rgba(43,34,26,0.78);
+    --fw-charcoal-muted:rgba(43,34,26,0.62);
   }
   html, body{
     width:1080px; height:1920px; margin:0; padding:0;
-    background:#E8D5C4;
+    background:#F3E3C9;
     overflow:hidden;
     font-family: 'Inter', system-ui, sans-serif;
-    color: var(--charcoal);
+    color: var(--fw-charcoal);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
   #root{ width:1080px; height:1920px; position:relative; }
-  .display{ font-family:'Inter Tight', 'Inter', sans-serif; letter-spacing:-0.035em; }
+
+  .fw-script{ font-family:'Great Vibes', cursive; font-weight:400; }
+  .fw-sc{ font-family:'Cormorant SC', serif; text-transform:uppercase; }
+  .fw-serif{ font-family:'Cormorant Garamond', serif; }
+  .fw-sans{ font-family:'Jost', sans-serif; }
   .tabular{ font-variant-numeric: tabular-nums; }
-  .eyebrow{ font-family:'Inter', sans-serif; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; }
 
   .stage{
     position:absolute; inset:0;
     background:
-      radial-gradient(ellipse 900px 700px at 18% 18%, rgba(232, 196, 180, 0.80), transparent 60%),
-      radial-gradient(ellipse 800px 600px at 88% 35%, rgba(245, 230, 216, 0.78), transparent 65%),
-      radial-gradient(ellipse 700px 700px at 30% 90%, rgba(201, 169, 97, 0.30), transparent 65%),
-      radial-gradient(ellipse 1100px 900px at 110% 110%, rgba(212, 184, 160, 0.7), transparent 70%),
-      linear-gradient(168deg, #F7EBDE 0%, #EFD7C4 45%, #E2C2AB 100%);
+      radial-gradient(ellipse 900px 700px at 14% 12%, rgba(122, 33, 48, 0.06), transparent 58%),
+      radial-gradient(ellipse 800px 640px at 90% 20%, rgba(201, 162, 74, 0.16), transparent 62%),
+      radial-gradient(ellipse 760px 700px at 20% 92%, rgba(122, 33, 48, 0.08), transparent 62%),
+      radial-gradient(ellipse 1100px 900px at 108% 105%, rgba(201, 162, 74, 0.12), transparent 68%),
+      linear-gradient(168deg, #F9F0DE 0%, #F3E3C9 45%, #ECD5B2 100%);
   }
 
-  /* atmospheric drifting orbs */
   .orb{
     position:absolute; border-radius:50%;
-    filter: blur(60px);
+    filter: blur(64px);
     mix-blend-mode: multiply;
-    opacity: 0.55;
+    opacity: 0.5;
     pointer-events:none;
   }
-  .orb-1{ width:520px; height:520px; left:-80px; top:120px; background: radial-gradient(circle, #E8C4B4 0%, transparent 65%); }
-  .orb-2{ width:600px; height:600px; right:-120px; top:480px; background: radial-gradient(circle, #F5E6D8 0%, transparent 65%); }
-  .orb-3{ width:480px; height:480px; left:60px; bottom:-40px; background: radial-gradient(circle, #C9A961 0%, transparent 60%); opacity:0.26; }
-  .orb-4{ width:420px; height:420px; right:80px; bottom:240px; background: radial-gradient(circle, #D4B886 0%, transparent 65%); }
+  .orb-1{ width:520px; height:520px; left:-90px; top:100px; background: radial-gradient(circle, #D9642B 0%, transparent 65%); opacity:0.14; }
+  .orb-2{ width:600px; height:600px; right:-130px; top:460px; background: radial-gradient(circle, #C9A24A 0%, transparent 65%); opacity:0.16; }
+  .orb-3{ width:480px; height:480px; left:40px; bottom:-40px; background: radial-gradient(circle, #7A2130 0%, transparent 60%); opacity:0.10; }
+  .orb-4{ width:420px; height:420px; right:70px; bottom:260px; background: radial-gradient(circle, #D4B8A0 0%, transparent 65%); opacity:0.20; }
 
-  /* pearlescent radiance orbs — luminous gold edition accent */
-  .pearl-orb{
-    position:absolute; border-radius:50%;
-    pointer-events:none; mix-blend-mode:screen;
-  }
-  .pearl-orb-a{
-    width:360px; height:360px; right:120px; top:60px;
-    background: radial-gradient(circle, rgba(255,252,244,0.55) 0%, rgba(244,236,221,0.20) 45%, transparent 70%);
-    filter: blur(20px); opacity:0.65;
-  }
-  .pearl-orb-b{
-    width:300px; height:300px; left:140px; top:980px;
-    background: radial-gradient(circle, rgba(255,250,238,0.50) 0%, rgba(201,169,97,0.14) 50%, transparent 72%);
-    filter: blur(24px); opacity:0.55;
-  }
-  .pearl-orb-c{
-    width:240px; height:240px; right:240px; bottom:120px;
-    background: radial-gradient(circle, rgba(255,253,247,0.48) 0%, transparent 68%);
-    filter: blur(18px); opacity:0.50;
-  }
-
-  /* grain overlay */
   .grain{
-    position:absolute; inset:0; pointer-events:none; opacity:0.07; mix-blend-mode:overlay;
+    position:absolute; inset:0; pointer-events:none; opacity:0.06; mix-blend-mode:overlay;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   }
 
@@ -107,90 +99,104 @@
     border-radius: 28px;
     overflow:hidden;
   }
-  .glass-strong{
-    background: rgba(255, 251, 246, 0.58);
-  }
+  .glass-strong{ background: rgba(255, 251, 246, 0.60); }
   .glass::after{
     content:""; position:absolute; left:0; right:0; top:0; height:50%;
     background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0));
     pointer-events:none;
   }
-  .gold-frame{
-    position:absolute; inset:0; pointer-events:none;
-    border-radius:inherit;
-  }
+  .gold-frame{ position:absolute; inset:0; pointer-events:none; border-radius:inherit; }
 
-  /* hairline rules for eyebrow headers */
-  .hair-rule{
-    height:1px; background: linear-gradient(90deg, transparent, rgba(184,150,90,0.55), transparent);
-    flex:1; max-width:220px;
+  .fw-ribbon{
+    display:inline-block;
+    padding:8px 22px;
+    border-radius:10px;
+    color:var(--fw-cream);
+    font-size:26px;
+    font-style:italic;
+    font-weight:600;
+    white-space:nowrap;
+    box-shadow: 0 10px 22px -10px rgba(122,33,48,0.5), inset 0 1px 0 rgba(255,255,255,0.18);
   }
-
-  .checkmark{
-    width:30px; height:30px; flex-shrink:0;
-    display:inline-flex; align-items:center; justify-content:center;
+  .fw-seal{
     border-radius:50%;
-    background: linear-gradient(135deg, #E2CB95, #C9A961);
-    box-shadow: 0 4px 10px -2px rgba(201,169,97,0.50), inset 0 1px 0 rgba(255,255,255,0.55);
-  }
-  .pin-dot{
-    width:8px; height:8px; border-radius:50%; background:var(--champagne);
-    box-shadow: 0 0 0 4px rgba(201,169,97,0.20);
-  }
-
-  /* edition badge — thin gold-outlined pill */
-  .edition-pill{
-    background: linear-gradient(160deg, rgba(255,252,244,0.78) 0%, rgba(244,236,221,0.55) 100%);
-    border: 1px solid rgba(201,169,97,0.65);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 4px 12px -4px rgba(160,120,40,0.22);
-  }
-
-  /* pearl-cream price pill with champagne ring */
-  .price-pill{
     background:
-      radial-gradient(ellipse 70% 60% at 50% 38%, rgba(255,253,247,0.95) 0%, rgba(244,236,221,0.82) 55%, rgba(238,226,205,0.72) 100%);
-    border: 2px solid rgba(201,169,97,0.70);
+      radial-gradient(ellipse 80% 70% at 50% 30%, rgba(255,255,255,0.65), transparent 65%),
+      linear-gradient(160deg, var(--fw-cream) 0%, var(--fw-cream-deep) 100%);
+    border: 3px solid var(--fw-gold);
     box-shadow:
-      0 28px 60px -20px rgba(150, 110, 40, 0.34),
-      0 8px 18px -6px rgba(150, 110, 40, 0.20),
-      inset 0 1px 0 rgba(255,255,255,0.85),
-      inset 0 -2px 6px rgba(201,169,97,0.22),
-      0 0 0 6px rgba(255,252,244,0.30);
-    -webkit-backdrop-filter: blur(28px) saturate(150%);
-    backdrop-filter: blur(28px) saturate(150%);
+      0 22px 50px -18px rgba(122,33,48,0.35),
+      0 8px 18px -8px rgba(122,33,48,0.22),
+      inset 0 1px 0 rgba(255,255,255,0.7);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    position:relative;
   }
-
-  .hero-vignette{
-    position:absolute; inset:0; pointer-events:none;
-    background:
-      linear-gradient(180deg, rgba(31,27,22,0) 48%, rgba(31,27,22,0.70) 100%),
-      linear-gradient(90deg, rgba(31,27,22,0.20) 0%, rgba(31,27,22,0) 38%);
+  .fw-seal::before{
+    content:""; position:absolute; inset:9px;
+    border-radius:50%;
+    border: 1px solid rgba(184, 134, 46, 0.4);
+    pointer-events:none;
   }
-  .hero-eyebrow-pill{
-    background: rgba(245, 238, 224, 0.88);
-    border: 1px solid rgba(201, 169, 97, 0.50);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-  }
-  .hero-fallback{
-    width:100%; height:100%;
-    background:
-      radial-gradient(ellipse 60% 50% at 50% 35%, rgba(255,253,247,0.95), transparent 65%),
-      radial-gradient(ellipse 70% 60% at 50% 80%, rgba(201,169,97,0.30), transparent 70%),
-      linear-gradient(165deg, #F3E9D8 0%, #E7D2BB 55%, #D9BFA4 100%);
+  .fw-logo-ring{
+    border-radius:50%;
+    border: 1.5px solid var(--fw-gold);
     display:flex; align-items:center; justify-content:center;
+    background: radial-gradient(ellipse 80% 70% at 50% 40%, rgba(255,255,255,0.55), transparent 70%);
   }
-
-  .item-icon{
-    width:40px; height:40px; flex-shrink:0; border-radius:12px;
+  .fw-step-icon-frame{
+    border-radius:50%;
     display:flex; align-items:center; justify-content:center;
-    background: linear-gradient(135deg, rgba(255,250,240,0.95), rgba(244,236,221,0.80));
-    border:1px solid rgba(201,169,97,0.38);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,0.6), 0 3px 8px -2px rgba(150,110,40,0.16);
+    background: radial-gradient(ellipse 85% 75% at 50% 35%, rgba(255,255,255,0.75), rgba(243,227,201,0.35) 75%);
+    border: 1px solid rgba(184, 134, 46, 0.3);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+    position:relative;
+  }
+  .fw-step-num{
+    position:absolute; top:-8px; left:-8px;
+    width:28px; height:28px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    background: linear-gradient(135deg, var(--fw-burgundy-light), var(--fw-burgundy));
+    box-shadow: 0 6px 14px -4px rgba(122,33,48,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+    color: var(--fw-cream);
+    font-family:'Jost', sans-serif;
+    font-weight:600; font-size:13px;
   }
 
+  *{ box-sizing:border-box; }
+  .layout{position:relative;width:100%;height:100%;padding:48px 58px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:160px 310px 540px 300px 344px 70px;gap:20px;}
+  .full-row{grid-column:1 / -1;}
+  .center{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+  .header{display:flex;align-items:center;justify-content:space-between;padding:22px 38px;}
+  .edition{font-size:19px;letter-spacing:0.1em;font-weight:600;color:var(--fw-burgundy);}
+  .hero{padding:26px 44px;}
+  .hero h1{font-size:76px;font-weight:400;line-height:1.04;letter-spacing:-0.02em;margin:18px 0;}
+  .hero h1 em{font-weight:600;color:var(--fw-burgundy);}
+  .hero p{font-size:25px;font-style:italic;line-height:1.4;max-width:780px;margin:0;color:var(--fw-charcoal-soft);}
+  .benefits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;}
+  .benefit{padding:26px 30px;display:flex;flex-direction:column;justify-content:center;}
+  .benefit .fw-step-icon-frame{width:64px;height:64px;margin-bottom:16px;}
+  .benefit svg:not(.gold-frame){width:34px;height:34px;}
+  .benefit h2{font-size:27px;font-weight:600;line-height:1.1;margin:0 0 10px;color:var(--fw-burgundy);}
+  .benefit p{font-size:19px;line-height:1.4;margin:0;color:var(--fw-charcoal-soft);max-width:360px;}
+  .price-row{display:grid;grid-template-columns:1fr 290px 1fr;gap:20px;align-items:center;}
+  .info{height:232px;padding:28px;gap:18px;}
+  .info p{font-size:28px;line-height:1.18;margin:0;color:var(--fw-burgundy);}
+  .price-seal{width:286px;height:286px;}
+  .price-note{font-size:14px;line-height:1.35;max-width:190px;margin-top:10px;color:var(--fw-charcoal-soft);}
+  .ritual{padding:30px 22px;}
+  .ritual-heading{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:34px;}
+  .ritual-heading h2{font-size:21px;letter-spacing:0.12em;font-weight:600;margin:0;}
+  .steps{display:flex;align-items:flex-start;}
+  .step{flex:1 1 0;min-width:0;text-align:center;display:flex;flex-direction:column;align-items:center;}
+  .step .fw-step-icon-frame{width:68px;height:68px;}
+  .step h3{font-size:15px;font-weight:600;line-height:1.16;margin:16px 0 7px;min-height:53px;display:flex;align-items:center;justify-content:center;overflow-wrap:normal;}
+  .step p{font-size:11px;line-height:1.3;margin:0;color:var(--fw-charcoal-soft);padding:0 4px;}
+  .connector{flex:0 0 11px;margin-top:27px;}
+  .connector svg{width:11px;}
+  .footer{font-size:16px;font-weight:600;letter-spacing:0.2em;color:var(--fw-charcoal-soft);}
   @media (prefers-reduced-motion: reduce){
-    *{ animation: none !important; transition: none !important; }
+    *{ animation:none !important;transition:none !important; }
   }
 </style>
 </head>
@@ -198,374 +204,279 @@
 <div id="root"></div>
 
 <script type="text/babel" data-presets="react">
-const { useEffect, useState, useRef, useMemo } = React;
+
 const m = window.Motion.motion;
-
 function App(){
-
-  // staggered spring entry
-  const springIn = (delay=0)=>({
+  const reduceMotion = window.Motion.useReducedMotion();
+  const springIn = (delay=0)=> (reduceMotion ? {} : ({
     initial:{ opacity:0, y:40, scale:0.95 },
     animate:{ opacity:1, y:0, scale:1 },
     transition:{ type:'spring', stiffness:100, damping:15, delay }
-  });
+  }));
 
-  // continuous breathing per card
-  const breathe = (phase=0)=>({
+  const springInLeft = (delay=0)=> (reduceMotion ? {} : ({
+    initial:{ opacity:0, x:-50, scale:0.95 },
+    animate:{ opacity:1, x:0, scale:1 },
+    transition:{ type:'spring', stiffness:100, damping:15, delay }
+  }));
+
+  const springInRight = (delay=0)=> (reduceMotion ? {} : ({
+    initial:{ opacity:0, x:50, scale:0.95 },
+    animate:{ opacity:1, x:0, scale:1 },
+    transition:{ type:'spring', stiffness:100, damping:15, delay }
+  }));
+
+  const breathe = (phase=0)=> (reduceMotion ? {} : ({
     animate:{ y: [0, -2, 0, 2, 0] },
     transition:{ duration:4, repeat:Infinity, ease:'easeInOut', delay: phase }
-  });
+  }));
 
-  // gold border draw
-  const GoldFrame = ({ r=28, delay=0.4, color="rgba(184,150,90,0.55)" })=> (
+  const GoldFrame = ({ r=28, delay=0.4, color="rgba(184,134,46,0.5)" })=> (
     <svg className="gold-frame" viewBox="0 0 100 100" preserveAspectRatio="none">
       <m.rect
         x="0.5" y="0.5" width="99" height="99" rx={r/2.4} ry={r/2.4}
         fill="none" stroke={color} strokeWidth="0.18"
         pathLength="1"
-        initial={{ pathLength: 0, opacity: 0 }}
+        initial={reduceMotion ? false : { pathLength: 0, opacity: 0 }}
         animate={{ pathLength: 1, opacity: 1 }}
-        transition={{ duration: 1.4, delay, ease: 'easeOut' }}
+        transition={{ duration: reduceMotion ? 0 : 1.4, delay: reduceMotion ? 0 : delay, ease: 'easeOut' }}
       />
     </svg>
   );
 
-  // Hairline-drawing eyebrow header (rules grow outward from center text)
-  const EyebrowHeader = ({ children, color="var(--charcoal-muted)", delay=0 })=>(
-    <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'18px', position:'relative' }}>
-      <m.div className="hair-rule"
-        initial={{ scaleX:0, opacity:0 }} animate={{ scaleX:1, opacity:1 }}
-        transition={{ duration:0.9, delay, ease:'easeOut' }}
-        style={{ transformOrigin:'right center' }}/>
-      <span className="eyebrow" style={{ fontSize:'14px', color, letterSpacing:'0.26em', whiteSpace:'nowrap' }}>
-        {children}
-      </span>
-      <m.div className="hair-rule"
-        initial={{ scaleX:0, opacity:0 }} animate={{ scaleX:1, opacity:1 }}
-        transition={{ duration:0.9, delay, ease:'easeOut' }}
-        style={{ transformOrigin:'left center' }}/>
+  const DiamondGlyph = ({ size='9px', color='var(--fw-gold-deep)' })=>(
+    <span style={{ fontSize:size, color, lineHeight:1 }}>&#9670;</span>
+  );
+
+  const DividerRule = ({ width=96 })=>(
+    <div style={{ display:'flex', alignItems:'center', gap:'6px', width:`${width}px` }}>
+      <div style={{ flex:1, height:'1px', background:'linear-gradient(90deg, transparent, var(--fw-gold))' }}/>
+      <DiamondGlyph size="7px"/>
+      <div style={{ flex:1, height:'1px', background:'linear-gradient(90deg, var(--fw-gold), transparent)' }}/>
     </div>
   );
 
+
   const benefits = [
-    { icon: <DropletIcon/>, title:'Deep Hydration',         body:'Pearl minerals drench dry skin with lasting moisture.' },
-    { icon: <LeafIcon/>,    title:'Softer Skin',             body:'Gentle micro-exfoliation leaves feet velvety smooth.' },
-    { icon: <SparkleIcon/>, title:'Brightening Glow',        body:'Restores a healthy, luminous radiance.' },
-    { icon: <SteamIcon/>,   title:'Relaxing Steam Therapy',  body:'Warm steam soothes, opens pores, deeply relaxes.' },
+    {title:'Deep Hydration',body:'Pearl minerals drench dry skin with lasting moisture.',icon:<DropletIcon/>},
+    {title:'Softer Skin',body:'Gentle micro-exfoliation leaves feet velvety smooth.',icon:<LeafIcon/>},
+    {title:'Brightening Glow',body:'Restores a healthy, luminous radiance.',icon:<SparkleIcon/>},
+    {title:'Relaxing Steam Therapy',body:'Warm steam soothes, opens pores, deeply relaxes.',icon:<SteamIcon/>}
   ];
-
-  const included = [
-    { icon:<PearlIcon/>,     name:'Pearl Mineral Soak' },
-    { icon:<ScrubIcon/>,     name:'Sugar Scrub' },
-    { icon:<ExfoliateIcon/>, name:'Micro-Exfoliation Scrub' },
-    { icon:<MaskIcon/>,      name:'Nourishing Foot Mask' },
-    { icon:<LotionIcon/>,    name:'Moisturizing Lotion' },
-    { icon:<WaxIcon/>,       name:'Paraffin Wax' },
-    { icon:<SteamIcon sm/>,  name:'Steam Therapy' },
-    { icon:<MassageIcon/>,   name:'10-Minute Massage' },
+  const steps = [
+    {title:'Pearl Mineral Soak',body:'A warm soak infused with pearl minerals.',icon:<BowlSteamIcon/>},
+    {title:'Sugar Scrub',body:'Gently buffs away rough, dry skin.',icon:<ScrubIcon/>},
+    {title:'Micro-Exfoliation Scrub',body:'A finer scrub for silky-smooth soles.',icon:<ScrubIcon/>},
+    {title:'Nourishing Foot Mask',body:'A rich mask to nourish tired feet.',icon:<JarIcon/>},
+    {title:'Moisturizing Lotion',body:'Locks in lasting hydration.',icon:<LotionIcon/>},
+    {title:'Paraffin Wax',body:'Warm paraffin seals in softness.',icon:<ParaffinIcon/>},
+    {title:'Steam Therapy',body:'Soothing steam that opens pores.',icon:<SteamIcon/>},
+    {title:'10-Minute Massage',body:'A relaxing massage to finish the ritual.',icon:<MassageIcon/>}
   ];
-
-  return (
-    <>
-      {/* atmospheric stage */}
-      <div className="stage" aria-hidden="true">
-        <m.div className="orb orb-1"
-          animate={{ x:[0,30,-10,0], y:[0,-20,10,0] }}
-          transition={{ duration:18, repeat:Infinity, ease:'easeInOut' }} />
-        <m.div className="orb orb-2"
-          animate={{ x:[0,-25,15,0], y:[0,15,-12,0] }}
-          transition={{ duration:22, repeat:Infinity, ease:'easeInOut', delay:1.5 }} />
-        <m.div className="orb orb-3"
-          animate={{ x:[0,18,-22,0], y:[0,-14,8,0] }}
-          transition={{ duration:20, repeat:Infinity, ease:'easeInOut', delay:0.8 }} />
-        <m.div className="orb orb-4"
-          animate={{ x:[0,-18,22,0], y:[0,12,-18,0] }}
-          transition={{ duration:24, repeat:Infinity, ease:'easeInOut', delay:2.2 }} />
-
-        {/* pearlescent radiance — luminous gold edition */}
-        <m.div className="pearl-orb pearl-orb-a"
-          animate={{ opacity:[0.45,0.72,0.45], scale:[1,1.06,1] }}
-          transition={{ duration:9, repeat:Infinity, ease:'easeInOut' }} />
-        <m.div className="pearl-orb pearl-orb-b"
-          animate={{ opacity:[0.40,0.62,0.40], scale:[1,1.05,1] }}
-          transition={{ duration:11, repeat:Infinity, ease:'easeInOut', delay:1.4 }} />
-        <m.div className="pearl-orb pearl-orb-c"
-          animate={{ opacity:[0.36,0.58,0.36], scale:[1,1.07,1] }}
-          transition={{ duration:10, repeat:Infinity, ease:'easeInOut', delay:2.6 }} />
-
-        <div className="grain"/>
-      </div>
-
-      {/* content frame — dense 9-row grid (slide-4 cadence) */}
-      <div className="relative w-full h-full" style={{ padding:'40px 60px', display:'grid',
-        gridTemplateColumns:'repeat(6, 1fr)',
-        gridTemplateRows:'72px 576px 178px 46px 270px 46px 286px 62px',
-        gap:'17px'
-      }}>
-
-        {/* ─── Row A — brand strip + edition badge ─── */}
-        <m.div {...springIn(0.05)} style={{ gridColumn:'1 / -1', gridRow:'1' }}
-          className="glass glass-strong flex items-center justify-between px-9">
-          <GoldFrame delay={0.5} color="rgba(201,169,97,0.55)"/>
-          <div className="flex items-baseline gap-4">
-            <span className="display tabular" style={{ fontSize:'30px', fontWeight:800, letterSpacing:'-0.04em' }}>
-              ZEN
-            </span>
-            <span className="eyebrow" style={{ fontSize:'14px', color:'var(--charcoal-soft)' }}>
-              Nail Spa
-            </span>
-            <span style={{ width:'5px', height:'5px', borderRadius:'50%',
-              background:'rgba(201,169,97,0.55)', margin:'0 4px', alignSelf:'center' }}/>
-            <span className="eyebrow" style={{ fontSize:'12px', color:'var(--charcoal-muted)' }}>
-              Durham, NC
-            </span>
+  return (<>
+    <div className="stage" aria-hidden="true">
+      <div className="grain"/>
+      <LeafCluster corner="tl"/><LeafCluster corner="tr"/>
+      <LeafCluster corner="bl"/><LeafCluster corner="br"/>
+    </div>
+    <main className="layout">
+      {/* Row A — brand and edition */}
+      <m.header {...springIn(0.05)} className="full-row glass glass-strong header">
+        <GoldFrame delay={0.5}/>
+        <div className="center">
+          <div className="fw-logo-ring" style={{width:88,height:88}}>
+            <span className="fw-script" style={{fontSize:40,color:'var(--fw-gold-deep)',transform:'translateY(-2px)'}}>Zen</span>
           </div>
-          <div className="edition-pill" style={{
-            padding:'9px 20px', borderRadius:'999px',
-            display:'inline-flex', alignItems:'center', gap:'10px' }}>
-            <span className="pin-dot"/>
-            <span className="eyebrow" style={{ fontSize:'12.5px', color:'var(--champagne)', letterSpacing:'0.20em' }}>
-              The Luminous Radiance Edition
-            </span>
-          </div>
-        </m.div>
-
-        {/* ─── Row B — hero card ─── */}
-        <m.div {...springIn(0.15)} style={{ gridColumn:'1 / -1', gridRow:'2' }}
-          className="glass relative overflow-hidden">
-          <m.div style={{ width:'100%', height:'100%' }}
-            initial={{ scale:0.92 }}
-            animate={{ scale:[1, 1.015, 1] }}
-            transition={{ scale:{ duration:5, repeat:Infinity, ease:'easeInOut' } }}>
-            <img src="assets/pearl-steam-hero.png" alt="Pearl-infused steam pedicure with pearls and warm steam on cream marble"
-              style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'center 30%', display:'block' }}
-              onError={(e)=>{ e.currentTarget.style.display='none'; e.currentTarget.parentElement.insertAdjacentHTML('beforeend', '<div class=&quot;hero-fallback&quot;><svg width=&quot;180&quot; height=&quot;180&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;><circle cx=&quot;12&quot; cy=&quot;13&quot; r=&quot;6&quot; fill=&quot;%23F4ECDD&quot; stroke=&quot;%23C9A961&quot; stroke-width=&quot;0.7&quot;/><circle cx=&quot;9.6&quot; cy=&quot;11&quot; r=&quot;1.6&quot; fill=&quot;%23ffffff&quot;/><path d=&quot;M9 4 q1 -2 0 -3 M12 3.5 q1.2 -2 0 -3.4 M15 4 q1 -2 0 -3&quot; stroke=&quot;%23C9A961&quot; stroke-width=&quot;0.6&quot; stroke-linecap=&quot;round&quot; fill=&quot;none&quot; opacity=&quot;0.7&quot;/></svg></div>'); }}/>
-          </m.div>
-          <div className="hero-vignette"/>
-
-          {/* eyebrow pill top-left */}
-          <m.div className="hero-eyebrow-pill absolute"
-            style={{ top:'26px', left:'26px', padding:'10px 18px', borderRadius:'999px',
-              display:'inline-flex', alignItems:'center', gap:'10px' }}
-            initial={{ opacity:0, y:-10 }} animate={{ opacity:1, y:0 }}
-            transition={{ delay:0.9, duration:0.6 }}>
-            <span style={{ width:'8px', height:'8px', background:'var(--champagne)', borderRadius:'50%' }}/>
-            <span className="eyebrow" style={{ fontSize:'12px', color:'var(--charcoal)', letterSpacing:'0.20em' }}>
-              Zen Pedicure · Pearl &amp; Steam
-            </span>
-          </m.div>
-
-          {/* title block bottom-left */}
-          <div className="absolute" style={{ left:'42px', right:'48px', bottom:'40px' }}>
-            <m.div initial={{ opacity:0, y:24 }} animate={{ opacity:1, y:0 }}
-              transition={{ delay:1.0, duration:0.7, ease:'easeOut' }}>
-              <div style={{ display:'flex', alignItems:'center', gap:'12px', marginBottom:'14px' }}>
-                <span style={{ width:'7px', height:'7px', borderRadius:'50%',
-                  background:'rgba(255,250,238,0.85)', boxShadow:'0 0 8px rgba(255,250,238,0.7)' }}/>
-                <span style={{ width:'5px', height:'5px', borderRadius:'50%', background:'rgba(201,169,97,0.85)' }}/>
-                <span className="eyebrow" style={{ fontSize:'13px', color:'rgba(245,238,224,0.88)', letterSpacing:'0.22em' }}>
-                  Luminous Radiance · Pearl-Infused
-                </span>
-              </div>
-              <h1 className="display" style={{
-                fontSize:'80px', fontWeight:800, lineHeight:0.95, letterSpacing:'-0.05em',
-                color:'#FBF3E8', margin:0,
-                textShadow:'0 2px 14px rgba(40,28,14,0.45)'
-              }}>
-                The<br/>
-                <span style={{ color:'#D9BE82' }}>Pearl &amp; Steam</span><br/>
-                Experience
-              </h1>
-              <div style={{
-                fontStyle:'italic', fontWeight:400, fontSize:'21px',
-                color:'rgba(248,240,226,0.90)', marginTop:'16px', lineHeight:1.4,
-                maxWidth:'620px', textShadow:'0 2px 10px rgba(40,28,14,0.40)'
-              }}>
-                A warm pearl-infused pedicure that softens dry skin,
-                restores moisture, and leaves your feet glowing.
-              </div>
+          <div className="fw-sc" style={{fontSize:15,fontWeight:600,letterSpacing:'0.34em',marginTop:8}}>Nail Spa</div>
+        </div>
+        <div className="center" style={{gap:14}}>
+          <DividerRule width={110}/>
+          <div className="fw-sc edition"><DiamondGlyph/> &nbsp;The Luminous Radiance Edition&nbsp; <DiamondGlyph/></div>
+        </div>
+      </m.header>
+      {/* Row B — name, headline and exact description */}
+      <m.section {...springIn(0.15)} className="full-row glass glass-strong center hero">
+        <GoldFrame delay={0.7}/>
+        <div className="fw-sc" style={{fontSize:24,fontWeight:600,letterSpacing:'0.12em',color:'var(--fw-charcoal-muted)'}}>The Pearl &amp; Steam Experience</div>
+        <h1 className="fw-serif">Hydrate. Soften. <em>Glow.</em></h1>
+        <p className="fw-serif">A warm pearl-infused pedicure that softens dry skin, restores moisture, and leaves your feet glowing.</p>
+      </m.section>
+      {/* Row C — four benefits */}
+      <section className="full-row benefits" aria-label="Benefits">
+        {benefits.map((b,i)=>(
+          <m.article key={b.title} {...(i%2 ? springInRight(0.3+i*0.08) : springInLeft(0.3+i*0.08))} className="glass benefit">
+            <GoldFrame delay={0.9+i*0.08}/>
+            <m.div {...breathe(i*0.3)}>
+              <div className="fw-step-icon-frame" aria-hidden="true">{b.icon}</div>
+              <h2 className="fw-sc">{b.title}</h2>
+              <p className="fw-sans">{b.body}</p>
             </m.div>
+          </m.article>
+        ))}
+      </section>
+      {/* Row D — framing cards and price seal */}
+      <section className="full-row price-row" aria-label="Price">
+        <m.div {...springInLeft(0.65)} className="glass center info">
+          <GoldFrame delay={1.1}/><DividerRule width={90}/>
+          <p className="fw-sc">The Luminous Radiance Edition</p>
+          <DividerRule width={90}/>
+        </m.div>
+        <m.div {...springIn(0.7)} className="center">
+          <div className="fw-seal price-seal">
+            <div className="fw-sc" style={{fontSize:19,fontWeight:600,letterSpacing:'0.24em',color:'var(--fw-gold-deep)'}}>From</div>
+            <div className="fw-serif tabular" style={{fontSize:96,fontWeight:600,lineHeight:1,color:'var(--fw-burgundy)'}}>$65</div>
+            <div className="fw-sans price-note">Gel polish &amp; add-ons available</div>
           </div>
-          <GoldFrame delay={0.7} color="rgba(201,169,97,0.55)"/>
         </m.div>
-
-        {/* ─── Row C — tagline (cols 1–4) + price pill (cols 5–6) ─── */}
-        <m.div {...springIn(0.30)} style={{ gridColumn:'1 / span 4', gridRow:'3' }}
-          className="glass flex items-center px-9">
-          <GoldFrame delay={0.9} color="rgba(201,169,97,0.5)"/>
-          <m.div {...breathe(0.2)}>
-            <div className="display" style={{
-              fontSize:'38px', fontWeight:700, lineHeight:1.04, letterSpacing:'-0.035em',
-              color:'var(--charcoal)'
-            }}>
-              Hydrate. Soften. <span style={{ color:'var(--champagne)' }}>Glow.</span>
-            </div>
-            <div style={{
-              fontStyle:'italic', fontWeight:400, fontSize:'19px',
-              color:'var(--charcoal-soft)', marginTop:'10px', letterSpacing:'-0.005em'
-            }}>
-              Pearl minerals · warm steam therapy
-            </div>
-          </m.div>
+        <m.div {...springInRight(0.75)} className="glass center info">
+          <GoldFrame delay={1.15}/><DividerRule width={90}/>
+          <p className="fw-serif" style={{fontStyle:'italic',fontSize:32}}>The radiant glow you deserve</p>
+          <DividerRule width={90}/>
         </m.div>
-
-        <m.div style={{ gridColumn:'5 / span 2', gridRow:'3', position:'relative' }}
-          initial={{ opacity:0, scale:0.5 }} animate={{ opacity:1, scale:1 }}
-          transition={{ type:'spring', stiffness:220, damping:12, delay:0.45 }}>
-          <m.div className="price-pill" style={{
-              width:'100%', height:'100%', borderRadius:'28px',
-              display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
-              position:'relative'
-            }}
-            animate={{
-              boxShadow:[
-                '0 28px 60px -20px rgba(150,110,40,0.34), 0 8px 18px -6px rgba(150,110,40,0.20), inset 0 1px 0 rgba(255,255,255,0.85), inset 0 -2px 6px rgba(201,169,97,0.22), 0 0 0 6px rgba(255,252,244,0.30)',
-                '0 28px 60px -20px rgba(150,110,40,0.34), 0 8px 18px -6px rgba(150,110,40,0.20), inset 0 1px 0 rgba(255,255,255,0.85), inset 0 -2px 6px rgba(201,169,97,0.22), 0 0 0 11px rgba(255,250,235,0.50)',
-                '0 28px 60px -20px rgba(150,110,40,0.34), 0 8px 18px -6px rgba(150,110,40,0.20), inset 0 1px 0 rgba(255,255,255,0.85), inset 0 -2px 6px rgba(201,169,97,0.22), 0 0 0 6px rgba(255,252,244,0.30)'
-              ]
-            }}
-            transition={{ duration:3, repeat:Infinity, ease:'easeInOut' }}>
-            <div className="eyebrow" style={{ fontSize:'15px', color:'var(--champagne)',
-              letterSpacing:'0.32em', marginBottom:'2px' }}>
-              From
-            </div>
-            <div className="display tabular" style={{
-              fontSize:'92px', fontWeight:800, letterSpacing:'-0.05em',
-              lineHeight:1, color:'var(--champagne)',
-              display:'flex', alignItems:'baseline',
-              textShadow:'0 2px 6px rgba(150,110,40,0.18)'
-            }}>
-              <span style={{ fontSize:'42px', fontWeight:700, marginRight:'4px',
-                transform:'translateY(-22px)', display:'inline-block' }}>$</span>
-              65
-            </div>
-          <div style={{ fontSize:'11px', fontWeight:400, color:'var(--charcoal-soft)', lineHeight:1.35, textAlign:'center', letterSpacing:'0.02em', marginTop:'6px', maxWidth:'190px' }}>
-              Gel polish & add-ons available
-            </div>
-          </m.div>
-        </m.div>
-
-        {/* ─── Row D — "WHY YOU'LL LOVE IT" header ─── */}
-        <div style={{ gridColumn:'1 / -1', gridRow:'4', display:'flex', alignItems:'center', justifyContent:'center' }}>
-          <EyebrowHeader color="var(--gold)" delay={0.6}>
-            Why You'll Love It
-          </EyebrowHeader>
-        </div>
-
-        {/* ─── Row E — 4 benefit cards (2×2) ─── */}
-        <div style={{ gridColumn:'1 / -1', gridRow:'5',
-          display:'grid', gridTemplateColumns:'1fr 1fr', gridTemplateRows:'1fr 1fr', gap:'17px' }}>
-          {benefits.map((b,i)=>(
-            <m.div key={i} {...springIn(0.70 + i*0.08)}
-              className="glass px-7 py-5 flex flex-col justify-center relative">
-              <m.div {...breathe(i*0.3)}>
-                <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
-                  <div style={{ width:'50px', height:'50px', borderRadius:'15px',
-                    background:'linear-gradient(135deg, rgba(255,250,240,0.95), rgba(244,236,221,0.85))',
-                    border:'1px solid rgba(201,169,97,0.38)',
-                    display:'flex', alignItems:'center', justifyContent:'center',
-                    boxShadow:'inset 0 1px 0 rgba(255,255,255,0.6), 0 4px 10px -2px rgba(150,110,40,0.18)' }}>
-                    {b.icon}
-                  </div>
-                  <span className="eyebrow tabular" style={{ fontSize:'11px', color:'var(--charcoal-muted)' }}>
-                    0{i+1}
-                  </span>
-                </div>
-                <div className="display" style={{
-                  fontSize:'27px', fontWeight:700, letterSpacing:'-0.032em',
-                  marginTop:'15px', color:'var(--charcoal)', lineHeight:1.05
-                }}>
-                  {b.title}
-                </div>
-                <div style={{
-                  fontSize:'16px', fontWeight:400, color:'var(--charcoal-soft)',
-                  marginTop:'7px', lineHeight:1.35
-                }}>
-                  {b.body}
-                </div>
-              </m.div>
-              <GoldFrame delay={0.95 + i*0.08} r={22} color="rgba(201,169,97,0.5)"/>
+      </section>
+      {/* Row E — eight included ritual items, in order */}
+      <m.section {...springIn(0.85)} className="full-row glass glass-strong ritual">
+        <GoldFrame delay={1.3}/>
+        <div className="ritual-heading"><DividerRule width={110}/><h2 className="fw-sc">The Eight-Step Pedicure Ritual</h2><DividerRule width={110}/></div>
+        <div className="steps">
+          {steps.map((s,i)=>(<React.Fragment key={s.title}>
+            <m.div {...springIn(0.85+i*0.07)} className="step">
+              <div className="fw-step-icon-frame">
+                <m.span className="fw-step-num" initial={reduceMotion ? false : {scale:0,opacity:0}} animate={{scale:1,opacity:1}} transition={{delay:reduceMotion ? 0 : 0.95+i*0.07,type:'spring',stiffness:260,damping:14}}>{i+1}</m.span>
+                {s.icon}
+              </div>
+              <h3 className="fw-sc">{s.title}</h3><p className="fw-sans">{s.body}</p>
             </m.div>
-          ))}
+            {i<steps.length-1 && <div className="connector" aria-hidden="true"><ChevronIcon/></div>}
+          </React.Fragment>))}
         </div>
-
-        {/* ─── Row F — "WHAT'S INCLUDED" header ─── */}
-        <div style={{ gridColumn:'1 / -1', gridRow:'6', display:'flex', alignItems:'center', justifyContent:'center' }}>
-          <EyebrowHeader color="var(--gold)" delay={1.05}>
-            What's Included
-          </EyebrowHeader>
-        </div>
-
-        {/* ─── Row G — Included card (wide, 4×2 grid) ─── */}
-        <m.div {...springIn(1.15)} style={{ gridColumn:'1 / -1', gridRow:'7', position:'relative' }}
-          className="glass glass-strong px-9 py-7 flex flex-col justify-center">
-          <GoldFrame delay={1.5} color="rgba(201,169,97,0.5)"/>
-          <div style={{
-            display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gridTemplateRows:'1fr 1fr',
-            columnGap:'26px', rowGap:'24px'
-          }}>
-            {included.map((it,i)=>(
-              <m.div key={i}
-                initial={{ opacity:0, x:-12 }} animate={{ opacity:1, x:0 }}
-                transition={{ delay:1.2 + i*0.05, duration:0.45, ease:'easeOut' }}
-                style={{ display:'flex', alignItems:'center', gap:'14px' }}>
-                <m.span className="item-icon"
-                  initial={{ scale:0, opacity:0 }} animate={{ scale:1, opacity:1 }}
-                  transition={{ delay:1.24 + i*0.05, type:'spring', stiffness:260, damping:14 }}>
-                  {it.icon}
-                </m.span>
-                <span style={{
-                  fontFamily:'Inter Tight', fontWeight:600, fontSize:'19px',
-                  letterSpacing:'-0.018em', color:'var(--charcoal)', lineHeight:1.15
-                }}>
-                  {it.name}
-                </span>
-              </m.div>
-            ))}
-          </div>
-        </m.div>
-
-        {/* ─── Row H — footer pill ─── */}
-        <m.div {...springIn(1.70)} style={{ gridColumn:'1 / -1', gridRow:'8' }}
-          className="glass glass-strong flex items-center justify-center relative">
-          <GoldFrame delay={2.0} color="rgba(201,169,97,0.5)"/>
-          <m.div {...breathe(1.5)} style={{ display:'flex', alignItems:'center', gap:'16px' }}>
-            <span style={{
-              fontStyle:'italic', fontWeight:400, fontSize:'21px',
-              color:'var(--charcoal-soft)'
-            }}>
-              The radiant glow you deserve
-            </span>
-            <span style={{ width:'5px', height:'5px', borderRadius:'50%', background:'rgba(201,169,97,0.6)' }}/>
-            <span style={{
-              fontFamily:'Inter Tight', fontWeight:700, fontSize:'24px',
-              letterSpacing:'-0.025em', color:'var(--charcoal)',
-              display:'inline-flex', alignItems:'center', gap:'14px'
-            }}>
-              Ask the front desk
-              <m.span
-                animate={{ x:[0,6,0] }} transition={{ duration:1.6, repeat:Infinity, ease:'easeInOut' }}
-                style={{ display:'inline-flex' }}>
-                <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
-                  <path d="M5 14 H22 M16 8 L22 14 L16 20" stroke="#C9A961" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </m.span>
-            </span>
-          </m.div>
-        </m.div>
-
-      </div>
-    </>
-  );
+      </m.section>
+      {/* Row F — passive footer strip */}
+      <m.footer {...springIn(1.3)} className="full-row glass glass-strong center footer fw-sc">
+        <GoldFrame delay={1.6} r={20}/>
+        <div>The radiant glow you deserve</div>
+      </m.footer>
+    </main>
+  </>);
 }
 
-/* ── benefit icons ─────────────────────────────────────── */
+/* Botanical accents and burgundy/gold ritual line art. */
+function LeafShape({ x=0, y=0, rotate=0, scale=1, color='#7A2130', opacity=0.9 }){
+  return (
+    <g transform={`translate(${x},${y}) rotate(${rotate}) scale(${scale})`} opacity={opacity}>
+      <path d="M0,0 C 20,-12 46,-8 60,10 C 46,24 20,28 0,26 C -6,16 -5,6 0,0 Z" fill={color}/>
+      <path d="M2,4 L 50,10" stroke="rgba(0,0,0,0.18)" strokeWidth="1" fill="none"/>
+    </g>
+  );
+}
+function LeafClusterSVG(){
+  return (
+    <svg width="230" height="230" viewBox="0 0 230 230" style={{ overflow:'visible' }}>
+      <LeafShape x={4}  y={10} rotate={18}  scale={1.5}  color="#7A2130" opacity={0.92}/>
+      <LeafShape x={24} y={44} rotate={-8}  scale={1.7}  color="#B8862E" opacity={0.9}/>
+      <LeafShape x={8}  y={62} rotate={42}  scale={1.3}  color="#C9A24A" opacity={0.85}/>
+      <LeafShape x={46} y={12} rotate={64}  scale={1.15} color="#8C2A3A" opacity={0.88}/>
+      <LeafShape x={58} y={58} rotate={-28} scale={1.05} color="#B8862E" opacity={0.8}/>
+      <LeafShape x={16} y={26} rotate={-52} scale={0.9}  color="#8C2A3A" opacity={0.85}/>
+      <circle cx="30" cy="20" r="4" fill="#8C2A3A" opacity="0.8"/>
+      <circle cx="46" cy="34" r="3.4" fill="#7A2130" opacity="0.75"/>
+      <circle cx="18" cy="46" r="3" fill="#B8862E" opacity="0.75"/>
+    </svg>
+  );
+}
+function LeafCluster({ corner }){
+  const flip = {
+    tl: 'none',
+    tr: 'scaleX(-1)',
+    bl: 'scaleY(-1)',
+    br: 'scale(-1,-1)'
+  }[corner];
+  const pos = {
+    tl: { top:'-14px', left:'-14px' },
+    tr: { top:'-14px', right:'-14px' },
+    bl: { bottom:'-14px', left:'-14px' },
+    br: { bottom:'-14px', right:'-14px' }
+  }[corner];
+  return (
+    <div style={{ position:'absolute', ...pos, transform:flip, pointerEvents:'none', zIndex:0, opacity:0.85 }}>
+      <LeafClusterSVG/>
+    </div>
+  );
+}
+function ChevronIcon(){
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+      <path d="M8 4 L 17 12 L 8 20" stroke="var(--fw-gold-deep)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </svg>
+  );
+}
+function BowlSteamIcon(){
+  return (
+    <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
+      <path d="M14 8 C 14 5, 16 5, 16 8 C 16 10, 14 10, 14 12" stroke="#C9A24A" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+      <path d="M19 7 C 19 4, 21 4, 21 7 C 21 9, 19 9, 19 11" stroke="#C9A24A" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+      <path d="M5 16 H 31 C 30 25, 25 29, 18 29 C 11 29, 6 25, 5 16 Z"
+        stroke="#7A2130" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.20)"/>
+      <ellipse cx="18" cy="16" rx="13" ry="2" stroke="#7A2130" strokeWidth="1.6" fill="rgba(201,162,74,0.30)"/>
+    </svg>
+  );
+}
+function ScrubIcon(){
+  return (
+    <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
+      <path d="M8 22 L 12 12 H 24 L 28 22 Z" stroke="#7A2130" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.20)"/>
+      <line x1="8" y1="22" x2="28" y2="22" stroke="#7A2130" strokeWidth="1.6"/>
+      <circle cx="14" cy="17" r="1.1" fill="#C9A24A"/>
+      <circle cx="18" cy="15" r="1.1" fill="#C9A24A"/>
+      <circle cx="22" cy="18" r="1.1" fill="#C9A24A"/>
+      <circle cx="16" cy="20" r="0.9" fill="#C9A24A"/>
+      <circle cx="21" cy="20" r="0.9" fill="#C9A24A"/>
+      <path d="M11 26 H 25" stroke="#C9A24A" strokeWidth="1.5" strokeLinecap="round"/>
+    </svg>
+  );
+}
+function JarIcon(){
+  return (
+    <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
+      <rect x="10" y="8" width="16" height="4" rx="1.2" stroke="#7A2130" strokeWidth="1.6" fill="rgba(201,162,74,0.30)"/>
+      <path d="M11 12 H 25 V 27 C 25 28.5, 23.5 29, 22 29 H 14 C 12.5 29, 11 28.5, 11 27 Z"
+        stroke="#7A2130" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.18)"/>
+      <path d="M14 18 C 16 16, 20 16, 22 18" stroke="#C9A24A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+      <path d="M13 22 C 16 20, 20 20, 23 22" stroke="#C9A24A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+    </svg>
+  );
+}
+function LotionIcon(){
+  return (
+    <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
+      <path d="M15 8 H 21 V 11 H 15 Z" stroke="#7A2130" strokeWidth="1.6" fill="rgba(201,162,74,0.30)"/>
+      <path d="M13 11 H 23 L 22 14 H 14 Z" stroke="#7A2130" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.18)"/>
+      <path d="M14 14 H 22 V 28 C 22 29, 21 29.5, 20 29.5 H 16 C 15 29.5, 14 29, 14 28 Z"
+        stroke="#7A2130" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.15)"/>
+      <path d="M21 8 V 5 H 24 V 7" stroke="#C9A24A" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+      <line x1="16" y1="20" x2="20" y2="20" stroke="#C9A24A" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="16" y1="23" x2="20" y2="23" stroke="#C9A24A" strokeWidth="1.4" strokeLinecap="round"/>
+    </svg>
+  );
+}
+function ParaffinIcon(){
+  return (
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+      <ellipse cx="18" cy="24" rx="13" ry="6" stroke="#7A2130" strokeWidth="1.6" fill="rgba(201,162,74,0.28)"/>
+      <path d="M9 24 C 9 20, 11 17, 13 16" stroke="#C9A24A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+      <path d="M27 24 C 27 20, 25 17, 23 16" stroke="#C9A24A" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+      <path d="M13 10 C 13 8, 15 8, 15 10 C 15 12, 13 12, 13 14" stroke="#C9A24A" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
+      <path d="M19 8 C 19 6, 21 6, 21 8 C 21 10, 19 10, 19 12" stroke="#C9A24A" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
+      <path d="M24 12 C 24 10, 26 10, 26 12 C 26 14, 24 14, 24 16" stroke="#C9A24A" strokeWidth="1.3" strokeLinecap="round" fill="none"/>
+    </svg>
+  );
+}
 function DropletIcon(){
   return (
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
       <path d="M12 3 C 12 3, 5 11, 5 16 a7 7 0 0 0 14 0 C 19 11, 12 3, 12 3 z"
-        stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,169,97,0.20)"/>
-      <path d="M9 15 a3 3 0 0 0 3 3" stroke="#C9A961" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+        stroke="#7A2130" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.20)"/>
+      <path d="M9 15 a3 3 0 0 0 3 3" stroke="#C9A24A" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
     </svg>
   );
 }
@@ -573,8 +484,8 @@ function LeafIcon(){
   return (
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
       <path d="M5 19 C 5 11, 11 5, 19 5 C 19 13, 13 19, 5 19 Z"
-        stroke="#1F1B16" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,169,97,0.20)"/>
-      <path d="M5 19 C 9 15, 13 11, 17 7" stroke="#C9A961" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+        stroke="#7A2130" strokeWidth="1.6" strokeLinejoin="round" fill="rgba(201,162,74,0.20)"/>
+      <path d="M5 19 C 9 15, 13 11, 17 7" stroke="#C9A24A" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
     </svg>
   );
 }
@@ -582,9 +493,9 @@ function SparkleIcon(){
   return (
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
       <path d="M12 2 L13.6 9 L20.5 10.5 L13.6 12 L12 19 L10.4 12 L3.5 10.5 L10.4 9 Z"
-        stroke="#1F1B16" strokeWidth="1.5" strokeLinejoin="round" fill="rgba(201,169,97,0.22)"/>
-      <circle cx="19.5" cy="4.5" r="1.4" fill="#C9A961"/>
-      <circle cx="4.5" cy="18.5" r="1" fill="#C9A961"/>
+        stroke="#7A2130" strokeWidth="1.5" strokeLinejoin="round" fill="rgba(201,162,74,0.22)"/>
+      <circle cx="19.5" cy="4.5" r="1.4" fill="#C9A24A"/>
+      <circle cx="4.5" cy="18.5" r="1" fill="#C9A24A"/>
     </svg>
   );
 }
@@ -592,66 +503,10 @@ function SteamIcon({ sm }){
   const s = sm ? 20 : 26;
   return (
     <svg width={s} height={s} viewBox="0 0 24 24" fill="none">
-      <path d="M5 21 h14" stroke="#1F1B16" strokeWidth="1.6" strokeLinecap="round"/>
-      <path d="M6 21 C 6 16, 18 16, 18 21" stroke="#1F1B16" strokeWidth="1.6" fill="rgba(201,169,97,0.18)"/>
-      <path d="M9 12 q 1.6 -2 0 -4 q -1.6 -2 0 -4" stroke="#C9A961" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-      <path d="M14.5 12 q 1.6 -2 0 -4 q -1.6 -2 0 -4" stroke="#C9A961" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-    </svg>
-  );
-}
-
-/* ── included-item icons ───────────────────────────────── */
-function PearlIcon(){
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="7" fill="rgba(244,236,221,0.9)" stroke="#1F1B16" strokeWidth="1.4"/>
-      <circle cx="9.5" cy="9.5" r="2" fill="#ffffff"/>
-    </svg>
-  );
-}
-function ScrubIcon(){
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <circle cx="7" cy="9" r="2" stroke="#1F1B16" strokeWidth="1.3" fill="rgba(201,169,97,0.25)"/>
-      <circle cx="14" cy="7" r="1.6" stroke="#1F1B16" strokeWidth="1.3" fill="rgba(201,169,97,0.25)"/>
-      <circle cx="17" cy="13" r="2" stroke="#1F1B16" strokeWidth="1.3" fill="rgba(201,169,97,0.25)"/>
-      <circle cx="10" cy="15" r="1.7" stroke="#1F1B16" strokeWidth="1.3" fill="rgba(201,169,97,0.25)"/>
-      <circle cx="15.5" cy="18" r="1.4" stroke="#1F1B16" strokeWidth="1.3" fill="rgba(201,169,97,0.25)"/>
-    </svg>
-  );
-}
-function ExfoliateIcon(){
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <path d="M4 18 L18 4 a2.5 2.5 0 0 1 3.5 3.5 L7.5 21.5" stroke="#1F1B16" strokeWidth="1.4" strokeLinejoin="round" fill="rgba(201,169,97,0.18)"/>
-      <path d="M4 18 L7.5 21.5 L4.5 22.5 Z" fill="#C9A961" stroke="#1F1B16" strokeWidth="1.2" strokeLinejoin="round"/>
-    </svg>
-  );
-}
-function MaskIcon(){
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <path d="M12 4 C 6 4, 4 8, 4 13 C 4 18, 8 21, 12 21 C 16 21, 20 18, 20 13 C 20 8, 18 4, 12 4 Z"
-        stroke="#1F1B16" strokeWidth="1.4" fill="rgba(201,169,97,0.18)"/>
-      <path d="M8 11 q 4 3 8 0" stroke="#C9A961" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
-    </svg>
-  );
-}
-function LotionIcon(){
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <rect x="8" y="9" width="8" height="12" rx="2" stroke="#1F1B16" strokeWidth="1.4" fill="rgba(201,169,97,0.18)"/>
-      <path d="M10 9 V6 h4 v3" stroke="#1F1B16" strokeWidth="1.4" strokeLinejoin="round"/>
-      <path d="M11 3 h3 v2" stroke="#C9A961" strokeWidth="1.4" strokeLinecap="round"/>
-    </svg>
-  );
-}
-function WaxIcon(){
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <path d="M5 13 C 5 9, 8 6, 12 6 C 16 6, 19 9, 19 13 v5 a2 2 0 0 1 -2 2 H7 a2 2 0 0 1 -2 -2 Z"
-        stroke="#1F1B16" strokeWidth="1.4" fill="rgba(201,169,97,0.18)"/>
-      <path d="M8 13 q 4 3 8 0" stroke="#C9A961" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+      <path d="M5 21 h14" stroke="#7A2130" strokeWidth="1.6" strokeLinecap="round"/>
+      <path d="M6 21 C 6 16, 18 16, 18 21" stroke="#7A2130" strokeWidth="1.6" fill="rgba(201,162,74,0.18)"/>
+      <path d="M9 12 q 1.6 -2 0 -4 q -1.6 -2 0 -4" stroke="#C9A24A" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+      <path d="M14.5 12 q 1.6 -2 0 -4 q -1.6 -2 0 -4" stroke="#C9A24A" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
     </svg>
   );
 }
@@ -659,10 +514,10 @@ function MassageIcon(){
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
       <path d="M8 4 C 6.5 6, 6 9, 7 12.5 C 7.8 15.5, 7 19, 9.5 20.5 C 12 21, 13 18, 13 14 C 13 9.5, 11 4, 8 4 Z"
-        stroke="#1F1B16" strokeWidth="1.4" strokeLinejoin="round" fill="rgba(201,169,97,0.18)"/>
-      <circle cx="15" cy="6" r="1" fill="#C9A961"/>
-      <circle cx="17" cy="9" r="0.9" fill="#C9A961"/>
-      <circle cx="17.5" cy="12" r="0.8" fill="#C9A961"/>
+        stroke="#7A2130" strokeWidth="1.4" strokeLinejoin="round" fill="rgba(201,162,74,0.18)"/>
+      <circle cx="15" cy="6" r="1" fill="#C9A24A"/>
+      <circle cx="17" cy="9" r="0.9" fill="#C9A24A"/>
+      <circle cx="17.5" cy="12" r="0.8" fill="#C9A24A"/>
     </svg>
   );
 }
