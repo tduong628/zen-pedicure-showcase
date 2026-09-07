@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Zen Nail Spa — Pedicure Menu (Display)</title>
+<title>Pedicure Menu Display</title>
 <style>
-  :root { --slide-w: 1080; --slide-h: 1920; }
   * { margin:0; padding:0; box-sizing:border-box; }
   html, body {
     width:100%; height:100%; background:#0c0b0a; overflow:hidden;
@@ -20,138 +19,189 @@
     overflow:hidden;
     background:#F7ECD8;
   }
-  /* Each poster fills the stage; two layers crossfade */
+  /* Each poster fills the stage; two layers crossfade with a slow reveal */
   .layer {
     position:absolute; inset:0;
-    opacity:0;
     overflow:hidden;
+    opacity:0;
     background:#F7ECD8;
-    transition: opacity 1s ease;
   }
-  .layer.active { opacity:1; z-index:2; }
-  .layer.reset { transition:none; }
   .layer img {
     position:absolute; inset:0;
     width:100%; height:100%;
-    object-fit:contain;
+    object-fit:cover;
     display:block;
-    transform:scale(1);
-    transition: transform 12s linear;
-    will-change:transform;
+    background:#F7ECD8;
+    transform:scale(1.02);
+    transform-origin:center center;
   }
-  /* Ken Burns: slow drift from 1.0 -> 1.04 across the full on-screen duration */
-  .layer.zoom img { transform:scale(1.04); }
-  .layer.no-zoom-transition img { transition:none; }
-  /* Progress dots */
+  /* Settled: the resting state for the currently-shown slide — pixel-static at scale(1) */
+  .layer.settled { opacity:1; }
+  .layer.settled img { transform:scale(1); }
+  /* Transition-in: the incoming slide crossfades in while settling from 1.02 to 1.00 */
+  .layer.transition-in {
+    opacity:1;
+    transition: opacity var(--transition-ms) var(--ease);
+  }
+  .layer.transition-in img {
+    transform:scale(1);
+    transition: transform var(--transition-ms) var(--ease);
+  }
+  /* Transition-out: the outgoing slide only fades opacity — no transform */
+  .layer.transition-out {
+    opacity:0;
+    transition: opacity var(--transition-ms) var(--ease);
+  }
+  .layer.transition-out img { transform:scale(1); }
+  @media (prefers-reduced-motion: reduce) {
+    .layer img { transform:none !important; transition:none !important; }
+    .layer.transition-in,
+    .layer.transition-out { transition-duration: var(--reduced-transition-ms); }
+  }
+  /* Progress dots — always visible; a kiosk display has no cursor to hover with */
   #progress {
     position:absolute; bottom:30px; left:50%; transform:translateX(-50%);
     display:flex; gap:14px; z-index:50;
     padding:12px 22px; border-radius:999px;
-    background:rgba(20,18,16,0.32);
+    background:rgba(20,18,16,0.28);
     backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-    opacity:0; transition:opacity .4s ease;
   }
-  #stage:hover #progress { opacity:1; }
   .dot {
     width:9px; height:9px; border-radius:50%;
     background:rgba(255,255,255,0.34);
     transition: all .5s ease;
   }
   .dot.on { background:#E8C9A0; width:30px; border-radius:6px; }
-  /* Idle hint */
-  #hint {
-    position:absolute; top:24px; left:50%; transform:translateX(-50%);
-    z-index:60; color:rgba(255,255,255,0.7);
-    font-size:14px; letter-spacing:.14em; text-transform:uppercase;
-    padding:10px 20px; border-radius:999px;
-    background:rgba(20,18,16,0.34); backdrop-filter:blur(14px);
-    opacity:0; transition:opacity .5s ease; pointer-events:none;
-  }
-  #stage:hover #hint { opacity:1; }
 </style>
 </head>
 <body>
 <div id="stage">
-  <div class="layer" id="layA"><img id="imgA" alt=""></div>
-  <div class="layer" id="layB"><img id="imgB" alt=""></div>
+  <div class="layer" id="layA"><img id="imgA" alt="" src=""></div>
+  <div class="layer" id="layB"><img id="imgB" alt="" src=""></div>
 
-  <div id="hint">Zen Nail Spa · Pedicure Menu — press F for fullscreen</div>
   <div id="progress"></div>
 </div>
 
 <script>
 (function () {
-  // Poster manifest — each slide is one complete, fully-designed ChatGPT poster image.
-  var POSTER_DIR = 'styles/bento/assets/posters/';
-  var SLIDES = [
-    { src: POSTER_DIR + 'poster-charcoal-detox.png', label: 'Charcoal Detox Pedicure' },
-    { src: POSTER_DIR + 'poster-fall-winter.jpg',     label: 'Fall/Winter Pedicure Special' },
-    { src: POSTER_DIR + 'poster-honey-orange.png',    label: 'Honey Orange Zest Pedicure' },
-    { src: POSTER_DIR + 'poster-herbal.png',          label: 'Zen Herbal Pedicure Ritual' },
-    { src: POSTER_DIR + 'poster-romantic-rose.png',   label: 'Romantic Rose Pedicure' },
-    { src: POSTER_DIR + 'poster-lavender.png',        label: 'Lavender Spa Pedicure' },
-    { src: POSTER_DIR + 'poster-basic-spa.png',       label: 'Basic Spa Pedicure' },
-    { src: POSTER_DIR + 'poster-pearl-steam.png',     label: 'The Pearl & Steam Experience' },
-    { src: POSTER_DIR + 'poster-green-tea.png',       label: 'Green Tea Pedicure' },
-    { src: POSTER_DIR + 'poster-collagen.png',        label: 'Collagen Spa Experience' }
-  ];
-  var SLIDE_MS = 12000;          // 12s per slide (John's choice)
+  // ── Per-salon config — the ONLY block that differs between the Deluxe and
+  // Zen copies of this file. Everything below this object is identical.
+  var CONFIG = {
+    SALON_NAME: "Zen Nail Spa",
+    POSTER_DIR: "styles/bento/assets/posters/",
+    SLIDES: [
+      { src: "poster-charcoal-detox.png", label: "Charcoal Detox Pedicure" },
+      { src: "poster-fall-winter.png",    label: "Fall/Winter Pedicure Special" },
+      { src: "poster-honey-orange.png",   label: "Honey Orange Zest Pedicure" },
+      { src: "poster-herbal.png",         label: "Zen Herbal Pedicure Ritual" },
+      { src: "poster-romantic-rose.png",  label: "Romantic Rose Pedicure" },
+      { src: "poster-lavender.png",       label: "Lavender Spa Pedicure" },
+      { src: "poster-basic-spa.png",      label: "Basic Spa Pedicure" },
+      { src: "poster-pearl-steam.png",    label: "The Pearl & Steam Experience" },
+      { src: "poster-green-tea.png",      label: "Green Tea Pedicure" },
+      { src: "poster-collagen.png",       label: "Collagen Spa Experience" }
+    ]
+  };
+  // ── End per-salon config.
+
+  document.title = CONFIG.SALON_NAME + " — Pedicure Menu Display";
+
+  var SLIDES = CONFIG.SLIDES.map(function (s) {
+    return { src: CONFIG.POSTER_DIR + s.src, label: s.label };
+  });
+
+  var SLIDE_MS = 12000;               // hold per slide (single source of truth)
+  var TRANSITION_MS = 1400;           // crossfade + settle duration
+  var REDUCED_TRANSITION_MS = 600;    // prefers-reduced-motion crossfade duration
+  var EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
   var SLIDE_W = 1080, SLIDE_H = 1920;
 
-  var stage = document.getElementById('stage');
+  // Derive the CSS transition timing from these JS constants so the two are
+  // never allowed to drift into independent literals.
+  document.documentElement.style.setProperty("--transition-ms", TRANSITION_MS + "ms");
+  document.documentElement.style.setProperty("--reduced-transition-ms", REDUCED_TRANSITION_MS + "ms");
+  document.documentElement.style.setProperty("--ease", EASE);
+
+  var stage = document.getElementById("stage");
   var layers = [
-    { el: document.getElementById('layA'), img: document.getElementById('imgA') },
-    { el: document.getElementById('layB'), img: document.getElementById('imgB') }
+    { el: document.getElementById("layA"), img: document.getElementById("imgA") },
+    { el: document.getElementById("layB"), img: document.getElementById("imgB") }
   ];
-  var progress = document.getElementById('progress');
+  var progress = document.getElementById("progress");
 
   // Build progress dots
   SLIDES.forEach(function (_, i) {
-    var d = document.createElement('div');
-    d.className = 'dot' + (i === 0 ? ' on' : '');
+    var d = document.createElement("div");
+    d.className = "dot" + (i === 0 ? " on" : "");
     progress.appendChild(d);
   });
-  var dots = progress.querySelectorAll('.dot');
+  var dots = progress.querySelectorAll(".dot");
+
+  function updateDots() {
+    for (var i = 0; i < dots.length; i++) {
+      dots[i].classList.toggle("on", i === idx);
+    }
+  }
 
   // Scale stage to fit viewport, preserving 1080x1920 aspect (portrait)
   function fit() {
     var sw = window.innerWidth, sh = window.innerHeight;
     var scale = Math.min(sw / SLIDE_W, sh / SLIDE_H);
-    stage.style.transform = 'translate(-50%,-50%) scale(' + scale + ')';
+    stage.style.transform = "translate(-50%,-50%) scale(" + scale + ")";
   }
-  window.addEventListener('resize', fit);
+  window.addEventListener("resize", fit);
   fit();
 
-  var idx = 0;
-  var front = 0;
-
-  function loadInto(layer, src, ready) {
-    layer.img.onload = function () {
-      layer.img.onload = null;
-      ready();
-    };
-    layer.img.onerror = function () {
-      layer.img.onerror = null;
-      ready();
-    };
-    layer.img.src = src;
-    if (layer.img.complete && layer.img.naturalWidth > 0) {
-      layer.img.onload = null;
-      layer.img.onerror = null;
-      ready();
-    }
+  function prefersReducedMotion() {
+    return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }
+  function effectiveTransitionMs() {
+    return prefersReducedMotion() ? REDUCED_TRANSITION_MS : TRANSITION_MS;
   }
 
-  function startZoom(layer) {
-    // Snap the zoom transform back to 1x with no transition, then re-enable
-    // the transition and kick off the slow drift to 1.04x for the full
-    // on-screen duration of this slide.
-    layer.el.classList.add('no-zoom-transition');
-    layer.el.classList.remove('zoom');
-    void layer.img.offsetWidth;
-    layer.el.classList.remove('no-zoom-transition');
+  // Preload the next poster as soon as the current one becomes active, so a
+  // cold kiosk never flashes an empty layer while an image loads at swap time.
+  var preloadedSrcs = {};
+  function preload(i) {
+    var src = SLIDES[i].src;
+    if (preloadedSrcs[src]) return;
+    preloadedSrcs[src] = true;
+    var probe = new Image();
+    probe.src = src;
+  }
+
+  var idx = 0;      // currently active slide index
+  var front = 0;    // which layer (0/1) is currently active
+
+  function reveal(incoming, outgoing, next) {
+    // Commit the incoming layer's hidden resting state (opacity 0, scale 1.02)
+    // before triggering the transition, so the browser has a real "from" frame.
+    void incoming.el.offsetWidth;
     requestAnimationFrame(function () {
-      layer.el.classList.add('zoom');
+      incoming.el.classList.add("transition-in");
+      outgoing.el.classList.remove("settled");
+      outgoing.el.classList.add("transition-out");
+
+      var finished = false;
+      function finish() {
+        if (finished) return;
+        finished = true;
+        incoming.el.removeEventListener("transitionend", onEnd);
+        incoming.el.classList.remove("transition-in");
+        incoming.el.classList.add("settled");
+        outgoing.el.classList.remove("transition-out");
+        front = 1 - front;
+        idx = next;
+        updateDots();
+        preload((idx + 1) % SLIDES.length);
+      }
+      function onEnd(e) {
+        if (e.target !== incoming.el || e.propertyName !== "opacity") return;
+        finish();
+      }
+      incoming.el.addEventListener("transitionend", onEnd);
+      // Safety net in case transitionend never fires (e.g. reduced-motion edge cases).
+      setTimeout(finish, effectiveTransitionMs() + 250);
     });
   }
 
@@ -159,32 +209,80 @@
     var back = 1 - front;
     var incoming = layers[back];
     var outgoing = layers[front];
-    incoming.el.className = 'layer reset';
-    loadInto(incoming, SLIDES[next].src, function () {
-      void incoming.el.offsetWidth;
-      incoming.el.className = 'layer';
-      requestAnimationFrame(function () {
-        incoming.el.classList.add('active');
-        startZoom(incoming);
-        outgoing.el.classList.remove('active');
-        front = back;
-        idx = next;
-        dots.forEach(function (d, i) { d.classList.toggle('on', i === idx); });
-      });
-    });
+    var src = SLIDES[next].src;
+    var called = false;
+
+    incoming.el.classList.remove("settled", "transition-in", "transition-out");
+    incoming.img.alt = SLIDES[next].label;
+
+    function whenReady() {
+      if (called) return;
+      called = true;
+      incoming.img.onload = null;
+      incoming.img.onerror = null;
+      reveal(incoming, outgoing, next);
+    }
+
+    // onerror is required here: one missing/corrupt poster file must never
+    // stall the loop — fall through to reveal() either way.
+    incoming.img.onload = whenReady;
+    incoming.img.onerror = whenReady;
+    incoming.img.src = src;
+
+    if (incoming.img.complete && incoming.img.naturalWidth > 0) {
+      whenReady();
+    } else {
+      setTimeout(whenReady, 1200); // blind fallback if neither event fires
+    }
   }
 
-  function tick() { go((idx + 1) % SLIDES.length); }
+  function tick() {
+    go((idx + 1) % SLIDES.length);
+  }
 
-  var timer = null;
-  function start() { stop(); timer = setInterval(tick, SLIDE_MS); }
-  function stop() { if (timer !== null) { clearInterval(timer); timer = null; } }
+  // Self-correcting setTimeout chain targeting an absolute next-tick
+  // timestamp, so timing does not accumulate drift over a 12-hour salon day.
+  var nextTickAt = null;
+  var timerId = null;
 
-  // Prime the first slide, then begin the auto-advance loop unconditionally.
-  loadInto(layers[0], SLIDES[0].src, function () {
-    layers[0].el.className = 'layer active';
-    startZoom(layers[0]);
-    start();
+  function scheduleNext() {
+    if (timerId !== null) { clearTimeout(timerId); timerId = null; }
+    if (document.hidden) return;
+    var now = Date.now();
+    if (nextTickAt === null || nextTickAt <= now) {
+      nextTickAt = now + SLIDE_MS;
+    }
+    var delay = Math.max(0, nextTickAt - now);
+    timerId = setTimeout(function () {
+      nextTickAt += SLIDE_MS;
+      tick();
+      scheduleNext();
+    }, delay);
+  }
+
+  function start() {
+    stop();
+    nextTickAt = Date.now() + SLIDE_MS;
+    scheduleNext();
+  }
+  function stop() {
+    if (timerId !== null) { clearTimeout(timerId); timerId = null; }
+  }
+
+  // Prime slide 0 immediately (no transition for the very first paint),
+  // preload slide 1, then begin the auto-advance loop.
+  layers[0].img.src = SLIDES[0].src;
+  layers[0].img.alt = SLIDES[0].label;
+  layers[0].el.classList.add("settled");
+  updateDots();
+  preload(1 % SLIDES.length);
+  start();
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key.toLowerCase() === "f") {
+      e.preventDefault();
+      toggleFs();
+    }
   });
 
   function toggleFs() {
@@ -198,14 +296,11 @@
         result = document.exitFullscreen();
       }
       if (result && result.catch) result.catch(function () {});
-    } catch (_) {
-      // Fullscreen may be unavailable in the current browser.
-    }
+    } catch (_) { /* Fullscreen may be unavailable in an embedded browser. */ }
   }
-  document.addEventListener('keydown', function (e) {
-    if (e.key.toLowerCase() === 'f') toggleFs();
-  });
-  document.addEventListener('visibilitychange', function () {
+
+  // Pause the schedule while the page/tab is hidden; resume on return.
+  document.addEventListener("visibilitychange", function () {
     if (document.hidden) stop(); else start();
   });
 })();
