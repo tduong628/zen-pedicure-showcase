@@ -18,23 +18,30 @@
     width:1080px; height:1920px;
     transform-origin:center center;
     overflow:hidden;
-    background:#F5E6D8;
+    background:#F7ECD8;
   }
+  /* Each poster fills the stage; two layers crossfade */
   .layer {
     position:absolute; inset:0;
     opacity:0;
-    transform:translateX(100%);
-    transition:transform 1.1s cubic-bezier(0.65,0,0.35,1), opacity 1.1s ease;
-    will-change:transform, opacity;
-    pointer-events:none;
+    overflow:hidden;
+    background:#F7ECD8;
+    transition: opacity 1s ease;
   }
-  .layer.active { opacity:1; transform:translateX(0); }
-  .layer.leaving { opacity:0.65; transform:translateX(-100%); }
+  .layer.active { opacity:1; z-index:2; }
   .layer.reset { transition:none; }
-  .layer iframe {
-    width:1080px; height:1920px; border:0; display:block;
-    background:#F5E6D8;
+  .layer img {
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:contain;
+    display:block;
+    transform:scale(1);
+    transition: transform 12s linear;
+    will-change:transform;
   }
+  /* Ken Burns: slow drift from 1.0 -> 1.04 across the full on-screen duration */
+  .layer.zoom img { transform:scale(1.04); }
+  .layer.no-zoom-transition img { transition:none; }
   /* Progress dots */
   #progress {
     position:absolute; bottom:30px; left:50%; transform:translateX(-50%);
@@ -65,8 +72,8 @@
 </head>
 <body>
 <div id="stage">
-  <div class="layer" id="layA"><iframe id="frA" title="slide A"></iframe></div>
-  <div class="layer" id="layB"><iframe id="frB" title="slide B"></iframe></div>
+  <div class="layer" id="layA"><img id="imgA" alt=""></div>
+  <div class="layer" id="layB"><img id="imgB" alt=""></div>
 
   <div id="hint">Zen Nail Spa · Pedicure Menu — press F for fullscreen</div>
   <div id="progress"></div>
@@ -74,26 +81,27 @@
 
 <script>
 (function () {
-  // Slide manifest matches zen-slideshow.html.
+  // Poster manifest — each slide is one complete, fully-designed ChatGPT poster image.
+  var POSTER_DIR = 'styles/bento/assets/posters/';
   var SLIDES = [
-    { src: "styles/bento/index.html",                    label: "Charcoal Detox Pedicure" },
-    { src: "styles/bento/slide-02-summer-pedicure.html",  label: "Fall/Winter Pedicure Special" },
-    { src: "styles/bento/slide-03-honey-orange.html",     label: "Honey Orange Zest Pedicure" },
-    { src: "styles/bento/slide-04-zen-herbal.html",       label: "Zen Herbal Pedicure Ritual" },
-    { src: "styles/bento/slide-05-romantic-rose.html",    label: "Romantic Rose Pedicure" },
-    { src: "styles/bento/slide-06-lavender-spa.html",     label: "Lavender Spa Pedicure" },
-    { src: "styles/bento/slide-07-basic-spa.html",        label: "Basic Spa Pedicure" },
-    { src: "styles/bento/slide-08-pearl-steam.html",      label: "The Pearl & Steam Experience" },
-    { src: "styles/bento/slide-09-green-tea.html",        label: "Green Tea Pedicure" },
-    { src: "styles/bento/slide-10-collagen-spa.html",     label: "Collagen Spa Experience" }
+    { src: POSTER_DIR + 'poster-charcoal-detox.png', label: 'Charcoal Detox Pedicure' },
+    { src: POSTER_DIR + 'poster-fall-winter.jpg',     label: 'Fall/Winter Pedicure Special' },
+    { src: POSTER_DIR + 'poster-honey-orange.png',    label: 'Honey Orange Zest Pedicure' },
+    { src: POSTER_DIR + 'poster-herbal.png',          label: 'Zen Herbal Pedicure Ritual' },
+    { src: POSTER_DIR + 'poster-romantic-rose.png',   label: 'Romantic Rose Pedicure' },
+    { src: POSTER_DIR + 'poster-lavender.png',        label: 'Lavender Spa Pedicure' },
+    { src: POSTER_DIR + 'poster-basic-spa.png',       label: 'Basic Spa Pedicure' },
+    { src: POSTER_DIR + 'poster-pearl-steam.png',     label: 'The Pearl & Steam Experience' },
+    { src: POSTER_DIR + 'poster-green-tea.png',       label: 'Green Tea Pedicure' },
+    { src: POSTER_DIR + 'poster-collagen.png',        label: 'Collagen Spa Experience' }
   ];
   var SLIDE_MS = 12000;          // 12s per slide (John's choice)
   var SLIDE_W = 1080, SLIDE_H = 1920;
 
   var stage = document.getElementById('stage');
   var layers = [
-    { el: document.getElementById('layA'), fr: document.getElementById('frA') },
-    { el: document.getElementById('layB'), fr: document.getElementById('frB') }
+    { el: document.getElementById('layA'), img: document.getElementById('imgA') },
+    { el: document.getElementById('layB'), img: document.getElementById('imgB') }
   ];
   var progress = document.getElementById('progress');
 
@@ -116,61 +124,66 @@
 
   var idx = 0;
   var front = 0;
-  var timer = null;
-  var busy = false;
 
-  function load(layer, src, ready) {
-    // Install the handler before navigating, including for cached local files.
-    layer.fr.onload = function () {
-      layer.fr.onload = null;
-      // Allow the slide's entrance animation and first paint to begin.
-      setTimeout(function () {
-        requestAnimationFrame(function () {
-          requestAnimationFrame(ready);
-        });
-      }, 420);
+  function loadInto(layer, src, ready) {
+    layer.img.onload = function () {
+      layer.img.onload = null;
+      ready();
     };
-    layer.fr.src = src;
+    layer.img.onerror = function () {
+      layer.img.onerror = null;
+      ready();
+    };
+    layer.img.src = src;
+    if (layer.img.complete && layer.img.naturalWidth > 0) {
+      layer.img.onload = null;
+      layer.img.onerror = null;
+      ready();
+    }
+  }
+
+  function startZoom(layer) {
+    // Snap the zoom transform back to 1x with no transition, then re-enable
+    // the transition and kick off the slow drift to 1.04x for the full
+    // on-screen duration of this slide.
+    layer.el.classList.add('no-zoom-transition');
+    layer.el.classList.remove('zoom');
+    void layer.img.offsetWidth;
+    layer.el.classList.remove('no-zoom-transition');
+    requestAnimationFrame(function () {
+      layer.el.classList.add('zoom');
+    });
   }
 
   function go(next) {
-    if (busy || document.hidden) return;
-    busy = true;
     var back = 1 - front;
     var incoming = layers[back];
     var outgoing = layers[front];
     incoming.el.className = 'layer reset';
-    load(incoming, SLIDES[next].src, function () {
-      // Commit the offscreen position before enabling the transition.
+    loadInto(incoming, SLIDES[next].src, function () {
       void incoming.el.offsetWidth;
       incoming.el.className = 'layer';
       requestAnimationFrame(function () {
         incoming.el.classList.add('active');
-        outgoing.el.className = 'layer leaving';
+        startZoom(incoming);
+        outgoing.el.classList.remove('active');
         front = back;
         idx = next;
         dots.forEach(function (d, i) { d.classList.toggle('on', i === idx); });
-        setTimeout(function () {
-          outgoing.el.className = 'layer reset';
-          outgoing.fr.onload = null;
-          outgoing.fr.src = 'about:blank';
-          busy = false;
-        }, 1200);
       });
     });
   }
 
   function tick() { go((idx + 1) % SLIDES.length); }
-  function start() {
-    stop();
-    if (!document.hidden) timer = setInterval(tick, SLIDE_MS);
-  }
-  function stop() {
-    if (timer !== null) { clearInterval(timer); timer = null; }
-  }
 
-  load(layers[0], SLIDES[0].src, function () {
-    layers[0].el.className = 'layer reset active';
+  var timer = null;
+  function start() { stop(); timer = setInterval(tick, SLIDE_MS); }
+  function stop() { if (timer !== null) { clearInterval(timer); timer = null; } }
+
+  // Prime the first slide, then begin the auto-advance loop unconditionally.
+  loadInto(layers[0], SLIDES[0].src, function () {
+    layers[0].el.className = 'layer active';
+    startZoom(layers[0]);
     start();
   });
 
